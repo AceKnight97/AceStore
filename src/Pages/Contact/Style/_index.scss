@@ -1,0 +1,10 @@
+.contact {
+  &-form {
+    max-width: 50%;
+    min-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+}

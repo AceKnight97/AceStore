@@ -1,0 +1,32 @@
+@import "../../Pages/MyCV/index";
+@import "../../Pages/Contact/Style/index";
+@import "../../Pages/Home/Style/index";
+@import "../../Pages/OurTeam/Style/index";
+@import "../../Pages/Common/Style/index";
+@import "../../Pages/LightNovel/Style/index";
+
+.ant-menu-item {
+  height: 100%;
+}
+
+.home,
+.contact,
+.our-team {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+
+  &-main {
+    padding: 0 5%;
+    padding-top: 6.5%;
+    padding-bottom: 1.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+  }
+}

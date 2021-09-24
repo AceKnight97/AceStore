@@ -1,0 +1,200 @@
+@import "./Portfolio/profolio";
+@import "./Style/index";
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .my-cv-wrapper {
+    min-width: 1200px;
+    display: flex;
+    width: 100%;
+  }
+}
+
+.my-cv-wrapper {
+  // min-height: 100%;
+  position: relative;
+  // padding: 24px;
+  display: flex;
+  width: 100%;
+  background: linear-gradient(180deg, rgba(3, 56, 244, 0.71) 0%, rgba(224, 37, 206, 0.79) 93.75%);
+}
+
+.my-cv-wrapper {
+  .my-cv {
+    &-main {
+      // margin-top: 24px;
+      padding: 24px;
+      // overflow: auto;
+      // height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    &-left {
+      width: 450px;
+      height: 100%;
+      background: rgba(196, 196, 196, 0.3);
+      border-radius: 10px;
+      padding: 24px;
+      margin-right: 12px;
+      // height: max-content;
+    }
+    &-right {
+      width: 580px;
+      // height: 100%;
+      height: max-content;
+      background-color: white;
+      border-radius: 10px;
+      padding: 24px;
+      margin-left: 12px;
+
+      // display: flex;
+      // justify-content: space-between;
+      // flex-direction: column;
+    }
+    &-header {
+      display: flex;
+    }
+    &-names {
+      margin-left: 24px;
+    }
+    &-lastname {
+      font-size: 25px;
+      line-height: 30px;
+      color: #cecaca;
+    }
+    &-firstname {
+      margin-top: 6px;
+      font-weight: 500;
+      font-size: 35px;
+      line-height: 43px;
+      color: #ffffff;
+    }
+    &-role {
+      margin-top: 6px;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 18px;
+      color: #cecaca;
+    }
+    &-avatar {
+      height: 120px;
+      width: 120px;
+      border-radius: 100px;
+    }
+    &-body {
+      margin-top: 24px;
+      padding: 8px 16px;
+      background: rgba(196, 196, 196, 0.35);
+      border-radius: 10px;
+      &-social {
+        font-size: 16px;
+        line-height: 22px;
+        margin-top: 4px;
+        color: white;
+      }
+      &-title {
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 24px;
+        color: white;
+      }
+      &-content {
+        font-size: 16px;
+        line-height: 22px;
+        color: #fafafa;
+        display: flex;
+        align-items: center;
+        .a-dot {
+          font-size: 12px;
+          vertical-align: top;
+          margin-right: 4px;
+        }
+      }
+      &-link {
+        font-size: 14px;
+        line-height: 16px;
+        color: #fafafa;
+        padding: 0;
+        margin: 0 auto;
+        width: 100%;
+        span {
+          width: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+    &-body-hobbies-wrapper {
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+    &-hobbies {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 80px;
+      height: 80px;
+
+      &-icon {
+        // font-size: 34px;
+        // color: white;
+        width: 40px;
+        height: 40px;
+      }
+      &-title {
+        color: white;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .my-skills {
+    &-wrapper {
+      display: flex;
+    }
+    &-div {
+      margin-top: 12px;
+      margin-right: 36px;
+      border-radius: 50%;
+      background: #fafafa;
+      border: 3px solid #40a9ff;
+      padding: 8px;
+    }
+    &-icon {
+      height: 46px;
+    }
+    &-item {
+    }
+    &-title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 68px;
+      margin-top: 4px;
+    }
+  }
+}
+
+.cv-btn {
+  &-details,
+  &-back {
+    position: absolute;
+    top: calc(50% - 12px);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 16px;
+    font-size: 16px;
+  }
+  &-back {
+    left: 12px;
+  }
+  &-details {
+    right: 12px;
+  }
+}

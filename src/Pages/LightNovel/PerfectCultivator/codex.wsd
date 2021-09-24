@@ -1,0 +1,47 @@
+@startuml TestCodex
+skinparam BackgroundColor transparent
+skinparam componentStyle rectangle
+
+component Cultivation {
+component Chapter3 {
+}
+
+component Chapter2 {
+  actor Main as A
+  rectangle SatThan {
+  usecase "Am" as st1
+  usecase "Thuc" as st2
+  usecase "Cuc The" as st3
+  usecase "..." as st4
+  usecase "..." as st5
+  usecase "..." as st6
+  usecase "..." as st7
+  usecase "..." as st8
+  usecase "..." as st9
+  }
+  A --> st1
+  A --> st2
+  A --> st3
+  A --> st4
+  A --> st5
+  A --> st6
+  A --> st7
+  A --> st8
+  A --> st9
+}
+
+component Chapter1 {
+}
+}
+@enduml
+'    component "A.1" {
+' }
+'    component A.44 {
+'       [A4.1]
+' }
+'    component "A.2"
+'    [A.3]
+'    component A.5 [
+' A.5] 
+'    component A.6 [
+' ]

@@ -1,0 +1,26 @@
+.chapter {
+  &-title {
+    display: flex;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  &-go-back {
+    position: absolute;
+    top: 24px;
+    left: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &-content {
+    white-space: break-spaces;
+  }
+  &-link {
+    margin-top: 16px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+  }
+}

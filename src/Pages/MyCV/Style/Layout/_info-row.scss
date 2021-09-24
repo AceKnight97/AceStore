@@ -1,0 +1,35 @@
+.info-row {
+  &-wrapper {
+    display: flex;
+    background: rgba(196, 196, 196, 0.35);
+    border-radius: 10px;
+    align-items: center;
+    min-height: 44px;
+    padding: 8px 16px;
+    button {
+      margin: 0 auto;
+      padding: 0;
+      width: calc(100% - 40px);
+      span {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  &-icon {
+    margin-right: 24px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    color: white;
+    // background-color: white;
+  }
+  &-title {
+    font-size: 15px;
+    line-height: 18px;
+    color: #ffffff;
+  }
+}

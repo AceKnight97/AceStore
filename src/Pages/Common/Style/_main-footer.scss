@@ -1,0 +1,54 @@
+.main-footer {
+  border-top: 1px solid $gray-5;
+  display: flex;
+  // flex-direction: column;
+
+  width: 100%;
+  // height: 54px;
+  height: max-content;
+  padding: 24px 5%;
+  .skype {
+    display: flex;
+    align-items: center;
+  }
+  .email {
+    margin-left: 12px;
+    padding: 0;
+    color: unset;
+    &:hover {
+      text-decoration: underline;
+      color: skyblue;
+      cursor: pointer;
+    }
+  }
+  .facebook {
+    display: flex;
+    align-items: center;
+    margin-left: 36px;
+  }
+  .footer-icon {
+    display: flex;
+    align-items: center;
+    svg {
+      height: 24px;
+      width: 24px;
+      color: #2596be;
+    }
+  }
+  .facebook-color {
+    svg {
+      color: #063970;
+    }
+  }
+  .it-recruitment {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    button {
+      padding: 4px;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  // overflow: auto;
+
+  > * {
+    font-size: $size-14;
+    color: $gray-9;
+    line-height: $size-22;
+  }
+  .div-root {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    &-header {
+      padding: 0;
+    }
+    .ant-layout-sider {
+      z-index: 1;
+    }
+  }
+  .static-promotional-website {
+    height: 100%;
+    width: 100%;
+    display: flex;
+  }
+  span {
+    display: flex;
+    align-content: center;
+  }
+}

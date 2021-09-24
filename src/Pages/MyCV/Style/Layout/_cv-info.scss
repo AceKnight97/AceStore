@@ -1,0 +1,28 @@
+.cv-exp {
+  &-company-name {
+    margin-top: 12px;
+    font-weight: bold;
+    line-height: 24px;
+    font-size: 16px;
+    color: #343434;
+  }
+  &-position {
+    font-size: 12px;
+    font-size: 12px;
+    line-height: 20px;
+    color: #343434;
+  }
+  &-duration {
+    font-size: 12px;
+    line-height: 20px;
+    line-height: 18px;
+    color: #73808d;
+  }
+  &-content {
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 20px;
+    color: rgba(0, 0, 0, 0.8);
+    // color: red;
+  }
+}

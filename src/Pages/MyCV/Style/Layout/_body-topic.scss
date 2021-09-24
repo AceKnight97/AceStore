@@ -1,0 +1,30 @@
+.body-topic-wrapper {
+  display: flex;
+  align-items: center;
+  .border-line {
+    flex: 1;
+    border: 1px solid $new-bg;
+  }
+}
+
+.summary {
+  width: 154px;
+  background-color: $new-bg;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  &-wrapper {
+    padding: 24px;
+  }
+  &-content {
+    margin-top: 4px;
+  }
+}
