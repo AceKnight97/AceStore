@@ -8,8 +8,6 @@ import {
 import { PAGE_MANAGER } from '../Constants';
 import reloadPageRequest from '../Redux/Actions/reload';
 import Home from './Home';
-import LightNovel from './LightNovel';
-import MyCV from './MyCV';
 
 const Main = (props) => {
   useEffect(() => {
@@ -25,10 +23,7 @@ const Main = (props) => {
     <main className='div-root'>
       <Router>
         <Switch>
-          <Route path='/acestore' name='My CV' component={MyCV} />
-          <Route path='/home' name='Home' component={Home} />
-          <Route path='/light-novel' name='My Light Novel' component={LightNovel} />
-
+          <Route path='/acestore' name='Home' component={Home} />
           <Redirect path='/' to={{ pathname: '/acestore' }} />
         </Switch>
       </Router>
