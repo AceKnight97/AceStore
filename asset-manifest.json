@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/acestore/static/css/main.a617e044.chunk.css",
+    "main.js": "/acestore/static/js/main.3a48ae1f.chunk.js",
+    "main.js.map": "/acestore/static/js/main.3a48ae1f.chunk.js.map",
+    "runtime-main.js": "/acestore/static/js/runtime-main.6e9632dd.js",
+    "runtime-main.js.map": "/acestore/static/js/runtime-main.6e9632dd.js.map",
+    "static/js/2.04e95a29.chunk.js": "/acestore/static/js/2.04e95a29.chunk.js",
+    "static/js/2.04e95a29.chunk.js.map": "/acestore/static/js/2.04e95a29.chunk.js.map",
+    "static/js/3.4940607c.chunk.js": "/acestore/static/js/3.4940607c.chunk.js",
+    "static/js/3.4940607c.chunk.js.map": "/acestore/static/js/3.4940607c.chunk.js.map",
+    "index.html": "/acestore/index.html",
+    "static/css/main.a617e044.chunk.css.map": "/acestore/static/css/main.a617e044.chunk.css.map",
+    "static/js/2.04e95a29.chunk.js.LICENSE.txt": "/acestore/static/js/2.04e95a29.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/acestore/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6e9632dd.js",
+    "static/js/2.04e95a29.chunk.js",
+    "static/css/main.a617e044.chunk.css",
+    "static/js/main.3a48ae1f.chunk.js"
+  ]
+}
