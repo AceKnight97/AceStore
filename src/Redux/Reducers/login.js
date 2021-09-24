@@ -1,7 +1,5 @@
 import AppFlowActions from '../../Constants';
 import initialState from './initialState';
-import auth from '../../Helpers/auth';
-import { convertLoginData } from '../../Ultis';
 
 const login = (state = initialState.login, action) => {
   switch (action.type) {

@@ -1,6 +1,7 @@
+
 export default {
   loading: {},
-  login: {
-    user: {},
-  },
+  login: {},
+  bookings: [],
+  checkins: [],
 };

@@ -1,4 +1,4 @@
-import AppFlowActions from '../../Constants';
+import AppFlowActions from '../../constants';
 
 /**
  *
