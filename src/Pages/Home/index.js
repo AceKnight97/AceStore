@@ -16,7 +16,7 @@ const Home = (props) => {
   }
   return (
     <div className={classnames('home', className)}>
-      <span>my component</span>
+      <span>my component 123 3241231</span>
     </div>
   );
 };
