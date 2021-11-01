@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import InputCT from './inputCT';
+import InputCT from '../inputCT';
 
 
 const PairInput = (props) => {
@@ -104,7 +104,7 @@ PairInput.defaultProps = {
 
   titleLeft: '',
   titleRight: '',
-  onChangeLeft: () => {},
+  onChangeLeft: () => { },
   onChangeRight: () => { },
   pad: 8,
   placeholderLeft: '',
@@ -123,7 +123,7 @@ PairInput.defaultProps = {
   unitPlaceholderRight: '',
   unitValueLeft: '',
   unitValueRight: '',
-  onChangeUnitLeft: () => {},
+  onChangeUnitLeft: () => { },
   onChangeUnitRight: () => { },
   unitTypeLeft: '',
   unitTypeRight: '',

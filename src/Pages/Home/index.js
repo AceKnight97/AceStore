@@ -4,6 +4,9 @@ import classnames from 'classnames';
 import _ from 'lodash';
 import { } from 'antd';
 import { useMergeState } from '../../Helpers/customHooks';
+import HomeHeader from '../../Components/Pages/Home/HomeHeader';
+import HomeFooter from '../../Components/Pages/Home/HomeFooter';
+import HomeBody from '../../Components/Pages/Home/HomeBody';
 
 
 const Home = (props) => {
@@ -16,7 +19,13 @@ const Home = (props) => {
   }
   return (
     <div className={classnames('home', className)}>
-      <span>my component 123 3241231</span>
+      <HomeHeader />
+
+      <HomeBody />
+
+
+
+      <HomeFooter />
     </div>
   );
 };

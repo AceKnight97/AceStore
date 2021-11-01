@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import InputCT from './inputCT';
+import InputCT from '../inputCT';
 import SelectCT from './selectCT';
 
 
@@ -44,8 +44,8 @@ const UnitInput = (props) => {
 UnitInput.defaultProps = {
   className: '',
   title: '',
-  onChange: () => {},
-  onChangeUnit: () => {},
+  onChange: () => { },
+  onChangeUnit: () => { },
   placeholder: '',
   disabled: false,
   data: ['inch', 'cm'],

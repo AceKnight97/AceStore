@@ -4,10 +4,10 @@ import { Checkbox } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import classnames from 'classnames';
 
-import DatepickerCT from './datepickerCT';
-import InputCT from './inputCT';
+import DatepickerCT from '../DatepickerCT';
+import InputCT from '../inputCT';
 import SelectCT from './selectCT';
-import InputTitle from './inputTitle';
+import InputTitle from '../InputTitle';
 import AsyncSelectInput from './asyncSelect';
 
 const CheckboxCT = (props) => {

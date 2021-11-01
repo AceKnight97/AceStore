@@ -10,10 +10,12 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "variables";
 @import "reset";
+@import "./colors";
+@import "./flex-box";
+
 @import "./Modal/index";
 @import "./Pages/index";
 @import "./Vendors/index";
-@import "flex-box";
 
 @import "./Components/index";
 @import "../Components/index.scss";

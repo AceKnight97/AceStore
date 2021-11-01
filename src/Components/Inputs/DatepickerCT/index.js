@@ -4,7 +4,7 @@ import { DatePicker, TimePicker } from 'antd';
 import classnames from 'classnames';
 import moment from 'moment';
 
-import InputTitle from './inputTitle';
+import InputTitle from '../InputTitle';
 
 const DatepickerCT = (props) => {
   const {

@@ -5,8 +5,8 @@ import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import NumberFormat from 'react-number-format';
 import classnames from 'classnames';
 
-import InputTitle from './inputTitle';
-import DatepickerCT from './datepickerCT';
+import InputTitle from '../InputTitle';
+import DatepickerCT from '../DatepickerCT';
 
 const InputCT = (props) => {
   const {
@@ -174,8 +174,8 @@ InputCT.defaultProps = {
   isSearchable: false,
   loadOptions: () => { },
   options: [],
-  clearOptions: () => {},
-  onInputChange: () => {},
+  clearOptions: () => { },
+  onInputChange: () => { },
 };
 
 InputCT.propTypes = {
