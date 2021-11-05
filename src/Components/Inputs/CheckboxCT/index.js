@@ -5,10 +5,10 @@ import { SearchOutlined } from '@ant-design/icons';
 import classnames from 'classnames';
 
 import DatepickerCT from '../DatepickerCT';
-import InputCT from '../inputCT';
-import SelectCT from './selectCT';
+import InputCT from '../InputCT';
+import SelectCT from '../SelectCT';
 import InputTitle from '../InputTitle';
-import AsyncSelectInput from './asyncSelect';
+// import AsyncSelectInput from './asyncSelect';
 
 const CheckboxCT = (props) => {
   const {
@@ -86,7 +86,7 @@ const CheckboxCT = (props) => {
           />
         ) : null}
 
-      {
+      {/* {
         type === 'ASYNC_SELECT' && (
           <AsyncSelectInput
             disabled={supDisabled}
@@ -100,7 +100,7 @@ const CheckboxCT = (props) => {
             loadOptions={props.loadOptions}
           />
         )
-      }
+      } */}
     </div>
   );
 };

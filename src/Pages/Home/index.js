@@ -23,8 +23,6 @@ const Home = (props) => {
 
       <HomeBody />
 
-
-
       <HomeFooter />
     </div>
   );

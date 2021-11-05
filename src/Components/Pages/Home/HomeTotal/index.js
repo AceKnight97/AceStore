@@ -6,7 +6,7 @@ import { } from 'antd';
 import { useMergeState } from '../../../../Helpers/customHooks';
 
 
-const HomeFooter = (props) => {
+const HomeTotal = (props) => {
   const [state, setState] = useMergeState({
     data: [],
   });
@@ -15,16 +15,16 @@ const HomeFooter = (props) => {
     setState({ [key]: value });
   }
   return (
-    <div className={classnames('home-footer', className)}>
-      <span>Footer</span>
+    <div className={classnames('home-total', className)}>
+
     </div>
   );
 };
-HomeFooter.defaultProps = {
+HomeTotal.defaultProps = {
   className: '',
 };
-HomeFooter.propTypes = {
+HomeTotal.propTypes = {
   className: PropTypes.string,
 };
 
-export default HomeFooter;
+export default HomeTotal;

@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import {
   BrowserRouter as Router, Redirect, Route, Switch,
 } from 'react-router-dom';
@@ -11,7 +10,7 @@ import Home from './Home';
 
 const Main = (props) => {
   useEffect(() => {
-    window.onbeforeunload = () => {};
+    window.onbeforeunload = () => { };
     window.onload = () => {
       props.reloadPageRequest();
     };

@@ -1,7 +1,37 @@
 .home-body {
-  padding: 3rem 0;
+  padding: 3rem 1.5rem;
   display: flex;
   flex-direction: column;
   background-color: white;
   border-radius: 0.125rem;
+  &-main {
+  }
+  &-cart-tag {
+    margin-top: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 1350px) {
+  .home-body {
+    &-toper {
+      display: flex;
+      flex-direction: column;
+      // flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      &-block-2,
+      &-block-3 {
+        margin-top: 1rem;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1350px) {
+  .home-body {
+    &-toper {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 }

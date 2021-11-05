@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import _ from 'lodash';
 import { } from 'antd';
 import { useMergeState } from '../../../../Helpers/customHooks';
-import logo from '../../../../Images/Pages/Home/acestore-logo.jpg';
+import logo from '../../../../Images/Pages/Home/logo-min.jpg';
 
 
 const HomeHeader = (props) => {

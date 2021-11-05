@@ -3,8 +3,8 @@ import classnames from 'classnames';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
-import Blue1BgRow from '../UI/blue1BgRow';
-import InputTitle from './inputTitle';
+// import Blue1BgRow from '../UI/blue1BgRow';
+import InputTitle from '../InputTitle';
 
 
 const { Option } = Select;
@@ -64,7 +64,7 @@ const SelectCT = (props) => {
         }
       </Select>
 
-      {
+      {/* {
         isValueOutside && (
           <div className="select-ct-outside-res">
             {
@@ -80,7 +80,7 @@ const SelectCT = (props) => {
             }
           </div>
         )
-      }
+      } */}
     </div>
   );
 };
