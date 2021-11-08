@@ -1,6 +1,8 @@
 import { isValidEmail } from "../../../Utils";
 
-export const a = ' ';
+export const mutationSignIn = () => {
+
+};
 
 export const checkValidLogin = (state = {}) => {
   const { email, password } = state;

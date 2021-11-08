@@ -28,7 +28,6 @@ export const handleRightBtnClick = (state = {}) => {
 
 }
 
-
 export const disabledRegister = (state = {}) => {
   const {
     email, password, confirmPassword,
@@ -46,5 +45,9 @@ export const disabledRegister = (state = {}) => {
     }
   }
   return false;
+
+}
+
+export const mutationCreateUser = () => {
 
 }

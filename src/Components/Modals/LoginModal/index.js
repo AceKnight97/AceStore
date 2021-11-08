@@ -7,7 +7,7 @@ import ModalHeader from '../ModalHeader';
 import ModalFooter from '../ModalFooter';
 import { useMergeState } from '../../../Helpers/customHooks';
 import InputCT from '../../Inputs/InputCT';
-import { checkValidLogin } from './helper';
+import { checkValidLogin, mutationSignIn } from './helper';
 
 const LoginModal = (props) => {
   const [state, setState] = useMergeState({
