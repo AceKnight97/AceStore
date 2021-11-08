@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import _ from 'lodash';
@@ -8,7 +8,7 @@ import starInactiveIc from '../../../../Images/Pages/Home/star-inactive.svg';
 import { getPrice } from '../../../../Helpers';
 import SelectCT from '../../../Inputs/SelectCT';
 import CheckboxCT from '../../../Inputs/CheckboxCT';
-import { useMergeState } from '../../../../Helpers/customHooks';
+import { useMergeState, useUpdateEffect } from '../../../../Helpers/customHooks';
 import { PACKAGE_DATA, QUANTITY_TYPES, WEIGHT_DATA } from '../../../../Constants/home';
 
 
@@ -18,21 +18,27 @@ const FoodCard = (props) => {
     price: props.price,
     stars: props.stars,
     isBuy: props.isBuy,
-    quantity: props.quantity,
+    quantity: props.quantity || props.quantityType === QUANTITY_TYPES.WEIGHT ? WEIGHT_DATA[0] : PACKAGE_DATA[0],
+    quantityType: props.quantityType,
   });
   const {
-    className, quntityType, imgSrc, unit,
+    className, quantityType, imgSrc, unit,
+    onChangeCart,
   } = props;
   const {
     name, price, stars, isBuy, quantity
   } = state;
 
-  // console.log({ quantity, a: props.quantity })
+  useUpdateEffect(() => {
+    onChangeCart(state);
+  }, [isBuy, quantity]);
+
   const onChange = (key, value) => {
     setState({ [key]: value });
   }
+
   return (
-    <div className={classnames('food-card', className)}>
+    <div className={classnames('food-card', isBuy && 'food-card-active', className)}>
 
       {
         imgSrc ?
@@ -51,12 +57,13 @@ const FoodCard = (props) => {
               {getPrice(price, unit)}
             </div>
             <SelectCT
+              disabled={!isBuy}
               name='quantity'
               showSearch={false}
               className='mt-4'
               value={quantity}
               onChange={onChange}
-              data={quntityType === QUANTITY_TYPES.WEIGHT ? WEIGHT_DATA : PACKAGE_DATA}
+              data={quantityType === QUANTITY_TYPES.WEIGHT ? WEIGHT_DATA : PACKAGE_DATA}
             />
           </div>
 
@@ -86,6 +93,11 @@ const FoodCard = (props) => {
 
       </div>
 
+      {
+        isBuy && <div className="food-card-isbuy">
+          Buy
+        </div>
+      }
 
     </div>
   );
@@ -96,10 +108,11 @@ FoodCard.defaultProps = {
   price: 0,
   stars: 3,
   isBuy: false,
-  quantity: WEIGHT_DATA[0],
-  quntityType: QUANTITY_TYPES.WEIGHT,
+  quantity: undefined,
+  quantityType: QUANTITY_TYPES.WEIGHT,
   imgSrc: '',
-  unit: 'VND'
+  unit: 'VND',
+  onChangeCart: () => { }
 };
 FoodCard.propTypes = {
   className: PropTypes.string,
@@ -108,9 +121,10 @@ FoodCard.propTypes = {
   stars: PropTypes.number,
   isBuy: PropTypes.bool,
   quantity: PropTypes.string,
-  quntityType: PropTypes.string,
+  quantityType: PropTypes.string,
   imgSrc: PropTypes.string,
   unit: PropTypes.string,
+  onChangeCart: PropTypes.func,
 };
 
 export default FoodCard;

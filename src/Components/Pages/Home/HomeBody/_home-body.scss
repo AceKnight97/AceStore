@@ -8,6 +8,13 @@
   }
   &-cart-tag {
     margin-top: 1.5rem;
+    display: flex;
+    &-title {
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+    &-item {
+    }
   }
 }
 

@@ -4,4 +4,17 @@
   padding: 1rem;
   border: 1px solid $gray-5;
   border-radius: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &-title {
+    font-weight: bold;
+    font-size: 1.125rem;
+  }
+  &-price {
+    font-weight: bold;
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: center;
+  }
 }

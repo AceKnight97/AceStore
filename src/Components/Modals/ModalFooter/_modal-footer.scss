@@ -1,0 +1,8 @@
+.modal-footer-wrapper {
+  height: $size-52;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: $size-1 solid $gray-5;
+  padding: 0 $size-16;
+}

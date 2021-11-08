@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import _ from 'lodash';
@@ -13,10 +13,16 @@ const FoodTable = (props) => {
   const toggleRef = useRef(undefined);
   const debounceRef = useRef(undefined);
   const [state, setState] = useMergeState({
-    isShow: true,
+    isShow: props.isShow,
   });
-  const { className, data, title } = props;
+  const { className, data, title, onChangeCart } = props;
   const { isShow } = state;
+  useEffect(() => {
+    if (!isShow) {
+      const el = findDOMNode(toggleRef.current);
+      $(el).slideUp('slow');
+    }
+  }, []);
   const toggleShow = () => {
     if (debounceRef.current) {
       clearTimeout(debounceRef.current);
@@ -30,6 +36,10 @@ const FoodTable = (props) => {
     }, 200);
   }
 
+  // const  = (isBuy = false, itemData = {}) => {
+  //   console.log({ isBuy, itemData });
+  // }
+
   return (
     <div className={classnames('food-table', className)}>
       <div className="food-table-title">
@@ -40,33 +50,19 @@ const FoodTable = (props) => {
           _.map(_.range(Math.ceil(data?.length / 4)), (x) => (
             <div className="food-table-row" key={x}>
               {
-                !_.isEmpty(data?.[x * 4]) &&
-                <FoodCard
-                  {...data?.[x * 4]}
-                />
-              }
-              {
-                !_.isEmpty(data?.[x * 4 + 1]) &&
-                <FoodCard
-                  {...data?.[x * 4 + 1]}
-                />
-              }
-              {
-                !_.isEmpty(data?.[x * 4 + 2]) &&
-                <FoodCard
-                  {...data?.[x * 4 + 2]}
-                />
-              }
-              {
-                !_.isEmpty(data?.[x * 4 + 3]) &&
-                <FoodCard
-                  {...data?.[x * 4 + 3]}
-                />
+                _.map(_.range(0, 4), (y) => !_.isEmpty(data?.[x * 4 + y]) &&
+                  <FoodCard
+                    key={y}
+                    {...data?.[x * 4 + y]}
+                    onChangeCart={(item) => onChangeCart(item, title)}
+                  />)
               }
             </div>
           ))
         }
       </div>
+
+      <div className="food-table-ender" />
       <Button type="link" onClick={toggleShow} className='food-table-show-btn'>
         {isShow ? 'Hide' : 'Show'}
       </Button>
@@ -76,12 +72,16 @@ const FoodTable = (props) => {
 FoodTable.defaultProps = {
   className: '',
   data: [],
-  title: ''
+  title: '',
+  onChangeCart: () => { },
+  isShow: false,
 };
 FoodTable.propTypes = {
   className: PropTypes.string,
   data: PropTypes.arrayOf(PropTypes.shape()),
   title: PropTypes.string,
+  onChangeCart: PropTypes.func,
+  isShow: PropTypes.bool,
 };
 
 export default FoodTable;

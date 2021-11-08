@@ -108,6 +108,7 @@ const InputCT = (props) => {
       {type === 'PASSWORD'
         ? (
           <Input.Password
+            className={errMes ? 'err-border' : ''}
             value={value}
             disabled={disabled}
             placeholder={placeholder}

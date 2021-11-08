@@ -1,8 +1,27 @@
 .home-header {
+  position: relative;
   height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: $home-header-bg;
   border-radius: 0.125rem;
+  &-btns {
+    position: absolute;
+    bottom: -31px;
+    right: 0;
+  }
+  &-login-btn {
+    border-right: 1px solid $gray-4 !important;
+  }
+  &-register-btn {
+  }
+  &-logout-btn {
+  }
+  &-username-btn {
+    border-right: 1px solid $gray-4 !important;
+  }
+  &-active-account-btn {
+    border-right: 1px solid $gray-4 !important;
+  }
 }

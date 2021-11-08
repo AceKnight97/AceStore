@@ -5,7 +5,7 @@ export const temp = '';
 
 
 
-export const getPrice = (value = 0, unit = 'VND') => {
+export const getPrice = (value = 0, unit = 'VND', text = 'Price:') => {
   let temp = '';
   switch (unit) {
     case 'VND':
@@ -14,5 +14,5 @@ export const getPrice = (value = 0, unit = 'VND') => {
     default:
       break;
   }
-  return `Price: ${temp}`;
+  return `${text} ${temp}`;
 }

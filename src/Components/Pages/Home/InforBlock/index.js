@@ -41,6 +41,7 @@ const InforBlock = (props) => {
         onChange={onChange}
         placeholder={placeholder1}
         className=''
+        type={type1}
       />
 
       <InputCT
@@ -50,6 +51,7 @@ const InforBlock = (props) => {
         onChange={onChange}
         placeholder={placeholder2}
         className='mt-16'
+        type={type2}
       />
 
     </div>
