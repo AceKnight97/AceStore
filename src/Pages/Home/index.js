@@ -19,7 +19,7 @@ const Home = (props) => {
   }
   return (
     <div className={classnames('home', className)}>
-      <HomeHeader />
+     <HomeHeader />
 
       <HomeBody />
 

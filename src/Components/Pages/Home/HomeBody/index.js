@@ -9,6 +9,7 @@ import HomeTotal from "../HomeTotal";
 import { FOOD_NAMES, MOCKING_FOOD_TABLE } from "../../../../Constants/home";
 import FoodTable from "../FoodTable";
 import { calcCartTotal } from "./helper";
+import FilterBlock from "../FilterBlock";
 
 const ace = FOOD_NAMES;
 
@@ -55,7 +56,7 @@ const HomeBody = (props) => {
 
   const renderToper = () => (
     <div className="home-body-toper">
-      <InforBlock
+     {/*  <InforBlock
         name1="name"
         value1={name}
         title1="Name:"
@@ -77,6 +78,11 @@ const HomeBody = (props) => {
         className="home-body-toper-block-2"
         type="ADDRESS_NOTES"
       />
+     */}
+      <FilterBlock
+      
+      
+      ></FilterBlock>
       <HomeTotal
         className="home-body-toper-block-3"
         total={total}

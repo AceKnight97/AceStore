@@ -7,8 +7,8 @@ import { useMergeState } from "../../../../Helpers/customHooks";
 import logo from "../../../../Images/Pages/Home/logo-min.jpg";
 import LoginModal from "../../../Modals/LoginModal";
 import RegisterModal from "../../../Modals/RegisterModal";
-import Supergraphic from "../../../UI/Supergraphic";
-import Loading from "../../../UI/Loading";
+// import Supergraphic from "../../../UI/Supergraphic";
+// import Loading from "../../../UI/Loading";
 
 const MOCKING_USER = {
   // isVerify: false,
@@ -30,15 +30,14 @@ const HomeHeader = (props) => {
   };
   const onClickActive = () => {};
   const onClickUsername = () => {};
-  const onClickLogout = () => {};
+  const onClickLogout = () => { };
   const { isVerify, username } = MOCKING_USER;
   return (
     <>
-      <Supergraphic></Supergraphic>
       {/* <Loading></Loading> */}
 
       <div className={classnames("home-header", className)}>
-        <img src={logo} alt="Logo" />
+        {/*  <img src={logo} alt="Logo" /> */}
 
         <div className="home-header-btns">
           {username ? (

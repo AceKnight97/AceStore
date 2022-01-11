@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {
   BrowserRouter as Router, Redirect, Route, Switch,
 } from 'react-router-dom';
+import Supergraphic from '../Components/UI/Supergraphic';
 import { PAGE_MANAGER } from '../Constants';
 import reloadPageRequest from '../Redux/Actions/reload';
 import Home from './Home';
@@ -20,6 +21,7 @@ const Main = (props) => {
   }, []);
   return (
     <main className='div-root'>
+      <Supergraphic></Supergraphic>
       <Router>
         <Switch>
           <Route path='/acestore' name='Home' component={Home} />

@@ -1,5 +1,5 @@
 module.exports = {
-    rules: { 
-      "no-unused-vars": "off",
-    },
-  }
+  rules: { 
+    "no-unused-vars": "off",
+  },
+}
