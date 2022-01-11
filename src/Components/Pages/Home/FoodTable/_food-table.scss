@@ -15,6 +15,12 @@
     // align-items: center;
     // justify-content: space-between;
   }
+  &-wrap {
+    flex-wrap: wrap;
+    display: flex;
+    // white-space: pre-wrap;
+    // overflow-wrap: break-word;
+  }
   &-show-btn {
     position: absolute;
     top: 0;

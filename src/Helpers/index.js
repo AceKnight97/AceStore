@@ -1,18 +1,33 @@
-import currencyFormatter from 'currency-formatter';
+import currencyFormatter from "currency-formatter";
 
+export const temp = "";
 
-export const temp = '';
-
-
-
-export const getPrice = (value = 0, unit = 'VND', text = 'Price:') => {
-  let temp = '';
+export const getPrice = (value = 0, unit = "VND", text = "Price:") => {
+  let temp = "";
   switch (unit) {
-    case 'VND':
-      temp = currencyFormatter.format(value, { code: 'VND' });
+    case "VND":
+      temp = currencyFormatter.format(value, { code: "VND" });
       break;
     default:
       break;
   }
   return `${text} ${temp}`;
-}
+};
+
+// const toDataURL = (url, callback) => {
+//   var xhr = new XMLHttpRequest();
+//   xhr.onload = function () {
+//     var reader = new FileReader();
+//     reader.onloadend = function () {
+//       callback(reader.result);
+//     };
+//     reader.readAsDataURL(xhr.response);
+//   };
+//   xhr.open("GET", url);
+//   xhr.responseType = "blob";
+//   xhr.send();
+// };
+
+// toDataURL(testimg, function (dataUrl) {
+//   console.log("RESULT:", dataUrl);
+// });

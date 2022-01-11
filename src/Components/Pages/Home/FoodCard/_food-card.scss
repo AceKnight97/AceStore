@@ -1,11 +1,11 @@
+@import "../../../../Styles/style.scss";
+
 .food-card {
   position: relative;
-  // margin-top: 1.5rem;
   border: 1px solid $gray-5;
   padding: 1rem;
-  border-radius: 0.25rem;
-  // width: 368px;
-  width: calc(100% - 1rem);
+  width: 280px;
+  max-width: 280px;
   &-img {
     height: 232px;
     background-color: #e8c0c0;
@@ -19,6 +19,12 @@
     }
     &-col {
       margin-top: 0.25rem;
+      &-stars {
+        img {
+          width: 1rem;
+          height: 1rem;
+        }
+      }
     }
   }
   &-isbuy {
@@ -32,7 +38,7 @@
     line-height: 1.5rem;
     color: white;
     font-weight: bold;
-    border-top-right-radius: 0.25rem;
+    // border-top-right-radius: 0.25rem;
     border-bottom-left-radius: 100%;
     padding-top: 0.5rem;
     padding-left: 1.125rem;

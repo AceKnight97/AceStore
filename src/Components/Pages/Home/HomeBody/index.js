@@ -56,7 +56,7 @@ const HomeBody = (props) => {
 
   const renderToper = () => (
     <div className="home-body-toper">
-     {/*  <InforBlock
+      {/*  <InforBlock
         name1="name"
         value1={name}
         title1="Name:"
@@ -79,10 +79,7 @@ const HomeBody = (props) => {
         type="ADDRESS_NOTES"
       />
      */}
-      <FilterBlock
-      
-      
-      ></FilterBlock>
+      <FilterBlock></FilterBlock>
       <HomeTotal
         className="home-body-toper-block-3"
         total={total}
@@ -117,6 +114,7 @@ const HomeBody = (props) => {
             title={x.title}
             data={x.data}
             onChangeCart={onChangeCart}
+            isShow={i === 0}
           />
         ))}
       </div>

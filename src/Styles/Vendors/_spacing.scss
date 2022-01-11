@@ -224,3 +224,15 @@ $pc-20: calc(100% / 4);
     padding-left: 2rem;
   }
 }
+
+.w {
+  &-140 {
+    width: 140px;
+  }
+  &-160 {
+    width: 160px;
+  }
+  &-200 {
+    width: 200px;
+  }
+}
