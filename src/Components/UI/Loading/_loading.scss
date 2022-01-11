@@ -1,0 +1,11 @@
+.loading {
+  .loader-gif {
+    display: block;
+    width: 100%;
+    background-image: url("../../../Images/loading.gif");
+    background-position: left;
+    background-repeat: no-repeat;
+    height: 200px;
+    background-size: 100%;
+  }
+}
