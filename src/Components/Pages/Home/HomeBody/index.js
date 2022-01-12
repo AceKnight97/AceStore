@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import _ from "lodash";
@@ -9,17 +9,46 @@ import HomeTotal from "../HomeTotal";
 import { FOOD_NAMES, MOCKING_FOOD_TABLE } from "../../../../Constants/home";
 import FoodTable from "../FoodTable";
 import { calcCartTotal } from "./helper";
+import { toDataURL } from "../../../../Helpers";
 import FilterBlock from "../FilterBlock";
+import testimg1 from "../../../../Images/Foods/1.webp";
+import testimg2 from "../../../../Images/Foods/2.webp";
+import testimg3 from "../../../../Images/Foods/3.webp";
+import testimg4 from "../../../../Images/Foods/4.webp";
+import testimg5 from "../../../../Images/Foods/5.jpg";
+import testimg6 from "../../../../Images/Foods/6.jpg";
+import testimg7 from "../../../../Images/Foods/7.webp";
+import testimg8 from "../../../../Images/Foods/8.jpg";
+import testimg9 from "../../../../Images/Foods/9.webp";
+import testimg10 from "../../../../Images/Foods/10.jpg";
+import testimg11 from "../../../../Images/Foods/11.png";
+import testimg12 from "../../../../Images/Foods/12.webp";
+import testimg13 from "../../../../Images/Foods/13.webp";
+import auth from "../../../../Helpers/auth";
+import { useHistory } from "react-router-dom";
 
-const ace = FOOD_NAMES;
-
+const arr = [
+  testimg1,
+  testimg2,
+  testimg3,
+  testimg4,
+  testimg5,
+  testimg6,
+  testimg7,
+  testimg8,
+  testimg9,
+  testimg10,
+  testimg11,
+  testimg12,
+  testimg13,
+];
 const HomeBody = (props) => {
+  const history = useHistory();
   const [state, setState] = useMergeState({
-    name: "asd",
+    name: "",
     phone: "",
     address: "",
     notes: "",
-
     // cartTags: [],
     foodData: _.cloneDeep(MOCKING_FOOD_TABLE),
   });
@@ -31,7 +60,18 @@ const HomeBody = (props) => {
     notes, // total, // cartTags,
     foodData,
   } = state;
-  console.log({ foodData });
+  useEffect(async () => {
+    const urlArr = [];
+    arr.forEach((e) => {
+      toDataURL(e, function (dataUrl) {
+        urlArr.push(dataUrl);
+      });
+    });
+    setTimeout(() => {
+      console.log({ urlArr });
+    }, 500);
+  }, []);
+
   const { cartTags, total } = calcCartTotal(foodData);
 
   const onChange = (key, value) => {
@@ -39,11 +79,14 @@ const HomeBody = (props) => {
   };
 
   const onClickReset = () => {
-    console.log({ onClickReset: foodData });
+    const test = auth.getDataLogin();
+    console.log({ onClickReset: foodData, test });
     setState({ foodData: _.cloneDeep(MOCKING_FOOD_TABLE) });
   };
 
-  const onClickBuy = () => {};
+  const onClickBuy = () => {
+    history.push("/food-order");
+  };
 
   const onChangeCart = (item = {}, title = "") => {
     // console.log({ item, title });

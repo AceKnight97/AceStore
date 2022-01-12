@@ -19,18 +19,28 @@ const FilterBlock = (props) => {
     maxPrice: undefined,
   });
   const { className } = props;
-  const { searchName, stars, kind, minPrice, maxPrice } = state;
   const onChange = (key, value) => {
     setState({ [key]: value });
   };
   const onChangeStar = (stars = 0) => {
+    if (stars === state.stars) {
+      setState({ stars: 0 });
+      return;
+    }
     setState({ stars });
   };
+  const { searchName, stars, kind, minPrice, maxPrice } = state;
+
   return (
     <div className={classnames("filter-block", className)}>
       <div className="flex">
         <div className="filter-block-title">Search:</div>
-        <InputCT name="searchName" value={searchName} onChange={onChange} />
+        <InputCT
+          name="searchName"
+          value={searchName}
+          onChange={onChange}
+          className="filter-block-search"
+        />
         <div className="filter-block-star">Stars:</div>
         {_.map(_.range(stars), (x, i) => (
           <button

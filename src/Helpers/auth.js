@@ -2,7 +2,7 @@ const { localStorage } = global.window;
 
 const auth = {
   login(data) {
-    console.log('login data: ', data);
+    console.log("login data: ", data);
     const { user, isSuccess } = data;
     const { username, _id } = user;
 
@@ -10,6 +10,13 @@ const auth = {
     localStorage.userId = _id;
     localStorage.isSuccess = isSuccess;
     localStorage.role = user.role;
+  },
+
+  setMasterData(data) {
+    localStorage.masterData = JSON.stringify(data);
+  },
+  getMasterData() {
+    return localStorage.masterData ? JSON.parse(localStorage.masterData) : [];
   },
 
   setDatalogin(data) {
@@ -33,13 +40,7 @@ const auth = {
   },
 
   role() {
-    return localStorage.role;// || 'MD'; // || 'NURSE';
-  },
-  isMD() {
-    return localStorage.role === 'MD';
-  },
-  isNurse() {
-    return localStorage.role === 'NURSE';
+    return localStorage.role; // || 'MD'; // || 'NURSE';
   },
 
   logout() {

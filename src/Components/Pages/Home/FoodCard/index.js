@@ -18,7 +18,6 @@ import {
   WEIGHT_DATA,
 } from "../../../../Constants/home";
 import "./_food-card.scss";
-import testimg from "./testimg.webp";
 
 const FoodCard = (props) => {
   const [state, setState] = useMergeState({

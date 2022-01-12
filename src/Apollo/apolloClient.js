@@ -1,11 +1,14 @@
 import {
-  ApolloClient, ApolloLink, HttpLink, InMemoryCache,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import { onError } from '@apollo/client/link/error';
-import packageJson from '../../package.json';
-import CONFIG from '../constants/config';
-import auth from '../utils/auth';
+  ApolloClient,
+  ApolloLink,
+  HttpLink,
+  InMemoryCache,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import { onError } from "@apollo/client/link/error";
+import packageJson from "../../package.json";
+import { CONFIG } from "../Constants";
+import auth from "../Helpers/auth";
 
 // import CONFIG from '../Config';
 // import EMITTER_CONSTANTS from '../Constants/';
@@ -15,16 +18,19 @@ const cache = new InMemoryCache({ addTypename: false });
 
 const defaultOptions = {
   watchQuery: {
-    fetchPolicy: 'no-cache',
-    errorPolicy: 'ignore',
+    fetchPolicy: "no-cache",
+    errorPolicy: "ignore",
   },
   query: {
-    fetchPolicy: 'no-cache',
-    errorPolicy: 'all',
+    fetchPolicy: "no-cache",
+    errorPolicy: "all",
   },
 };
 
-const createClient = async (isUsingCache = false, isNotShowDisconnect = false) => {
+const createClient = async (
+  isUsingCache = false,
+  isNotShowDisconnect = false
+) => {
   try {
     const token = auth.getToken();
     // console.log({ token });
@@ -34,39 +40,39 @@ const createClient = async (isUsingCache = false, isNotShowDisconnect = false) =
       headers: {
         ...headers,
         // authorization: token ? `Bearer ${token}` : '',
-        'access-token': token,
+        "access-token": token,
         // token,
       },
     }));
     return new ApolloClient({
       link: authLink.concat(
         ApolloLink.from([
-          onError(({
-            graphQLErrors, networkError, response, operation, forward,
-          }) => {
-            if (graphQLErrors) {
-              // _.map(graphQLErrors, ({ message, extensions }) => {
-              //   if (_.includes(message, '403') || _.includes(message, '400') || extensions.code === 'UNAUTHENTICATED') {
-              //     emitter.emit(EMITTER_CONSTANTS.LOGOUT);
-              //   }
-              // });
-            } else if (networkError) {
-              console.error(`[Network error]: ${networkError}`);
-              // if (!isNotShowDisconnect) {
-              // openPopupDisconnect();
-              // }
-              throw networkError;
+          onError(
+            ({ graphQLErrors, networkError, response, operation, forward }) => {
+              if (graphQLErrors) {
+                // _.map(graphQLErrors, ({ message, extensions }) => {
+                //   if (_.includes(message, '403') || _.includes(message, '400') || extensions.code === 'UNAUTHENTICATED') {
+                //     emitter.emit(EMITTER_CONSTANTS.LOGOUT);
+                //   }
+                // });
+              } else if (networkError) {
+                console.error(`[Network error]: ${networkError}`);
+                // if (!isNotShowDisconnect) {
+                // openPopupDisconnect();
+                // }
+                throw networkError;
+              }
             }
-          }),
+          ),
           new HttpLink({
             uri: CONFIG.APOLLO_HOST_URL,
-            credentials: 'same-origin',
+            credentials: "same-origin",
           }),
-        ]),
+        ])
       ),
       cache,
       defaultOptions: isUsingCache ? undefined : defaultOptions,
-      name: 'web',
+      name: "web",
       version: packageJson.version,
     });
   } catch (error) {
@@ -77,7 +83,7 @@ const createClient = async (isUsingCache = false, isNotShowDisconnect = false) =
 export const client = new ApolloClient({
   link: new HttpLink({
     uri: CONFIG.APOLLO_HOST_URL,
-    credentials: 'same-origin',
+    credentials: "same-origin",
   }),
   cache,
   defaultOptions,
