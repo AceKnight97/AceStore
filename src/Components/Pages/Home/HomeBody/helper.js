@@ -1,14 +1,36 @@
 import { QUANTITY_TYPES } from "../../../../Constants/home";
-import _ from 'lodash';
+import _ from "lodash";
+import fetchMenu from "../../../../Apollo/Functions/Fetch/fetchMenu";
 
-export const temp = '';
+export const getMasterData = async () => {
+  const res = await fetchMenu();
+  const foodData = [];
+  // _.forEach(res, (x) => {
+  //   const data = []
+  //   foodData.push({});
+  // });
+  // const grouped = _.mapValues(_.groupBy(res, "title"), (clist) =>
+  //   clist.map((res) => _.omit(res, "title"))
+  // );
 
+  const grouped = _.groupBy(res, (car) => car.title);
+
+  Object.keys(grouped).forEach((x) => {
+    foodData.push({
+      title: x,
+      data: grouped[x],
+    });
+  });
+
+  console.log({ grouped, foodData });
+  return foodData;
+};
 
 export const calcCartTotal = (foodData = []) => {
   let total = 0;
   const cartTags = [];
-  _.forEach(foodData, x => {
-    total += _.sumBy(x.data, z => {
+  _.forEach(foodData, (x) => {
+    total += _.sumBy(x.data, (z) => {
       if (z.isBuy) {
         // console.log({ z })
         if (z.quantityType === QUANTITY_TYPES.WEIGHT) {
@@ -31,4 +53,4 @@ export const calcCartTotal = (foodData = []) => {
   });
   // console.log({ foodData, total, cartTags });
   return { total, cartTags };
-}
+};

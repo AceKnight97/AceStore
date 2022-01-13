@@ -1,17 +1,16 @@
-import React, { useEffect, useMemo } from "react";
-import PropTypes from "prop-types";
+import { Tag } from "antd";
 import classnames from "classnames";
 import _ from "lodash";
-import { Tag } from "antd";
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import auth from "../../../../Helpers/auth";
 import { useMergeState } from "../../../../Helpers/customHooks";
-import InforBlock from "../InforBlock";
-import HomeTotal from "../HomeTotal";
-import { FOOD_NAMES, MOCKING_FOOD_TABLE } from "../../../../Constants/home";
-import FoodTable from "../FoodTable";
-import { calcCartTotal } from "./helper";
-import { toDataURL } from "../../../../Helpers";
-import FilterBlock from "../FilterBlock";
 import testimg1 from "../../../../Images/Foods/1.webp";
+import testimg10 from "../../../../Images/Foods/10.jpg";
+import testimg11 from "../../../../Images/Foods/11.png";
+import testimg12 from "../../../../Images/Foods/12.webp";
+import testimg13 from "../../../../Images/Foods/13.webp";
 import testimg2 from "../../../../Images/Foods/2.webp";
 import testimg3 from "../../../../Images/Foods/3.webp";
 import testimg4 from "../../../../Images/Foods/4.webp";
@@ -20,12 +19,10 @@ import testimg6 from "../../../../Images/Foods/6.jpg";
 import testimg7 from "../../../../Images/Foods/7.webp";
 import testimg8 from "../../../../Images/Foods/8.jpg";
 import testimg9 from "../../../../Images/Foods/9.webp";
-import testimg10 from "../../../../Images/Foods/10.jpg";
-import testimg11 from "../../../../Images/Foods/11.png";
-import testimg12 from "../../../../Images/Foods/12.webp";
-import testimg13 from "../../../../Images/Foods/13.webp";
-import auth from "../../../../Helpers/auth";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import FilterBlock from "../FilterBlock";
+import FoodTable from "../FoodTable";
+import HomeTotal from "../HomeTotal";
+import { calcCartTotal, getMasterData } from "./helper";
 
 const arr = [
   testimg1,
@@ -44,20 +41,35 @@ const arr = [
 ];
 const HomeBody = (props) => {
   const history = useHistory();
-  const location = useLocation();
-  console.log({ Iwant: location.state });
   const [state, setState] = useMergeState({
     name: "",
     phone: "",
     address: "",
     notes: "",
     // cartTags: [],
-    foodData:
-      auth.getFoodData().length !== 0
-        ? auth.getFoodData()
-        : _.cloneDeep(MOCKING_FOOD_TABLE),
+    foodData: auth.getFoodData().length !== 0 ? auth.getFoodData() : [], //_.cloneDeep([MOCKING_FOOD_TABLE])
     arrImages: [],
+    loading: true,
   });
+  const fetchMasterData = async () => {
+    const foodData = await getMasterData();
+    console.log({ object: foodData });
+    setState({ foodData, loading: false });
+  };
+
+  useEffect(() => {
+    fetchMasterData();
+    // const arrImages = [];
+    // arr.forEach((e) => {
+    //   toDataURL(e, function (dataUrl) {
+    //     arrImages.push(dataUrl);
+    //   });
+    // });
+    // setTimeout(() => {
+    //   // console.log({ arrImages });
+    //   setState({ arrImages });
+    // }, 500);
+  }, []);
   const { className } = props;
   const {
     name,
@@ -66,25 +78,6 @@ const HomeBody = (props) => {
     notes, // total, // cartTags,
     foodData,
   } = state;
-  useEffect(() => {
-    console.log({ location });
-    if (location.state) {
-      setState({ foodData: location.state });
-    }
-  }, [location.pathname]);
-
-  useEffect(async () => {
-    const arrImages = [];
-    arr.forEach((e) => {
-      toDataURL(e, function (dataUrl) {
-        arrImages.push(dataUrl);
-      });
-    });
-    setTimeout(() => {
-      // console.log({ arrImages });
-      setState({ arrImages });
-    }, 500);
-  }, []);
 
   const { cartTags, total } = calcCartTotal(foodData);
 
@@ -99,6 +92,7 @@ const HomeBody = (props) => {
         _.assign(y, { isBuy: false });
       });
     });
+    auth.setFoodData(undefined);
     setState({ foodData: newFoodData });
   };
 

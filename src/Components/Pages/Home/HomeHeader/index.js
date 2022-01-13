@@ -10,6 +10,7 @@ import RegisterModal from "../../../Modals/RegisterModal";
 import auth from "../../../../Helpers/auth";
 import { loginRequest, logoutRequest } from "../../../../Redux/Actions/login";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 // import Supergraphic from "../../../UI/Supergraphic";
 // import Loading from "../../../UI/Loading";
 
@@ -19,6 +20,7 @@ import { connect } from "react-redux";
 // };
 
 const HomeHeader = (props) => {
+  const history = useHistory();
   const [state, setState] = useMergeState({
     visibleLogin: false,
     visibleRegister: false,
@@ -33,14 +35,19 @@ const HomeHeader = (props) => {
   };
   const onClickActive = () => {};
   const onClickUsername = () => {};
+  const onClickHistory = () => {
+    history.push("/history");
+  };
   const onClickLogout = () => {
     auth.logout();
     props.logoutRequest();
   };
   const { isVerify = true, username } = auth.getDataLogin();
+
   useEffect(() => {
-    // console.log({ login: props.login });
-    // console.log({ loginData: auth.getDataLogin() });
+    if (_.isEmpty(props.login) && _.isEmpty(auth.getDataLogin())) {
+      setState({});
+    }
   }, [props.login]);
   return (
     <>
@@ -69,7 +76,13 @@ const HomeHeader = (props) => {
               >
                 {username}
               </Button>
-              {/**/}
+              <Button
+                type="link"
+                onClick={onClickHistory}
+                className="home-header-username-btn"
+              >
+                History
+              </Button>
               <Button
                 type="link"
                 onClick={onClickLogout}

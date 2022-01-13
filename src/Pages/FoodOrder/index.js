@@ -56,9 +56,13 @@ const FoodOrder = (props) => {
   const onClickConfirm = async () => {
     setState({ loading: true });
     const res = await mutationCreateOrder(foodData, email);
-    // if (res.isSuccess) {
-    // } else {
-    // }
+    if (res.isSuccess) {
+      alert("Successfully creating order!");
+      auth.setFoodData(undefined);
+      history.push("/home");
+    } else {
+      alert("Failed to create order: ", res.message);
+    }
     setState({ loading: false });
   };
 
@@ -94,7 +98,7 @@ const FoodOrder = (props) => {
         </div>
         <AntdTable
           className="mt-48"
-          rowKey="index"
+          rowKey="id"
           totalData={foodData}
           columns={generateColumns()}
         ></AntdTable>

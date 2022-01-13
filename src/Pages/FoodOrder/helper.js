@@ -23,11 +23,11 @@ export const mutationCreateOrder = async (data = [], email = "") => {
   const sendingData = data.map((x) => ({
     // name: x.name,
     // price: x.price,
-    food_id: x.food_id,
+    food_id: x.id,
     quantity: parseFloat(x.quantity.slice(0, 3)),
     email,
     // quantityType: x.quantityType,
   }));
   console.log({ data, sendingData });
-  // return await handleCreateOrder(data);
+  return await handleCreateOrder(sendingData);
 };

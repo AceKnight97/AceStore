@@ -13,6 +13,7 @@ import { PAGE_MANAGER } from "../Constants";
 import reloadPageRequest from "../Redux/Actions/reload";
 import FoodOrder from "./FoodOrder";
 import Home from "./Home";
+import History from "./History";
 
 const Main = (props) => {
   // const location = useLocation();
@@ -32,6 +33,7 @@ const Main = (props) => {
         <Supergraphic></Supergraphic>
         <Switch>
           <Route exact path="/acestore" name="Home" component={Home} />
+          <Route exact path="/history" name="Home" component={History} />
           <Route
             exact
             path="/food-order"

@@ -13,7 +13,7 @@ import SelectCT from "../../../Inputs/SelectCT";
 const FilterBlock = (props) => {
   const [state, setState] = useMergeState({
     searchName: "",
-    stars: 0,
+    rating: 0,
     kind: undefined,
     minPrice: undefined,
     maxPrice: undefined,
@@ -22,14 +22,14 @@ const FilterBlock = (props) => {
   const onChange = (key, value) => {
     setState({ [key]: value });
   };
-  const onChangeStar = (stars = 0) => {
-    if (stars === state.stars) {
-      setState({ stars: 0 });
+  const onChangeStar = (rating = 0) => {
+    if (rating === state.rating) {
+      setState({ rating: 0 });
       return;
     }
-    setState({ stars });
+    setState({ rating });
   };
-  const { searchName, stars, kind, minPrice, maxPrice } = state;
+  const { searchName, rating, kind, minPrice, maxPrice } = state;
 
   return (
     <div className={classnames("filter-block", className)}>
@@ -42,7 +42,7 @@ const FilterBlock = (props) => {
           className="filter-block-search"
         />
         <div className="filter-block-star">Stars:</div>
-        {_.map(_.range(stars), (x, i) => (
+        {_.map(_.range(rating), (x, i) => (
           <button
             className="bas-btn"
             key={x}
@@ -51,11 +51,11 @@ const FilterBlock = (props) => {
             <img src={starIc} alt="Star ic" />
           </button>
         ))}
-        {_.map(_.range(5 - stars), (x, i) => (
+        {_.map(_.range(5 - rating), (x, i) => (
           <button
             className="bas-btn"
             key={x}
-            onClick={() => onChangeStar(stars + i + 1)}
+            onClick={() => onChangeStar(rating + i + 1)}
           >
             <img src={starInactiveIc} alt="Star inactive ic" />
           </button>

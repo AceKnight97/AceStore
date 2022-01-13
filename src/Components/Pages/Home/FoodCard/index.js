@@ -23,7 +23,7 @@ const FoodCard = (props) => {
   const [state, setState] = useMergeState({
     name: props.name,
     price: props.price,
-    stars: props.stars,
+    rating: props.rating,
     isBuy: props.isBuy,
     quantity:
       props.quantity || props.quantityType === QUANTITY_TYPES.WEIGHT
@@ -32,7 +32,7 @@ const FoodCard = (props) => {
     quantityType: props.quantityType,
   });
   const { className, quantityType, imgSrc, unit, onChangeCart } = props;
-  const { name, price, stars, isBuy, quantity } = state;
+  const { name, price, rating, isBuy, quantity } = state;
 
   useUpdateEffect(() => {
     onChangeCart(state);
@@ -84,16 +84,16 @@ const FoodCard = (props) => {
           </div>
 
           <div className="food-card-info-col">
-            <div className="food-card-info-col-stars">
-              {_.map(_.range(stars), (x) => (
+            <div className="food-card-info-col-rating">
+              {_.map(_.range(rating), (x) => (
                 <img src={starIc} alt="Star ic" key={x} className="mr-2" />
               ))}
-              {_.map(_.range(5 - stars), (x, i) => (
+              {_.map(_.range(5 - rating), (x, i) => (
                 <img
                   src={starInactiveIc}
                   alt="Star ic"
                   key={x}
-                  className={4 - stars !== x ? "mr-2" : ""}
+                  className={4 - rating !== x ? "mr-2" : ""}
                 />
               ))}
             </div>
@@ -117,7 +117,7 @@ FoodCard.defaultProps = {
   className: "",
   name: "",
   price: 0,
-  stars: 3,
+  rating: 3,
   isBuy: false,
   quantity: undefined,
   quantityType: QUANTITY_TYPES.WEIGHT,
@@ -129,7 +129,7 @@ FoodCard.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string,
   price: PropTypes.number,
-  stars: PropTypes.number,
+  rating: PropTypes.number,
   isBuy: PropTypes.bool,
   quantity: PropTypes.string,
   quantityType: PropTypes.string,

@@ -3,13 +3,20 @@ const { localStorage } = global.window;
 const auth = {
   login(data) {
     console.log("login data: ", data);
-    const { user, isSuccess } = data;
-    const { username, _id } = user;
+    const { user, isSuccess, token } = data;
+    // const { username, _id } = user;
 
-    localStorage.username = username;
-    localStorage.userId = _id;
     localStorage.isSuccess = isSuccess;
-    localStorage.role = user.role;
+    localStorage.token = token;
+    localStorage.user = JSON.stringify(user);
+    // localStorage.username = username;
+    // localStorage.userId = _id;
+    // localStorage.isSuccess = isSuccess;
+    // localStorage.role = user.role;
+  },
+
+  getToken() {
+    return localStorage.token;
   },
 
   setFoodData(data) {

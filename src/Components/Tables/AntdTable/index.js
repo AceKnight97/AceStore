@@ -20,6 +20,7 @@ const AntdTable = (props) => {
           onRowClick(rowIndex, record);
         },
       })}
+      pagination={false}
       //   pagination={
       //     props.isNoPagination
       //       ? false

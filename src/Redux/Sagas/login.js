@@ -1,7 +1,7 @@
 import { put, call, take, fork } from "redux-saga/effects";
 
 import _ from "lodash";
-import auth from "../../Utils/auth";
+import auth from "../../Helpers/auth";
 import AppFlowActions from "../../Constants";
 
 // import login from '../reducers/login';

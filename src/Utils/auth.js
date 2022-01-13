@@ -2,9 +2,9 @@ const { localStorage } = global.window;
 
 const auth = {
   login(data) {
-    const { user, isSuccess, accessToken } = data;
+    const { user, isSuccess, token } = data;
     localStorage.isSuccess = isSuccess;
-    localStorage.token = accessToken;
+    localStorage.token = token;
     localStorage.user = JSON.stringify(user);
   },
 
