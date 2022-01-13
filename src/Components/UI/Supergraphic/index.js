@@ -12,8 +12,7 @@ import { RightOutlined } from "@ant-design/icons";
 const Supergraphic = (props) => {
   const location = useLocation();
   const history = useHistory();
-  // const params = useParams();
-  // console.log({ history, params });
+  const { pathname } = location;
   const [state, setState] = useMergeState({});
   const { className } = props;
   useEffect(() => {}, []);
@@ -24,11 +23,13 @@ const Supergraphic = (props) => {
 
   const renderLocationTitle = () => {
     // console.log({ location });
-    const { pathname } = location;
     let title = "";
     switch (pathname) {
       case "/food-order":
         title = "Food Order";
+        break;
+      case "/history":
+        title = "Order History";
         break;
       default:
         break;
@@ -62,6 +63,11 @@ const Supergraphic = (props) => {
         </div>
         <div className="bosch-header-group">Canteen - Group 4</div>
       </div>
+      {pathname !== "/home" && (
+        <NavLink to="/home" className="not-home-back-btn">
+          Go back
+        </NavLink>
+      )}
     </div>
   );
 };

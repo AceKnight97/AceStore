@@ -32,7 +32,7 @@ const Main = (props) => {
       <Router>
         <Supergraphic></Supergraphic>
         <Switch>
-          <Route exact path="/acestore" name="Home" component={Home} />
+          <Route exact path="/home" name="Home" component={Home} />
           <Route exact path="/history" name="Home" component={History} />
           <Route
             exact
@@ -40,7 +40,7 @@ const Main = (props) => {
             name="Food Order"
             component={FoodOrder}
           />
-          <Redirect path="/" to={{ pathname: "/acestore" }} />
+          <Redirect path="/" to={{ pathname: "/home" }} />
         </Switch>
       </Router>
     </main>

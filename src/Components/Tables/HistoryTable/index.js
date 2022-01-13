@@ -6,6 +6,7 @@ import { getPrice } from "../../../Helpers";
 import "./_history-table.scss";
 import moment from "moment";
 import AntdTable from "../AntdTable";
+import { getOrderTotal } from "./helper";
 
 const HistoryTable = (props) => {
   const toggleRef = useRef(undefined);
@@ -46,6 +47,8 @@ const HistoryTable = (props) => {
         <div className="flex">
           <span className="b mr-4">Date: </span>
           <span>{moment(date).format("HH:mm, DD/MM/YY")}</span>
+          <span className="b ml-16 mr-4">Total: </span>
+          <span>{getOrderTotal(data)}</span>
         </div>
         <Button type="link" onClick={onClickCloneOrder}>
           Clone order
