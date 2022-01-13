@@ -18,7 +18,7 @@ const Home = (props) => {
   const callApi = async () => {
     const masterdata = await fetchMasterData();
     auth.setMasterData(masterdata);
-    console.log({ masterdata });
+    // console.log({ masterdata });
   };
   useEffect(() => {
     callApi();

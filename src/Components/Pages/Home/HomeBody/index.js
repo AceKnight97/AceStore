@@ -25,7 +25,7 @@ import testimg11 from "../../../../Images/Foods/11.png";
 import testimg12 from "../../../../Images/Foods/12.webp";
 import testimg13 from "../../../../Images/Foods/13.webp";
 import auth from "../../../../Helpers/auth";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 
 const arr = [
   testimg1,
@@ -44,13 +44,19 @@ const arr = [
 ];
 const HomeBody = (props) => {
   const history = useHistory();
+  const location = useLocation();
+  console.log({ Iwant: location.state });
   const [state, setState] = useMergeState({
     name: "",
     phone: "",
     address: "",
     notes: "",
     // cartTags: [],
-    foodData: _.cloneDeep(MOCKING_FOOD_TABLE),
+    foodData:
+      auth.getFoodData().length !== 0
+        ? auth.getFoodData()
+        : _.cloneDeep(MOCKING_FOOD_TABLE),
+    arrImages: [],
   });
   const { className } = props;
   const {
@@ -60,15 +66,23 @@ const HomeBody = (props) => {
     notes, // total, // cartTags,
     foodData,
   } = state;
+  useEffect(() => {
+    console.log({ location });
+    if (location.state) {
+      setState({ foodData: location.state });
+    }
+  }, [location.pathname]);
+
   useEffect(async () => {
-    const urlArr = [];
+    const arrImages = [];
     arr.forEach((e) => {
       toDataURL(e, function (dataUrl) {
-        urlArr.push(dataUrl);
+        arrImages.push(dataUrl);
       });
     });
     setTimeout(() => {
-      console.log({ urlArr });
+      // console.log({ arrImages });
+      setState({ arrImages });
     }, 500);
   }, []);
 
@@ -79,21 +93,27 @@ const HomeBody = (props) => {
   };
 
   const onClickReset = () => {
-    const test = auth.getDataLogin();
-    console.log({ onClickReset: foodData, test });
-    setState({ foodData: _.cloneDeep(MOCKING_FOOD_TABLE) });
+    const newFoodData = _.cloneDeep(foodData);
+    _.forEach(newFoodData, (x) => {
+      _.forEach(x.data || [], (y) => {
+        _.assign(y, { isBuy: false });
+      });
+    });
+    setState({ foodData: newFoodData });
   };
 
   const onClickBuy = () => {
-    history.push("/food-order");
+    history.push({
+      pathname: "/food-order",
+      state: foodData,
+    });
+    auth.setFoodData(foodData);
   };
 
   const onChangeCart = (item = {}, title = "") => {
-    // console.log({ item, title });
     const { data } = _.find(foodData, (x) => x.title === title);
     const cardTemp = _.find(data, (x) => x.name === item.name);
     _.assign(cardTemp, { ...item });
-    // console.log({ foodData })
     setState({ foodData });
   };
 

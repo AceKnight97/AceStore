@@ -45,22 +45,6 @@ const FoodTable = (props) => {
         <span>{title}</span>
       </div>
       <div ref={toggleRef}>
-        {/*
-       {
-          _.map(_.range(Math.ceil(data?.length / 4)), (x) => (
-            <div className="food-table-row" key={x}>
-              {
-                _.map(_.range(0, 4), (y) => !_.isEmpty(data?.[x * 4 + y]) &&
-                  <FoodCard
-                    key={y}
-                    {...data?.[x * 4 + y]}
-                    onChangeCart={(item) => onChangeCart(item, title)}
-                  />)
-              }
-            </div>
-          ))
-        }
-      */}
         <div className="food-table-wrap">
           {_.map(data, (x, i) => (
             <FoodCard

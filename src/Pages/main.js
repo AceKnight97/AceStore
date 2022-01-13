@@ -6,6 +6,7 @@ import {
   Redirect,
   Route,
   Switch,
+  useLocation,
 } from "react-router-dom";
 import Supergraphic from "../Components/UI/Supergraphic";
 import { PAGE_MANAGER } from "../Constants";
@@ -14,6 +15,8 @@ import FoodOrder from "./FoodOrder";
 import Home from "./Home";
 
 const Main = (props) => {
+  // const location = useLocation();
+  // console.log({ location });
   useEffect(() => {
     window.onbeforeunload = () => {};
     window.onload = () => {
@@ -25,11 +28,16 @@ const Main = (props) => {
   }, []);
   return (
     <main className="div-root">
-      <Supergraphic></Supergraphic>
       <Router>
+        <Supergraphic></Supergraphic>
         <Switch>
-          <Route path="/acestore" name="Home" component={Home} />
-          <Route path="/food-order" name="Food Order" component={FoodOrder} />
+          <Route exact path="/acestore" name="Home" component={Home} />
+          <Route
+            exact
+            path="/food-order"
+            name="Food Order"
+            component={FoodOrder}
+          />
           <Redirect path="/" to={{ pathname: "/acestore" }} />
         </Switch>
       </Router>

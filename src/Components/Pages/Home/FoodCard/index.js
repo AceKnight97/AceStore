@@ -38,6 +38,10 @@ const FoodCard = (props) => {
     onChangeCart(state);
   }, [isBuy, quantity]);
 
+  useUpdateEffect(() => {
+    setState({ isBuy: props.isBuy });
+  }, [props.isBuy]);
+
   const onChange = (key, value) => {
     setState({ [key]: value });
   };

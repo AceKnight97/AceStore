@@ -12,11 +12,22 @@ const auth = {
     localStorage.role = user.role;
   },
 
+  setFoodData(data) {
+    localStorage.foodData = JSON.stringify(data);
+  },
+  getFoodData() {
+    return localStorage.foodData && localStorage.foodData !== "undefined"
+      ? JSON.parse(localStorage.foodData)
+      : [];
+  },
+
   setMasterData(data) {
     localStorage.masterData = JSON.stringify(data);
   },
   getMasterData() {
-    return localStorage.masterData ? JSON.parse(localStorage.masterData) : [];
+    return localStorage.masterData && localStorage.masterData !== "undefined"
+      ? JSON.parse(localStorage.masterData)
+      : [];
   },
 
   setDatalogin(data) {
@@ -24,7 +35,9 @@ const auth = {
   },
 
   getDataLogin() {
-    return localStorage.login ? JSON.parse(localStorage.login) : undefined;
+    return localStorage.login && localStorage.login !== "undefined"
+      ? JSON.parse(localStorage.login)
+      : {};
   },
 
   isSuccess() {

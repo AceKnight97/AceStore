@@ -14,6 +14,22 @@
     &-toper {
       display: flex;
       justify-content: space-between;
+      margin-top: 1rem;
+    }
+    &-btns {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      button {
+        width: 200px;
+        margin: 0 1rem;
+      }
+    }
+    &-cent {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
     &-main {
     }

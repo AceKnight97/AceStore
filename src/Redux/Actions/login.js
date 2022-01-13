@@ -1,11 +1,11 @@
-import AppFlowActions from '../../constants';
+import AppFlowActions from "../../Constants";
 
 /**
  *
  * @param {*} data
  */
 export function loginRequest(data) {
-  return ({ type: AppFlowActions.LOGIN_REQUEST, data });
+  return { type: AppFlowActions.LOGIN_REQUEST, data };
 }
 
 /**
@@ -13,5 +13,5 @@ export function loginRequest(data) {
  * @param {*} data
  */
 export function logoutRequest(data) {
-  return ({ type: AppFlowActions.LOGOUT_REQUEST, data });
+  return { type: AppFlowActions.LOGOUT_REQUEST, data };
 }

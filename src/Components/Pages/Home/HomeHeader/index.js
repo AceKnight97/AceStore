@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import _ from "lodash";
@@ -7,13 +7,16 @@ import { useMergeState } from "../../../../Helpers/customHooks";
 import logo from "../../../../Images/Pages/Home/logo-min.jpg";
 import LoginModal from "../../../Modals/LoginModal";
 import RegisterModal from "../../../Modals/RegisterModal";
+import auth from "../../../../Helpers/auth";
+import { loginRequest, logoutRequest } from "../../../../Redux/Actions/login";
+import { connect } from "react-redux";
 // import Supergraphic from "../../../UI/Supergraphic";
 // import Loading from "../../../UI/Loading";
 
-const MOCKING_USER = {
-  // isVerify: false,
-  // username: 'Truong Thanh Triet',
-};
+// const MOCKING_USER = {
+//   isVerify: false,
+//   username: 'Truong Thanh Triet',
+// };
 
 const HomeHeader = (props) => {
   const [state, setState] = useMergeState({
@@ -30,8 +33,15 @@ const HomeHeader = (props) => {
   };
   const onClickActive = () => {};
   const onClickUsername = () => {};
-  const onClickLogout = () => { };
-  const { isVerify, username } = MOCKING_USER;
+  const onClickLogout = () => {
+    auth.logout();
+    props.logoutRequest();
+  };
+  const { isVerify = true, username } = auth.getDataLogin();
+  useEffect(() => {
+    // console.log({ login: props.login });
+    // console.log({ loginData: auth.getDataLogin() });
+  }, [props.login]);
   return (
     <>
       {/* <Loading></Loading> */}
@@ -51,6 +61,7 @@ const HomeHeader = (props) => {
                   Activate account
                 </Button>
               )}
+
               <Button
                 type="link"
                 onClick={onClickUsername}
@@ -58,6 +69,7 @@ const HomeHeader = (props) => {
               >
                 {username}
               </Button>
+              {/**/}
               <Button
                 type="link"
                 onClick={onClickLogout}
@@ -87,7 +99,11 @@ const HomeHeader = (props) => {
         </div>
       </div>
 
-      <LoginModal visible={visibleLogin} onClickCancel={onClickLogin} />
+      <LoginModal
+        visible={visibleLogin}
+        onClickCancel={onClickLogin}
+        loginRequest={props.loginRequest}
+      />
       <RegisterModal
         visible={visibleRegister}
         onClickCancel={onClickRegister}
@@ -98,8 +114,23 @@ const HomeHeader = (props) => {
 HomeHeader.defaultProps = {
   className: "",
 };
+
 HomeHeader.propTypes = {
   className: PropTypes.string,
+  login: PropTypes.shape({
+    isSuccess: PropTypes.bool,
+  }).isRequired,
+  loginRequest: PropTypes.func.isRequired,
+  logoutRequest: PropTypes.func.isRequired,
 };
 
-export default HomeHeader;
+const mapStateToProps = (state) => ({
+  login: state.login,
+});
+
+const mapDispatchToProps = {
+  loginRequest,
+  logoutRequest,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);

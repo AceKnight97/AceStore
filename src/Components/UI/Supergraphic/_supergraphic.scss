@@ -12,11 +12,30 @@
   height: 44px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 3rem;
   margin-bottom: 2px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-color: white;
+  &-group {
+    padding-right: 0.5rem;
+    font-weight: bold;
+    font-size: 22px;
+    white-space: pre;
+    overflow-wrap: break-word;
+  }
   &-logo {
     max-height: 32px;
+  }
+  &-title {
+    margin-left: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    white-space: pre;
+    overflow-wrap: break-word;
+    span {
+      margin-left: 0.5rem;
+    }
   }
 }

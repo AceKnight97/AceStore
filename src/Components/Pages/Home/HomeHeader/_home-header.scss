@@ -6,6 +6,7 @@
   justify-content: center;
   background-color: $home-header-bg;
   border-radius: 0.125rem;
+  min-width: 850px;
   &-btns {
     position: absolute;
     bottom: -31px;

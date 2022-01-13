@@ -1,10 +1,8 @@
-import {
-  put, call, take, fork,
-} from 'redux-saga/effects';
+import { put, call, take, fork } from "redux-saga/effects";
 
-import _ from 'lodash';
-import auth from '../../Utils/auth';
-import AppFlowActions from '../../Constants';
+import _ from "lodash";
+import auth from "../../Utils/auth";
+import AppFlowActions from "../../Constants";
 
 // import login from '../reducers/login';
 
@@ -14,8 +12,9 @@ export function* loginRequest() {
     const request = yield take(AppFlowActions.LOGIN_REQUEST);
     const { data } = request;
     const result = {
-      isSuccess: true, user: _.cloneDeep(data.me), accessToken: data.accessToken,
-      // photo: data.photo || '',
+      isSuccess: true,
+      user: _.cloneDeep(data.user),
+      token: data.token,
     };
     console.log({ result });
     auth.login(result);
@@ -25,7 +24,6 @@ export function* loginRequest() {
     // }
   }
 }
-
 
 export default function* loginFlow() {
   yield fork(loginRequest);
