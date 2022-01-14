@@ -1,3 +1,4 @@
+import handleCreateAnyCustomerOrder from "../../Apollo/Functions/Handle/handleCreateAnyCustomerOrder";
 import handleCreateOrder from "../../Apollo/Functions/Handle/handleCreateOrder";
 import auth from "../../Helpers/auth";
 
@@ -19,15 +20,28 @@ export const getFoodData = (foodData = []) => {
   return arr;
 };
 
-export const mutationCreateOrder = async (data = [], email = "") => {
-  const sendingData = data.map((x) => ({
-    // name: x.name,
-    // price: x.price,
+export const mutationCreateOrder = async (foodData = [], email = "") => {
+  const sendingData = foodData.map((x) => ({
     food_id: x.id,
     quantity: parseFloat(x.quantity.slice(0, 3)),
     email,
-    // quantityType: x.quantityType,
   }));
-  console.log({ data, sendingData });
+  // console.log({ data, sendingData });
   return await handleCreateOrder(sendingData);
+};
+
+export const createOrderForAnyCustomer = async (
+  foodData = [],
+  anyCustomerData = {}
+) => {
+  const { email, username, address, phone, notes } = anyCustomerData;
+  const food = foodData.map((x) => ({
+    food_id: x.id,
+    quantity: parseFloat(x.quantity.slice(0, 3)),
+    email,
+  }));
+  const customer = { email, username, address, phone, notes, password: phone };
+  const sendingData = { food, customer };
+  console.log({ foodData, anyCustomerData, sendingData });
+  // return await handleCreateAnyCustomerOrder(sendingData);
 };

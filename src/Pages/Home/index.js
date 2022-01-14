@@ -7,22 +7,15 @@ import { useMergeState } from "../../Helpers/customHooks";
 import HomeHeader from "../../Components/Pages/Home/HomeHeader";
 import HomeFooter from "../../Components/Pages/Home/HomeFooter";
 import HomeBody from "../../Components/Pages/Home/HomeBody";
-import fetchMasterData from "../../Apollo/Functions/Fetch/fetchMasterData";
 import auth from "../../Helpers/auth";
+import { getFoodMasterData } from "../../Components/Pages/Home/HomeBody/helper";
 
 const Home = (props) => {
   const [state, setState] = useMergeState({
     data: [],
   });
   const { className } = props;
-  const callApi = async () => {
-    const masterdata = await fetchMasterData();
-    auth.setMasterData(masterdata);
-    // console.log({ masterdata });
-  };
-  useEffect(() => {
-    callApi();
-  }, []);
+  useEffect(() => {}, []);
   const onChange = (key, value) => {
     setState({ [key]: value });
   };

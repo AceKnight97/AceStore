@@ -120,6 +120,7 @@ SelectCT.propTypes = {
   title: PropTypes.string,
   placeholder: PropTypes.string,
   data: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.number),
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.arrayOf(PropTypes.shape()),
   ]),
@@ -129,6 +130,7 @@ SelectCT.propTypes = {
   defaultValue: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.string,
+    PropTypes.number,
   ]),
   isValueOutside: PropTypes.bool,
   mode: PropTypes.string,
@@ -136,6 +138,7 @@ SelectCT.propTypes = {
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.string,
     PropTypes.shape(),
+    PropTypes.number,
   ]),
   suffixIcon: PropTypes.node,
   name: PropTypes.string,

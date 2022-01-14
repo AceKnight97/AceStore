@@ -14,6 +14,8 @@ export const queryHistory = async () => {
       name: y.name,
       price: y.price,
       quantity: y.quantity,
+      food_id: y.food_id,
+      email: y.email,
     }));
     orderHistory.push({
       date: x,
@@ -22,5 +24,5 @@ export const queryHistory = async () => {
   });
   // console.log({ grouped, orderHistory });
 
-  return orderHistory;
+  return _.orderBy(orderHistory, [(x) => moment(x.date).valueOf()], ["desc"]);
 };

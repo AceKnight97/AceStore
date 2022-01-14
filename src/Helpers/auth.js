@@ -15,6 +15,14 @@ const auth = {
     // localStorage.role = user.role;
   },
 
+  setKindOfFood(data) {
+    localStorage.kindOfFood = JSON.stringify(data);
+  },
+  getKindOfFood() {
+    return localStorage.kindOfFood && localStorage.kindOfFood !== "undefined"
+      ? JSON.parse(localStorage.kindOfFood)
+      : [];
+  },
   getToken() {
     return localStorage.token;
   },
@@ -31,6 +39,7 @@ const auth = {
   setMasterData(data) {
     localStorage.masterData = JSON.stringify(data);
   },
+
   getMasterData() {
     return localStorage.masterData && localStorage.masterData !== "undefined"
       ? JSON.parse(localStorage.masterData)

@@ -26,23 +26,11 @@
         margin: 0 1rem;
       }
     }
-    &-cent {
+    &-no-his {
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-    }
-    &-main {
-    }
-    &-cart-tag {
-      margin-top: 1.5rem;
-      display: flex;
-      &-title {
-        font-weight: bold;
-        margin-right: 0.5rem;
-      }
-      &-item {
-      }
+      margin-top: 2rem;
     }
   }
 }

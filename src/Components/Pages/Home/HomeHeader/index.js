@@ -1,26 +1,19 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import { Button } from "antd";
 import classnames from "classnames";
 import _ from "lodash";
-import { Button } from "antd";
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
+import auth from "../../../../Helpers/auth";
 import { useMergeState } from "../../../../Helpers/customHooks";
-import logo from "../../../../Images/Pages/Home/logo-min.jpg";
+import { loginRequest, logoutRequest } from "../../../../Redux/Actions/login";
 import LoginModal from "../../../Modals/LoginModal";
 import RegisterModal from "../../../Modals/RegisterModal";
-import auth from "../../../../Helpers/auth";
-import { loginRequest, logoutRequest } from "../../../../Redux/Actions/login";
-import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
-// import Supergraphic from "../../../UI/Supergraphic";
-// import Loading from "../../../UI/Loading";
-
-// const MOCKING_USER = {
-//   isVerify: false,
-//   username: 'Truong Thanh Triet',
-// };
 
 const HomeHeader = (props) => {
   const history = useHistory();
+  const location = useLocation();
   const [state, setState] = useMergeState({
     visibleLogin: false,
     visibleRegister: false,
@@ -36,19 +29,25 @@ const HomeHeader = (props) => {
   const onClickActive = () => {};
   const onClickUsername = () => {};
   const onClickHistory = () => {
-    history.push("/history");
+    if (location.pathname !== "/history") {
+      history.push("/history");
+    }
   };
   const onClickLogout = () => {
     auth.logout();
     props.logoutRequest();
+    setState({});
   };
+
   const { isVerify = true, username } = auth.getDataLogin();
 
   useEffect(() => {
     if (_.isEmpty(props.login) && _.isEmpty(auth.getDataLogin())) {
+      console.log("No current user");
       setState({});
     }
   }, [props.login]);
+
   return (
     <>
       {/* <Loading></Loading> */}

@@ -9,24 +9,28 @@ import "./_food-order.scss";
 import HomeHeader from "../../Components/Pages/Home/HomeHeader";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import AntdTable from "../../Components/Tables/AntdTable";
-import { getFoodData, mutationCreateOrder } from "./helper";
+import {
+  createOrderForAnyCustomer,
+  getFoodData,
+  mutationCreateOrder,
+} from "./helper";
 import { calcCartTotal } from "../../Components/Pages/Home/HomeBody/helper";
 import { getPrice } from "../../Helpers";
+import AnyCustomerModal from "../../Components/Modals/AnyCustomerModal";
 
 const FoodOrder = (props) => {
   const location = useLocation();
   const history = useHistory();
   const [state, setState] = useMergeState({
     foodData: getFoodData(location.state),
+    anyCustomerVisible: false,
   });
   const { className } = props;
-  const { foodData } = state;
+  const { foodData, anyCustomerVisible } = state;
   useEffect(() => {}, []);
-  const onChange = (key, value) => {
-    setState({ [key]: value });
-  };
   const { total } = calcCartTotal(location.state);
   const { address, phone, email } = auth.getDataLogin();
+
   const generateColumns = () => {
     const columns = [
       {
@@ -50,10 +54,34 @@ const FoodOrder = (props) => {
     return columns;
   };
 
+  const orderAnyCustomer = async (anyCustomerData = {}) => {
+    setState({ loading: true });
+    const res = await createOrderForAnyCustomer(foodData, anyCustomerData);
+    const obj = { loading: false };
+    // if (res.isSuccess) {
+    //   alert("Successfully creating order!");
+    //   auth.setFoodData(undefined);
+    //   history.push("/home");
+    //   _.assign(obj, { anyCustomerVisible: false });
+    // } else {
+    //   alert("Failed to create order: ", res.message);
+    // }
+    setState(obj);
+  };
+
   const onClickBack = () => {
     history.push("/home");
   };
+
+  const onClickCancel = () => {
+    setState({ anyCustomerVisible: !anyCustomerVisible });
+  };
+
   const onClickConfirm = async () => {
+    if (!address || !phone || !email) {
+      setState({ anyCustomerVisible: true });
+      return;
+    }
     setState({ loading: true });
     const res = await mutationCreateOrder(foodData, email);
     if (res.isSuccess) {
@@ -103,6 +131,12 @@ const FoodOrder = (props) => {
           columns={generateColumns()}
         ></AntdTable>
       </div>
+
+      <AnyCustomerModal
+        visible={anyCustomerVisible}
+        onClickCancel={onClickCancel}
+        onClick={orderAnyCustomer}
+      ></AnyCustomerModal>
     </div>
   );
 };

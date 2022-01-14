@@ -38,6 +38,10 @@ const FoodTable = (props) => {
   // const  = (isBuy = false, itemData = {}) => {
   //   console.log({ isBuy, itemData });
   // }
+  // console.log({ title });
+  // if (title === "null") {
+  //   console.log(data);
+  // }
 
   return (
     <div className={classnames("food-table", className)}>

@@ -22,7 +22,7 @@ import testimg9 from "../../../../Images/Foods/9.webp";
 import FilterBlock from "../FilterBlock";
 import FoodTable from "../FoodTable";
 import HomeTotal from "../HomeTotal";
-import { calcCartTotal, getMasterData } from "./helper";
+import { calcCartTotal, getFoodMasterData, handleFilterFood } from "./helper";
 
 const arr = [
   testimg1,
@@ -50,11 +50,12 @@ const HomeBody = (props) => {
     foodData: auth.getFoodData().length !== 0 ? auth.getFoodData() : [], //_.cloneDeep([MOCKING_FOOD_TABLE])
     arrImages: [],
     loading: true,
+    rawFoodData: auth.getFoodData().length !== 0 ? auth.getFoodData() : [], //_.cloneDeep([MOCKING_FOOD_TABLE])
   });
   const fetchMasterData = async () => {
-    const foodData = await getMasterData();
-    console.log({ object: foodData });
-    setState({ foodData, loading: false });
+    const foodData = await getFoodMasterData();
+    auth.setMasterData(foodData);
+    setState({ foodData, rawFoodData: foodData, loading: false });
   };
 
   useEffect(() => {
@@ -111,6 +112,15 @@ const HomeBody = (props) => {
     setState({ foodData });
   };
 
+  const onFilterFood = (filterObject = {}) => {
+    setState({ foodData: [] });
+    setTimeout(() => {
+      const newFoodata = handleFilterFood(filterObject, state.rawFoodData);
+      // console.log({ newFoodata });
+      setState({ foodData: _.cloneDeep(newFoodata) });
+    }, 1);
+  };
+
   const renderToper = () => (
     <div className="home-body-toper">
       {/*  <InforBlock
@@ -136,7 +146,7 @@ const HomeBody = (props) => {
         type="ADDRESS_NOTES"
       />
      */}
-      <FilterBlock></FilterBlock>
+      <FilterBlock onFilterFood={onFilterFood}></FilterBlock>
       <HomeTotal
         className="home-body-toper-block-3"
         total={total}
@@ -165,15 +175,21 @@ const HomeBody = (props) => {
           </div>
         )}
 
-        {_.map(foodData, (x, i) => (
-          <FoodTable
-            key={i}
-            title={x.title}
-            data={x.data}
-            onChangeCart={onChangeCart}
-            isShow={i === 0}
-          />
-        ))}
+        {_.map(
+          foodData,
+          (x, i) =>
+            x.data.length !== 0 &&
+            x.title && (
+              <FoodTable
+                className="animation-fadein-2s"
+                key={i}
+                title={x.title}
+                data={x.data}
+                onChangeCart={onChangeCart}
+                isShow={i === 0}
+              />
+            )
+        )}
       </div>
     </div>
   );

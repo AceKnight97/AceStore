@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import _ from "lodash";
 import {} from "antd";
-import { useMergeState } from "../../../../Helpers/customHooks";
+import {
+  useMergeState,
+  useUpdateEffect,
+} from "../../../../Helpers/customHooks";
 import "./_filter-block.scss";
 import InputCT from "../../../Inputs/InputCT";
 import starIc from "../../../../Images/Pages/Home/star.svg";
 import starInactiveIc from "../../../../Images/Pages/Home/star-inactive.svg";
 import SelectCT from "../../../Inputs/SelectCT";
+import { MIN_MAX_PRICE } from "../../../../Constants/home";
+import auth from "../../../../Helpers/auth";
 
 const FilterBlock = (props) => {
+  const filterRef = useRef(undefined);
   const [state, setState] = useMergeState({
     searchName: "",
     rating: 0,
@@ -18,10 +24,11 @@ const FilterBlock = (props) => {
     minPrice: undefined,
     maxPrice: undefined,
   });
-  const { className } = props;
+  const { className, onFilterFood } = props;
   const onChange = (key, value) => {
     setState({ [key]: value });
   };
+
   const onChangeStar = (rating = 0) => {
     if (rating === state.rating) {
       setState({ rating: 0 });
@@ -30,6 +37,15 @@ const FilterBlock = (props) => {
     setState({ rating });
   };
   const { searchName, rating, kind, minPrice, maxPrice } = state;
+
+  useUpdateEffect(() => {
+    if (filterRef.current) {
+      clearTimeout(filterRef.current);
+    }
+    filterRef.current = setTimeout(() => {
+      onFilterFood(state);
+    }, 200);
+  }, [searchName, rating, kind, minPrice, maxPrice]);
 
   return (
     <div className={classnames("filter-block", className)}>
@@ -68,6 +84,7 @@ const FilterBlock = (props) => {
           onChange={onChange}
           className="w-160"
           title="Kind of food:"
+          data={auth.getKindOfFood() || []}
         />
         <SelectCT
           name="minPrice"
@@ -76,6 +93,9 @@ const FilterBlock = (props) => {
           title="Min price:"
           className="ml-48 w-160"
           type="NUMBER"
+          data={_.filter(MIN_MAX_PRICE, (x) =>
+            maxPrice ? x < maxPrice : true
+          )}
         />
         <SelectCT
           name="maxPrice"
@@ -84,6 +104,9 @@ const FilterBlock = (props) => {
           title="Max price:"
           className="ml-48 w-160"
           type="NUMBER"
+          data={_.filter(MIN_MAX_PRICE, (x) =>
+            minPrice ? x > minPrice : true
+          )}
         />
       </div>
     </div>
@@ -91,9 +114,11 @@ const FilterBlock = (props) => {
 };
 FilterBlock.defaultProps = {
   className: "",
+  onFilterFood: () => {},
 };
 FilterBlock.propTypes = {
   className: PropTypes.string,
+  onFilterFood: PropTypes.func,
 };
 
 export default FilterBlock;

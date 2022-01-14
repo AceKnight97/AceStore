@@ -184,3 +184,7 @@ export const MOCKING_FOOD_TABLE = [
     ],
   },
 ];
+
+export const MIN_MAX_PRICE = [
+  0, 100000, 200000, 500000, 1000000, 2000000, 5000000,
+];

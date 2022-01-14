@@ -1,28 +1,23 @@
 import { QUANTITY_TYPES } from "../../../../Constants/home";
 import _ from "lodash";
 import fetchMenu from "../../../../Apollo/Functions/Fetch/fetchMenu";
+import auth from "../../../../Helpers/auth";
 
-export const getMasterData = async () => {
+export const getFoodMasterData = async () => {
   const res = await fetchMenu();
+  const titles = [];
+
   const foodData = [];
-  // _.forEach(res, (x) => {
-  //   const data = []
-  //   foodData.push({});
-  // });
-  // const grouped = _.mapValues(_.groupBy(res, "title"), (clist) =>
-  //   clist.map((res) => _.omit(res, "title"))
-  // );
-
-  const grouped = _.groupBy(res, (car) => car.title);
-
+  const grouped = _.groupBy(res, (x) => x.title);
   Object.keys(grouped).forEach((x) => {
+    titles.push(x);
     foodData.push({
       title: x,
       data: grouped[x],
     });
   });
-
-  console.log({ grouped, foodData });
+  auth.setKindOfFood(titles);
+  // console.log({ grouped, foodData });
   return foodData;
 };
 
@@ -53,4 +48,41 @@ export const calcCartTotal = (foodData = []) => {
   });
   // console.log({ foodData, total, cartTags });
   return { total, cartTags };
+};
+
+export const handleFilterFood = (filterObject = {}, foodData = []) => {
+  // console.log({ filterObject, foodData });
+  const { searchName, rating, kind, minPrice, maxPrice } = filterObject;
+  console.log({ searchName, rating, kind, minPrice, maxPrice });
+  let newFoodata = _.cloneDeep(foodData);
+  _.forEach(newFoodata, (x) => {
+    x.data = _.filter(x.data, (y) => {
+      let condition = true;
+      if (kind) {
+        // console.log("kind");
+        condition = y.title === kind;
+      }
+      if (!_.isNil(rating) && !_.isNil(y.rating)) {
+        // console.log("rating");
+        condition = condition && y.rating >= rating;
+      }
+      if (searchName) {
+        // console.log("searchName");
+        condition =
+          condition && y.name?.toLowerCase().includes(searchName.toLowerCase());
+      }
+      if (!_.isNil(minPrice)) {
+        // console.log("minPrice");
+        condition = condition && y.price >= minPrice;
+      }
+      if (!_.isNil(maxPrice)) {
+        // console.log("maxPrice");
+        condition = condition && y.price <= maxPrice;
+      }
+      return condition;
+    });
+  });
+  // console.log({ newFoodata, foodData });
+
+  return newFoodata;
 };

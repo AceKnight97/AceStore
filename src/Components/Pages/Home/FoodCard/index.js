@@ -46,6 +46,10 @@ const FoodCard = (props) => {
     setState({ [key]: value });
   };
 
+  // console.log({ title });
+  if (!props.title || props.title === "null") {
+    console.log({ rating });
+  }
   return (
     <div
       className={classnames(
