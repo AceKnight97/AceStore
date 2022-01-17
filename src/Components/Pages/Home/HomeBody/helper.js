@@ -5,8 +5,8 @@ import auth from "../../../../Helpers/auth";
 
 export const getFoodMasterData = async () => {
   const res = await fetchMenu();
+  auth.setMenu(res);
   const titles = [];
-
   const foodData = [];
   const grouped = _.groupBy(res, (x) => x.title);
   Object.keys(grouped).forEach((x) => {

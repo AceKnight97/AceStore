@@ -6,7 +6,7 @@ const auth = {
     const { user, isSuccess, token } = data;
     // const { username, _id } = user;
 
-    console.log({ user });
+    // console.log({ user });
 
     localStorage.isSuccess = isSuccess;
     localStorage.token = token;
@@ -21,7 +21,14 @@ const auth = {
   getRole() {
     return localStorage.role;
   },
-
+  setMenu(data) {
+    localStorage.menu = JSON.stringify(data);
+  },
+  getMenu() {
+    return localStorage.menu && localStorage.menu !== "undefined"
+      ? JSON.parse(localStorage.menu)
+      : [];
+  },
   setKindOfFood(data) {
     localStorage.kindOfFood = JSON.stringify(data);
   },

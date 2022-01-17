@@ -2,9 +2,16 @@ import { CloseOutlined, FileImageTwoTone } from "@ant-design/icons";
 import { Button } from "antd";
 import classnames from "classnames";
 import PropTypes from "prop-types";
-import React, { useEffect } from "react";
-import { QUANTITY_TYPES_ADD_FOOD } from "../../../../Constants/home";
-import { useMergeState } from "../../../../Helpers/customHooks";
+import React, { useEffect, useRef } from "react";
+import {
+  QUANTITY_TYPES,
+  QUANTITY_TYPES_ADD_FOOD,
+} from "../../../../Constants/home";
+import auth from "../../../../Helpers/auth";
+import {
+  useMergeState,
+  useUpdateEffect,
+} from "../../../../Helpers/customHooks";
 import InputCT from "../../../Inputs/InputCT";
 import InputTitle from "../../../Inputs/InputTitle";
 import SelectCT from "../../../Inputs/SelectCT";
@@ -20,15 +27,18 @@ const DEFAULT_DATA = {
   title: "",
   titleErr: "",
   rating: 1,
-  quanityType: undefined,
+  quantityType: undefined,
   quanityTypeErr: "",
+  id: undefined,
 };
 
 const AddFood = (props) => {
+  const menuRef = useRef([]);
   const [state, setState] = useMergeState({
     ...DEFAULT_DATA,
   });
-  const { className, index, onChangeFood, onDeleteFood } = props;
+
+  const { className, index, onChangeFood, onDeleteFood, isAdd } = props;
 
   const onChangeStar = (rating = 1) => {
     if (rating !== state.rating) {
@@ -51,13 +61,40 @@ const AddFood = (props) => {
     title,
     titleErr,
     rating,
-    quanityType,
+    quantityType,
     quanityTypeErr,
+    id,
   } = state;
+  useEffect(() => {
+    if (!isAdd) {
+      menuRef.current = auth.getMenu();
+    }
+  }, []);
+  useEffect(() => {
+    const item = _.find(menuRef.current, (x) => x.id === id);
+    console.log({ item });
+    if (!_.isEmpty(item)) {
+      setState({
+        ...item,
+        quantityType:
+          QUANTITY_TYPES_ADD_FOOD[
+            item.quantityType === QUANTITY_TYPES.WEIGHT ? 0 : 1
+          ],
+      });
+    }
+  }, [id]);
 
   useEffect(() => {
-    onChangeFood(index, { image, name, price, title, rating, quanityType });
-  }, [image, name, price, title, rating, quanityType]);
+    onChangeFood(index, {
+      image,
+      name,
+      price,
+      title,
+      rating,
+      quantityType,
+      id,
+    });
+  }, [image, name, price, title, rating, quantityType, id]);
 
   const onChange = (key, value) => {
     // console.log({ key, value });
@@ -103,6 +140,17 @@ const AddFood = (props) => {
 
   return (
     <div className={classnames("add-food", className)}>
+      {!isAdd && (
+        <SelectCT
+          title="Food id"
+          name="id"
+          value={id}
+          onChange={onChange}
+          placeholder="Select food id"
+          data={_.map(auth.getMenu(), (x) => x.id)}
+          className="mb-16"
+        />
+      )}
       <div className="add-food-row">
         <div className="">
           {image ? (
@@ -183,8 +231,8 @@ const AddFood = (props) => {
           <SelectCT
             className="mt-16"
             title="Kind of quanity"
-            name="quanityType"
-            value={quanityType}
+            name="quantityType"
+            value={quantityType}
             onChange={onChange}
             placeholder="Enter your quanity"
             errMes={quanityTypeErr}
@@ -227,6 +275,7 @@ AddFood.defaultProps = {
   data: {},
   onChangeFood: () => {},
   onDeleteFood: () => {},
+  isAdd: false,
 };
 AddFood.propTypes = {
   className: PropTypes.string,
@@ -234,6 +283,7 @@ AddFood.propTypes = {
   data: PropTypes.shape(),
   onChangeFood: PropTypes.func,
   onDeleteFood: PropTypes.func,
+  isAdd: PropTypes.bool,
 };
 
 export default AddFood;

@@ -12,10 +12,12 @@
     border-radius: 0.125rem;
     min-width: 850px;
     overflow: auto;
+    .ant-tabs {
+      overflow: unset;
+    }
     &-title {
-      margin-top: 1.5rem;
       font-weight: bold;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
     }
     &-profile {
       .flex {
@@ -28,24 +30,6 @@
       }
       .fr-sb {
         margin-top: 1.5rem;
-      }
-    }
-    &-add-food {
-      // margin-top: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      // justify-content: center;
-    }
-    &-add-btns {
-      margin-top: 1.5rem;
-      display: flex;
-      // flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      button {
-        width: 200px;
-        margin: 0 1rem;
       }
     }
   }

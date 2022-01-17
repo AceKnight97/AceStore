@@ -5,7 +5,7 @@ import auth from "../../Helpers/auth";
 export const a = "";
 
 export const queryHistory = async () => {
-  const res = await fetchHistory(auth.getDataLogin()?.email);
+  const res = await fetchHistory();
   const orderHistory = [];
   const grouped = _.groupBy(res, (car) => car.createdAt);
 
