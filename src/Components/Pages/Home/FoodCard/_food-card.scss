@@ -8,7 +8,26 @@
   max-width: 280px;
   &-img {
     height: 232px;
+    width: 245px;
     background-color: #e8c0c0;
+    &-dis {
+      height: 232px;
+      width: 245px;
+    }
+    &-child {
+      display: none;
+    }
+    &:hover {
+      .food-card-img-child {
+        z-index: 999999999999999999999999999;
+        display: flex;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -90%);
+        // transition: height .4s ease-in-out;
+        transition: height 0.4s ease-in-out, transform 0.4s ease-in-out;
+      }
+    }
   }
   &-info {
     margin-top: 1rem;

@@ -162,7 +162,7 @@ const HomeBody = (props) => {
 
       <div className="home-body-main">
         {cartTags.length !== 0 && (
-          <div className="home-body-cart-tag">
+          <div className="home-body-cart-tag animation-fadein-2s">
             <div className="home-body-cart-tag-title">
               <span>Your cart:</span>
             </div>

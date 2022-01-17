@@ -2,7 +2,7 @@ import axios from "axios";
 import { CONFIG } from "../../../Constants";
 import auth from "../../../Helpers/auth";
 
-const fetchHistory = async () => {
+const fetchHistory = async (email = "") => {
   try {
     const Authorization = auth.getToken();
     // console.log({ Authorization });
@@ -12,6 +12,7 @@ const fetchHistory = async () => {
       headers: {
         Authorization,
       },
+      data: { email },
     });
     return res.data;
   } catch (error) {

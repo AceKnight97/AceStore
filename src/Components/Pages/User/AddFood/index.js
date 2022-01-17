@@ -1,20 +1,18 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import classnames from "classnames";
-import _ from "lodash";
+import { CloseOutlined, FileImageTwoTone } from "@ant-design/icons";
 import { Button } from "antd";
-import "./_add-food.scss";
+import classnames from "classnames";
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import { QUANTITY_TYPES_ADD_FOOD } from "../../../../Constants/home";
 import { useMergeState } from "../../../../Helpers/customHooks";
 import InputCT from "../../../Inputs/InputCT";
-import starIc from "../../../../Images/Pages/Home/star.svg";
-import starInactiveIc from "../../../../Images/Pages/Home/star-inactive.svg";
 import InputTitle from "../../../Inputs/InputTitle";
 import SelectCT from "../../../Inputs/SelectCT";
-import { QUANTITY_TYPES_ADD_FOOD } from "../../../../Constants/home";
-import { CloseOutlined } from "@ant-design/icons";
+import DisplayRating from "../../../UI/DisplayRating";
+import "./_add-food.scss";
 
 const DEFAULT_DATA = {
-  imgSrc: undefined,
+  image: undefined,
   name: "",
   nameErr: "",
   price: "",
@@ -45,7 +43,7 @@ const AddFood = (props) => {
   };
 
   const {
-    imgSrc,
+    image,
     name,
     nameErr,
     price,
@@ -58,11 +56,8 @@ const AddFood = (props) => {
   } = state;
 
   useEffect(() => {
-    if (name && price && title && rating && quanityType) {
-      //imgSrc &&
-      onChangeFood(index, { imgSrc, name, price, title, rating, quanityType });
-    }
-  }, [imgSrc, name, price, title, rating, quanityType]);
+    onChangeFood(index, { image, name, price, title, rating, quanityType });
+  }, [image, name, price, title, rating, quanityType]);
 
   const onChange = (key, value) => {
     // console.log({ key, value });
@@ -79,15 +74,90 @@ const AddFood = (props) => {
     onDeleteFood(index);
   };
 
+  // const onChangeImgCrop = async ({ fileList = [] }) => {
+  //   console.log({ fileList });
+  //   if (fileList && fileList[0]?.originFileObj) {
+  //   }
+  // };
+
+  const onChangeImg = async (event = {}) => {
+    const file = event?.target?.files[0];
+    if (!file) {
+      return;
+    }
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = async () => {
+      const img = reader.result;
+      setState({ image: img });
+    };
+  };
+
+  const onClickImg = () => {
+    const e = document.getElementById("img-id");
+    console.log({ e });
+    if (e) {
+      e.click();
+    }
+  };
+
   return (
     <div className={classnames("add-food", className)}>
       <div className="add-food-row">
         <div className="">
-          {imgSrc ? (
-            <img src={imgSrc} alt="Food card img" className="food-card-img" />
+          {image ? (
+            <img
+              src={image}
+              alt="Food card img"
+              className="food-card-img"
+              onClick={onClickImg}
+            />
           ) : (
-            <div className="food-card-img" />
+            <div className="food-card-img" onClick={onClickImg}>
+              <FileImageTwoTone />
+              <div className="food-card-img-text">
+                <span>Upload image</span>
+              </div>
+            </div>
           )}
+          <input
+            id="img-id"
+            type="file"
+            onChange={onChangeImg}
+            className="dis-none"
+            accept="image/png, .jpeg, .jpg, .webp"
+          ></input>
+
+          {/*   <ImgCrop shape="round">
+            <Upload
+              onChange={onChangeImgCrop}
+              itemRender={() => null}
+              accept="image/png, .jpeg, .jpg"
+              // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+              action="/api/upload_file"
+              showUploadList={{ showPreviewIcon: false }}
+              listType="picture"
+            >
+              {image ? (
+                <img
+                  src={image}
+                  alt="Food card img"
+                  className="food-card-img"
+                  // onClick={onClickImg}
+                />
+              ) : (
+                <div
+                  className="food-card-img"
+                  // onClick={onClickImg}
+                >
+                  <FileImageTwoTone />
+                  <div className="food-card-img-text">
+                    <span>Upload image</span>
+                  </div>
+                </div>
+              )}
+            </Upload>
+          </ImgCrop> */}
           <InputCT
             className="mt-16"
             title="Food name"
@@ -132,35 +202,20 @@ const AddFood = (props) => {
           />
           <InputCT
             className="mt-16"
-            title="Food title"
+            title="Kind of food"
             name="title"
             value={title}
             onChange={onChange}
-            placeholder="Enter your title"
+            placeholder="Enter kind of food"
             errMes={titleErr}
           />
           <InputTitle title="Rating" className="mt-16" />
 
-          <div className="flex">
-            {_.map(_.range(rating), (x, i) => (
-              <button
-                className="bas-btn"
-                key={x}
-                onClick={() => onChangeStar(i + 1)}
-              >
-                <img src={starIc} alt="Star ic" />
-              </button>
-            ))}
-            {_.map(_.range(5 - rating), (x, i) => (
-              <button
-                className="bas-btn"
-                key={x}
-                onClick={() => onChangeStar(rating + i + 1)}
-              >
-                <img src={starInactiveIc} alt="Star inactive ic" />
-              </button>
-            ))}
-          </div>
+          <DisplayRating
+            rating={rating}
+            isButton
+            onClick={onChangeStar}
+          ></DisplayRating>
         </div>
       </div>
     </div>

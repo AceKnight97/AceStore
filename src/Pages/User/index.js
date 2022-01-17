@@ -10,16 +10,17 @@ import AddFood from "../../Components/Pages/User/AddFood";
 import { useMergeState } from "../../Helpers/customHooks";
 import "./_user.scss";
 import { Button } from "antd";
-import { checkDisabledFoodList } from "./helper";
+import { checkDisabledFoodList, handleMutationAddFood } from "./helper";
 
 const User = (props) => {
   const location = useLocation();
   const history = useHistory();
   const [state, setState] = useMergeState({
     foodList: [undefined],
+    loading: false,
   });
   const { className } = props;
-  const { foodList } = state;
+  const { foodList, loading } = state;
   const isAdmin = auth.getRole() === "Admin";
   // console.log({ isAdmin, a: auth.getRole() });
   const { email, username, phone, address, notes, role } = auth.getDataLogin();
@@ -48,11 +49,28 @@ const User = (props) => {
   };
 
   const onDeleteFood = (index = 0) => {
-    // foodList[index] = data;
-    _.remove(foodList, index);
-    console.log({ onDeleteFood: foodList });
+    foodList.splice(index, 1);
+    console.log({ onDeleteFood: foodList, index });
     setState({ foodList });
   };
+
+  const onClickAddFood = async () => {
+    setState({ loading: true });
+    const res = await handleMutationAddFood(foodList);
+    const obj = { loading: false };
+    if (res.isSuccess) {
+      alert("Successfully adding new food!");
+      _.assign(obj, { foodList: [undefined] });
+      setState({ foodList: [] });
+    } else {
+      alert("Failed to add new food: ", res.message);
+    }
+    setTimeout(() => {
+      setState(obj);
+    }, 200);
+  };
+
+  const isDisabledBtn = checkDisabledFoodList(foodList);
 
   return (
     <div className={classnames("user", className)}>
@@ -86,7 +104,7 @@ const User = (props) => {
             </div>
             <div className="flex">
               <span className="b mr-4">Role:</span>
-              <span>{role}</span>
+              <span>{role || "Customer"}</span>
             </div>
           </div>
         </div>
@@ -103,6 +121,7 @@ const User = (props) => {
                   data={x}
                   onChangeFood={onChangeFood}
                   onDeleteFood={onDeleteFood}
+                  className="animation-fadein-1s"
                 />
               ))}
             </div>
@@ -110,11 +129,18 @@ const User = (props) => {
               <Button
                 type="dashed"
                 onClick={onClickNewFood}
-                disabled={checkDisabledFoodList(foodList)}
+                disabled={isDisabledBtn || loading}
               >
                 New food
               </Button>
-              <Button type="primary">Add food</Button>
+              <Button
+                type="primary"
+                disabled={isDisabledBtn}
+                onClick={onClickAddFood}
+                loading={loading}
+              >
+                Add food
+              </Button>
             </div>
           </>
         )}

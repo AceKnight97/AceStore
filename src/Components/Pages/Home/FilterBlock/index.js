@@ -14,6 +14,7 @@ import starInactiveIc from "../../../../Images/Pages/Home/star-inactive.svg";
 import SelectCT from "../../../Inputs/SelectCT";
 import { MIN_MAX_PRICE } from "../../../../Constants/home";
 import auth from "../../../../Helpers/auth";
+import DisplayRating from "../../../UI/DisplayRating";
 
 const FilterBlock = (props) => {
   const filterRef = useRef(undefined);
@@ -58,24 +59,13 @@ const FilterBlock = (props) => {
           className="filter-block-search"
         />
         <div className="filter-block-star">Stars:</div>
-        {_.map(_.range(rating), (x, i) => (
-          <button
-            className="bas-btn"
-            key={x}
-            onClick={() => onChangeStar(i + 1)}
-          >
-            <img src={starIc} alt="Star ic" />
-          </button>
-        ))}
-        {_.map(_.range(5 - rating), (x, i) => (
-          <button
-            className="bas-btn"
-            key={x}
-            onClick={() => onChangeStar(rating + i + 1)}
-          >
-            <img src={starInactiveIc} alt="Star inactive ic" />
-          </button>
-        ))}
+
+        <DisplayRating
+          rating={rating}
+          isButton
+          onClick={onChangeStar}
+          className="filter-block-star-dis"
+        ></DisplayRating>
         {/*
         <Button
           type="link"

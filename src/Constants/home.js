@@ -32,12 +32,7 @@ export const WEIGHT_DATA = [
   "4.0 Kg",
 ];
 
-export const PACKAGE_DATA = [
-  "1 package/dish",
-  "2 packages/dishes",
-  "3 packages/dishes",
-  "4 packages/dishes",
-];
+export const PACKAGE_DATA = ["1 pc", "2 pcs", "3 psc", "4 psc"];
 
 export const QUANTITY_TYPES_ADD_FOOD = ["Kg", "Package/Dish"];
 

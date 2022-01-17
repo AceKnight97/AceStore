@@ -1,10 +1,11 @@
 import moment from "moment";
 import fetchHistory from "../../Apollo/Functions/Fetch/fetchHistory";
+import auth from "../../Helpers/auth";
 
 export const a = "";
 
 export const queryHistory = async () => {
-  const res = await fetchHistory();
+  const res = await fetchHistory(auth.getDataLogin()?.email);
   const orderHistory = [];
   const grouped = _.groupBy(res, (car) => car.createdAt);
 

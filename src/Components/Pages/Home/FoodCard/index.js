@@ -1,22 +1,20 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import { Button } from "antd";
 import classnames from "classnames";
-import _ from "lodash";
-import {} from "antd";
-import starIc from "../../../../Images/Pages/Home/star.svg";
-import starInactiveIc from "../../../../Images/Pages/Home/star-inactive.svg";
-import { getPrice } from "../../../../Helpers";
-import SelectCT from "../../../Inputs/SelectCT";
-import CheckboxCT from "../../../Inputs/CheckboxCT";
-import {
-  useMergeState,
-  useUpdateEffect,
-} from "../../../../Helpers/customHooks";
+import PropTypes from "prop-types";
+import React from "react";
 import {
   PACKAGE_DATA,
   QUANTITY_TYPES,
   WEIGHT_DATA,
 } from "../../../../Constants/home";
+import { getPrice } from "../../../../Helpers";
+import {
+  useMergeState,
+  useUpdateEffect,
+} from "../../../../Helpers/customHooks";
+import SelectCT from "../../../Inputs/SelectCT";
+import FoodInfoModal from "../../../Modals/FoodInfoModal";
+import DisplayRating from "../../../UI/DisplayRating";
 import "./_food-card.scss";
 
 const FoodCard = (props) => {
@@ -30,9 +28,10 @@ const FoodCard = (props) => {
         ? WEIGHT_DATA[0]
         : PACKAGE_DATA[0],
     quantityType: props.quantityType,
+    visibleFoodInfo: false,
   });
-  const { className, quantityType, imgSrc, unit, onChangeCart } = props;
-  const { name, price, rating, isBuy, quantity } = state;
+  const { className, quantityType, image, unit, onChangeCart } = props;
+  const { name, price, rating, isBuy, quantity, visibleFoodInfo } = state;
 
   useUpdateEffect(() => {
     onChangeCart(state);
@@ -46,74 +45,100 @@ const FoodCard = (props) => {
     setState({ [key]: value });
   };
 
+  const toggleIsBuy = () => {
+    setState({ isBuy: !isBuy });
+  };
+
+  const toggleVisibleFoodInfo = () => {
+    setState({ visibleFoodInfo: !visibleFoodInfo });
+  };
+
   // console.log({ title });
   if (!props.title || props.title === "null") {
     console.log({ rating });
   }
   return (
-    <div
-      className={classnames(
-        "food-card",
-        isBuy && "food-card-active",
-        className
-      )}
-    >
-      {imgSrc ? (
-        <img src={imgSrc} alt="Food card img" className="food-card-img" />
-      ) : (
-        <div className="food-card-img" />
-      )}
-
-      <div className="food-card-info">
-        <div className="food-card-info-name">{name}</div>
-
-        <div className="fr-sb">
-          <div className="food-card-info-col">
-            <div className="food-card-info-col-price">
-              {getPrice(price, unit)}
-            </div>
-            <SelectCT
-              disabled={!isBuy}
-              name="quantity"
-              showSearch={false}
-              className="mt-4"
-              value={quantity}
-              onChange={onChange}
-              data={
-                quantityType === QUANTITY_TYPES.WEIGHT
-                  ? WEIGHT_DATA
-                  : PACKAGE_DATA
-              }
-            />
+    <div>
+      <div
+        className={classnames(
+          "food-card",
+          isBuy && "food-card-active",
+          className
+        )}
+      >
+        {image ? (
+          <div className="food-card-img" onClick={toggleIsBuy}>
+            <img
+              src={image}
+              alt="Food card img"
+              className="food-card-img-dis"
+            ></img>
+            {/*
+          
+          <img
+            src={image}
+            alt="Food card img"
+            className="food-card-img-child"
+          ></img>*/}
           </div>
+        ) : (
+          <div className="food-card-img" onClick={toggleIsBuy} />
+        )}
 
-          <div className="food-card-info-col">
-            <div className="food-card-info-col-rating">
-              {_.map(_.range(rating), (x) => (
-                <img src={starIc} alt="Star ic" key={x} className="mr-2" />
-              ))}
-              {_.map(_.range(5 - rating), (x, i) => (
-                <img
-                  src={starInactiveIc}
-                  alt="Star ic"
-                  key={x}
-                  className={4 - rating !== x ? "mr-2" : ""}
-                />
-              ))}
+        <div className="food-card-info">
+          <div className="food-card-info-name">{name}</div>
+
+          <div className="fr-sb">
+            <div className="food-card-info-col">
+              <div className="food-card-info-col-price">
+                {getPrice(price, unit)}
+              </div>
+              <SelectCT
+                disabled={!isBuy}
+                name="quantity"
+                showSearch={false}
+                className="mt-4"
+                value={quantity}
+                onChange={onChange}
+                data={
+                  quantityType === QUANTITY_TYPES.WEIGHT
+                    ? WEIGHT_DATA
+                    : PACKAGE_DATA
+                }
+              />
             </div>
 
-            <CheckboxCT
-              name="isBuy"
-              data="Buy"
-              isCheck={isBuy}
-              onChange={onChange}
-              className="mt-4"
-            />
+            <div className="food-card-info-col">
+              <DisplayRating
+                rating={rating}
+                className="food-card-info-col-rating"
+              ></DisplayRating>
+
+              <Button className="mt-10" onClick={toggleVisibleFoodInfo}>
+                More info
+              </Button>
+
+              {/*
+              <CheckboxCT
+                name="isBuy"
+                data="Buy"
+                isCheck={isBuy}
+                onChange={onChange}
+                className="mt-4"
+              />
+              */}
+            </div>
           </div>
         </div>
+
+        {isBuy && <div className="food-card-isbuy">Buy</div>}
       </div>
 
-      {isBuy && <div className="food-card-isbuy">Buy</div>}
+      <FoodInfoModal
+        visible={visibleFoodInfo}
+        toggleClick={toggleVisibleFoodInfo}
+        data={{ name, rating, price, image }}
+      ></FoodInfoModal>
     </div>
   );
 };
@@ -125,7 +150,7 @@ FoodCard.defaultProps = {
   isBuy: false,
   quantity: undefined,
   quantityType: QUANTITY_TYPES.WEIGHT,
-  imgSrc: "",
+  image: "",
   unit: "VND",
   onChangeCart: () => {},
 };
@@ -137,7 +162,7 @@ FoodCard.propTypes = {
   isBuy: PropTypes.bool,
   quantity: PropTypes.string,
   quantityType: PropTypes.string,
-  imgSrc: PropTypes.string,
+  image: PropTypes.string,
   unit: PropTypes.string,
   onChangeCart: PropTypes.func,
 };
