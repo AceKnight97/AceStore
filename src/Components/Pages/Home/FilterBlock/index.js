@@ -76,6 +76,15 @@ const FilterBlock = (props) => {
             <img src={starInactiveIc} alt="Star inactive ic" />
           </button>
         ))}
+        {/*
+        <Button
+          type="link"
+          // onClick={onClickUsername}
+          className="home-header-username-btn"
+        >
+          {username}
+        </Button>
+        */}
       </div>
       <div className="filter-block-row">
         <SelectCT

@@ -14,6 +14,7 @@ import reloadPageRequest from "../Redux/Actions/reload";
 import FoodOrder from "./FoodOrder";
 import Home from "./Home";
 import History from "./History";
+import User from "./User";
 
 const Main = (props) => {
   // const location = useLocation();
@@ -34,6 +35,7 @@ const Main = (props) => {
         <Switch>
           <Route exact path="/home" name="Home" component={Home} />
           <Route exact path="/history" name="Home" component={History} />
+          <Route exact path="/user" name="Home" component={User} />
           <Route
             exact
             path="/food-order"

@@ -39,6 +39,8 @@ export const PACKAGE_DATA = [
   "4 packages/dishes",
 ];
 
+export const QUANTITY_TYPES_ADD_FOOD = ["Kg", "Package/Dish"];
+
 export const MOCKING_FOOD_TABLE = [
   {
     title: "Seafood",

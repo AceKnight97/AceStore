@@ -1,0 +1,21 @@
+@import "../../../../Styles/style.scss";
+
+.add-food {
+  margin-top: 1.5rem;
+  border: $size-1 solid $gray-5;
+  padding: 1rem;
+  &-row {
+    display: flex;
+    flex-direction: row;
+    .food-card-img {
+      width: 246px;
+      height: 246px;
+    }
+  }
+  &-name-price {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1.5rem;
+    width: 220px;
+  }
+}

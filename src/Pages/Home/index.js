@@ -1,24 +1,13 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import classnames from "classnames";
-import _ from "lodash";
 import {} from "antd";
-import { useMergeState } from "../../Helpers/customHooks";
-import HomeHeader from "../../Components/Pages/Home/HomeHeader";
-import HomeFooter from "../../Components/Pages/Home/HomeFooter";
+import classnames from "classnames";
+import PropTypes from "prop-types";
+import React from "react";
 import HomeBody from "../../Components/Pages/Home/HomeBody";
-import auth from "../../Helpers/auth";
-import { getFoodMasterData } from "../../Components/Pages/Home/HomeBody/helper";
+import HomeFooter from "../../Components/Pages/Home/HomeFooter";
+import HomeHeader from "../../Components/Pages/Home/HomeHeader";
 
 const Home = (props) => {
-  const [state, setState] = useMergeState({
-    data: [],
-  });
   const { className } = props;
-  useEffect(() => {}, []);
-  const onChange = (key, value) => {
-    setState({ [key]: value });
-  };
   return (
     <div className={classnames("home", className)}>
       <HomeHeader />

@@ -74,9 +74,9 @@ export const mutationCreateUser = async (data) => {
 
 export const setDefaultData = () => {
   const data = {
-    email: "tttriet1997@gmail.com",
-    password: "123456789",
-    confirmPassword: "123456789",
+    email: "tttriet19977@gmail.com",
+    password: "0819541897",
+    confirmPassword: "0819541897",
     username: "AceKnight",
     phone: "0819541897",
     address: "329 le van Luong, P.Tan Quy, Q.7, TPHCM",

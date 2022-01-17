@@ -43,5 +43,5 @@ export const createOrderForAnyCustomer = async (
   const customer = { email, username, address, phone, notes, password: phone };
   const sendingData = { food, customer };
   console.log({ foodData, anyCustomerData, sendingData });
-  // return await handleCreateAnyCustomerOrder(sendingData);
+  return await handleCreateAnyCustomerOrder(sendingData);
 };

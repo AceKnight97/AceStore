@@ -27,7 +27,11 @@ const HomeHeader = (props) => {
     setState({ visibleRegister: !visibleRegister });
   };
   const onClickActive = () => {};
-  const onClickUsername = () => {};
+  const onClickUsername = () => {
+    if (location.pathname !== "/user") {
+      history.push("/user");
+    }
+  };
   const onClickHistory = () => {
     if (location.pathname !== "/history") {
       history.push("/history");

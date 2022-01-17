@@ -31,6 +31,9 @@ const Supergraphic = (props) => {
       case "/history":
         title = "Order History";
         break;
+      case "/user":
+        title = "User";
+        break;
       default:
         break;
     }

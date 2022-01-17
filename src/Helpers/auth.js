@@ -6,13 +6,20 @@ const auth = {
     const { user, isSuccess, token } = data;
     // const { username, _id } = user;
 
+    console.log({ user });
+
     localStorage.isSuccess = isSuccess;
     localStorage.token = token;
     localStorage.user = JSON.stringify(user);
+    localStorage.role = user.role;
     // localStorage.username = username;
     // localStorage.userId = _id;
     // localStorage.isSuccess = isSuccess;
     // localStorage.role = user.role;
+  },
+
+  getRole() {
+    return localStorage.role;
   },
 
   setKindOfFood(data) {

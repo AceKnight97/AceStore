@@ -58,14 +58,16 @@ const FoodOrder = (props) => {
     setState({ loading: true });
     const res = await createOrderForAnyCustomer(foodData, anyCustomerData);
     const obj = { loading: false };
-    // if (res.isSuccess) {
-    //   alert("Successfully creating order!");
-    //   auth.setFoodData(undefined);
-    //   history.push("/home");
-    //   _.assign(obj, { anyCustomerVisible: false });
-    // } else {
-    //   alert("Failed to create order: ", res.message);
-    // }
+    if (res.isSuccess) {
+      alert("Successfully creating order!");
+      auth.setFoodData(undefined);
+      _.assign(obj, { anyCustomerVisible: false });
+      setTimeout(() => {
+        history.push("/home");
+      }, 300);
+    } else {
+      alert("Failed to create order: ", res.message);
+    }
     setState(obj);
   };
 

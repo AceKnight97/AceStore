@@ -13,7 +13,7 @@ import { checkValidLogin, mutationSignIn } from "./helper";
 const LoginModal = (props) => {
   const [state, setState] = useMergeState({
     email: "tttriet1997@gmail.com",
-    password: "123456789",
+    password: "0819541897",
     emailErr: "",
     passwordErr: "",
     loading: false,
