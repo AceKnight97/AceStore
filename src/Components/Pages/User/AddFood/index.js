@@ -65,6 +65,9 @@ const AddFood = (props) => {
     quanityTypeErr,
     id,
   } = state;
+
+  const inputId = `${isAdd ? "add" : "edit"}-img-id-${index}`;
+
   useEffect(() => {
     if (!isAdd) {
       menuRef.current = auth.getMenu();
@@ -131,7 +134,7 @@ const AddFood = (props) => {
   };
 
   const onClickImg = () => {
-    const e = document.getElementById("img-id");
+    const e = document.getElementById(inputId);
     console.log({ e });
     if (e) {
       e.click();
@@ -169,7 +172,7 @@ const AddFood = (props) => {
             </div>
           )}
           <input
-            id="img-id"
+            id={inputId}
             type="file"
             onChange={onChangeImg}
             className="dis-none"

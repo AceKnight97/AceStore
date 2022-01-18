@@ -4,20 +4,18 @@ import auth from "../../../Helpers/auth";
 
 const fetchHistory = async () => {
   try {
-    const Authorization = auth.getToken();
-    const variables = JSON.stringify({ email: auth.getDataLogin()?.email });
-    console.log({ variables });
-    // const res = await axios.get(
-    //   `${CONFIG.APOLLO_HOST_URL}/api/foodorder/history`,
-    //   variables
-    // );
+    const email = auth.getDataLogin()?.email;
     const res = await axios({
-      method: "GET",
-      url: `${CONFIG.APOLLO_HOST_URL}/api/foodorder/historywithtoken`,
-      headers: {
-        Authorization,
-      },
+      method: "get",
+      url: `${CONFIG.APOLLO_HOST_URL}/api/foodorder/history/${email}`,
     });
+    // const res = await axios({
+    //   method: "GET",
+    //   url: `${CONFIG.APOLLO_HOST_URL}/api/foodorder/historywithtoken`,
+    //   headers: {
+    //     Authorization:  auth.getToken(),
+    //   },
+    // });
     return res.data;
   } catch (error) {
     throw error;
