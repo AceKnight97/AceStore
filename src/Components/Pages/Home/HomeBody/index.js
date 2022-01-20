@@ -23,6 +23,7 @@ import FilterBlock from "../FilterBlock";
 import FoodTable from "../FoodTable";
 import HomeTotal from "../HomeTotal";
 import { calcCartTotal, getFoodMasterData, handleFilterFood } from "./helper";
+import Loading from "../../../UI/Loading";
 
 const arr = [
   testimg1,
@@ -78,6 +79,7 @@ const HomeBody = (props) => {
     address,
     notes, // total, // cartTags,
     foodData,
+    loading,
   } = state;
 
   const { cartTags, total } = calcCartTotal(foodData);
@@ -157,40 +159,43 @@ const HomeBody = (props) => {
   );
 
   return (
-    <div className={classnames("home-body", className)}>
-      {renderToper()}
+    <div>
+      <div className={classnames("home-body", className)}>
+        {renderToper()}
 
-      <div className="home-body-main">
-        {cartTags.length !== 0 && (
-          <div className="home-body-cart-tag animation-fadein-2s">
-            <div className="home-body-cart-tag-title">
-              <span>Your cart:</span>
+        <div className="home-body-main">
+          {cartTags.length !== 0 && (
+            <div className="home-body-cart-tag animation-fadein-2s">
+              <div className="home-body-cart-tag-title">
+                <span>Your cart:</span>
+              </div>
+
+              {_.map(cartTags, (x, i) => (
+                <Tag key={i} className="home-body-cart-tag-item" color="orange">
+                  {x}
+                </Tag>
+              ))}
             </div>
+          )}
 
-            {_.map(cartTags, (x, i) => (
-              <Tag key={i} className="home-body-cart-tag-item" color="orange">
-                {x}
-              </Tag>
-            ))}
-          </div>
-        )}
-
-        {_.map(
-          foodData,
-          (x, i) =>
-            x.data.length !== 0 &&
-            x.title && (
-              <FoodTable
-                className="animation-fadein-2s"
-                key={i}
-                title={x.title}
-                data={x.data}
-                onChangeCart={onChangeCart}
-                isShow={i === 0}
-              />
-            )
-        )}
+          {_.map(
+            foodData,
+            (x, i) =>
+              x.data.length !== 0 &&
+              x.title && (
+                <FoodTable
+                  className="animation-fadein-2s"
+                  key={i}
+                  title={x.title}
+                  data={x.data}
+                  onChangeCart={onChangeCart}
+                  isShow={i === 0}
+                />
+              )
+          )}
+        </div>
       </div>
+      {loading && <Loading></Loading>}
     </div>
   );
 };

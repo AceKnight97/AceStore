@@ -54,8 +54,6 @@ const HomeHeader = (props) => {
 
   return (
     <>
-      {/* <Loading></Loading> */}
-
       <div className={classnames("home-header", className)}>
         {/*  <img src={logo} alt="Logo" /> */}
 

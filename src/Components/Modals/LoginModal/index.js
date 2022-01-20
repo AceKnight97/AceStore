@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import _ from "lodash";
@@ -10,16 +10,26 @@ import auth from "../../../Helpers/auth";
 import InputCT from "../../Inputs/InputCT";
 import { checkValidLogin, mutationSignIn } from "./helper";
 
+const DEFAULT_DATA = {
+  email: "tttriet1997@gmail.com",
+  password: "0819541897",
+};
+
 const LoginModal = (props) => {
   const [state, setState] = useMergeState({
-    email: "tttriet1997@gmail.com",
-    password: "0819541897",
+    email: "",
+    password: "",
     emailErr: "",
     passwordErr: "",
     loading: false,
   });
   const { className, visible, onClickCancel } = props;
   const { email, password, emailErr, passwordErr, loading } = state;
+
+  useEffect(() => {
+    // setState({ ...DEFAULT_DATA });
+  }, []);
+
   const onChange = (key, value) => {
     setState({ [key]: value, emailErr: "", passwordErr: "" });
   };

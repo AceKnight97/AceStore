@@ -3,7 +3,7 @@ import { NavLink, useHistory, useLocation, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import _ from "lodash";
-import {} from "antd";
+
 import "./_supergraphic.scss";
 import { useMergeState, useUpdateEffect } from "../../../Helpers/customHooks";
 import boschLogo from "../../../Images/bosch-logo-new-flat.png";

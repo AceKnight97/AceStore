@@ -1,30 +1,47 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Button, Modal } from "antd";
-import { QuestionCircleOutlined } from "@ant-design/icons";
+import { Modal } from "antd";
 import classnames from "classnames";
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
 import { useMergeState } from "../../../Helpers/customHooks";
 import InputCT from "../../Inputs/InputCT";
 import ModalFooter from "../ModalFooter";
 import ModalHeader from "../ModalHeader";
 import "./_any-customer-modal.scss";
-import handleCreateOrder from "../../../Apollo/Functions/Handle/handleCreateOrder";
+
+const MY_DATA = {
+  email: "tttriet1997@gmail.com",
+  username: "AceKnight",
+  phone: "0819541897",
+  address: "3 Le van luong, P.Tan Quy, Q.7",
+  notes: "Soon",
+};
+
+const DEFAULT_DATA = {
+  email: "",
+  username: "",
+  phone: "",
+  address: "",
+  notes: "",
+
+  emailErr: "",
+  usernameErr: "",
+  phoneErr: "",
+  addressErr: "",
+  loading: false,
+  isConfirm: false,
+};
 
 const AnyCustomerModal = (props) => {
   const [state, setState] = useMergeState({
-    email: "tttriet1997@gmail.com",
-    username: "AceKnight",
-    phone: "0819541897",
-    address: "3 Le van luong, P.Tan Quy, Q.7",
-    notes: "Soon",
-
-    emailErr: "",
-    usernameErr: "",
-    phoneErr: "",
-    addressErr: "",
-    loading: false,
-    isConfirm: false,
+    ...DEFAULT_DATA,
   });
+
+  useEffect(() => {
+    if (!visible) {
+      setState({ ...DEFAULT_DATA });
+    }
+  }, [props.visible]);
+
   const { className, visible, onClickCancel, onClick } = props;
   const {
     email,

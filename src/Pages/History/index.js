@@ -1,4 +1,3 @@
-import {} from "antd";
 import classnames from "classnames";
 import _ from "lodash";
 import PropTypes from "prop-types";
@@ -7,6 +6,7 @@ import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import HomeHeader from "../../Components/Pages/Home/HomeHeader";
 import HistoryTable from "../../Components/Tables/HistoryTable";
+import Loading from "../../Components/UI/Loading";
 import auth from "../../Helpers/auth";
 import { useMergeState } from "../../Helpers/customHooks";
 import { getFoodData } from "../FoodOrder/helper";
@@ -18,14 +18,15 @@ const History = (props) => {
   const history = useHistory();
   const [state, setState] = useMergeState({
     orderHistory: getFoodData(location.state),
+    loading: true,
   });
   const { className } = props;
 
   const fetchHistory = async () => {
     const orderHistory = await queryHistory();
-    setState({ orderHistory });
+    setState({ orderHistory, loading: false });
   };
-  const { orderHistory } = state;
+  const { orderHistory, loading } = state;
 
   useEffect(() => {
     if (auth.getToken()) {
@@ -57,6 +58,7 @@ const History = (props) => {
           ))
         )}
       </div>
+      {loading && <Loading></Loading>}
     </div>
   );
 };

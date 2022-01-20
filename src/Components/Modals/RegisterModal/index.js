@@ -15,26 +15,29 @@ import {
 } from "./helper";
 import auth from "../../../Helpers/auth";
 
+const DEFAULT_DATA = {
+  email: "",
+  password: "",
+  confirmPassword: "",
+  username: "",
+  phone: "",
+  address: "",
+  notes: "",
+
+  emailErr: "",
+  passwordErr: "",
+  confirmPasswordErr: "",
+  usernameErr: "",
+  phoneErr: "",
+  addressErr: "",
+  notesErr: "",
+  loading: false,
+  isStep1: true,
+};
+
 const RegisterModal = (props) => {
   const [state, setState] = useMergeState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-    username: "",
-    phone: "",
-    address: "",
-    notes: "",
-
-    emailErr: "",
-    passwordErr: "",
-    confirmPasswordErr: "",
-    usernameErr: "",
-    phoneErr: "",
-    addressErr: "",
-    notesErr: "",
-
-    loading: false,
-    isStep1: true,
+    ...DEFAULT_DATA,
   });
   const { className, visible, onClickCancel } = props;
   const {
@@ -57,8 +60,11 @@ const RegisterModal = (props) => {
   } = state;
 
   useEffect(() => {
-    setState({ ...setDefaultData() });
-  }, []);
+    // setState({ ...setDefaultData() });
+    if (!visible) {
+      setState({ ...DEFAULT_DATA });
+    }
+  }, [visible]);
 
   const onClickBack = () => {
     setState({ isStep1: true });

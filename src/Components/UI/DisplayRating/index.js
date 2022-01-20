@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import _ from "lodash";
-import {} from "antd";
+
 import "./_display-rating.scss";
 import starIc from "../../../Images/Pages/Home/star.svg";
 import starInactiveIc from "../../../Images/Pages/Home/star-inactive.svg";
