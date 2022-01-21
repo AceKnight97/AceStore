@@ -23,8 +23,12 @@ const History = (props) => {
   const { className } = props;
 
   const fetchHistory = async () => {
-    const orderHistory = await queryHistory();
-    setState({ orderHistory, loading: false });
+    try {
+      const orderHistory = await queryHistory();
+      setState({ orderHistory, loading: false });
+    } catch (error) {
+      setState({ loading: false });
+    }
   };
   const { orderHistory, loading } = state;
 
@@ -52,6 +56,8 @@ const History = (props) => {
               key={index}
               data={x.data}
               date={x.date}
+              notes={x.notes}
+              status={x.status}
               index={index}
               fetchHistory={fetchHistory}
             ></HistoryTable>

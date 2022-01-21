@@ -4,21 +4,24 @@ import fetchMenu from "../../../../Apollo/Functions/Fetch/fetchMenu";
 import auth from "../../../../Helpers/auth";
 
 export const getFoodMasterData = async () => {
-  const res = await fetchMenu();
-  auth.setMenu(res);
-  const titles = [];
-  const foodData = [];
-  const grouped = _.groupBy(res, (x) => x.title);
-  Object.keys(grouped).forEach((x) => {
-    titles.push(x);
-    foodData.push({
-      title: x,
-      data: grouped[x],
+  try {
+    const res = await fetchMenu();
+    auth.setMenu(res);
+    const titles = [];
+    const foodData = [];
+    const grouped = _.groupBy(res, (x) => x.title);
+    Object.keys(grouped).forEach((x) => {
+      titles.push(x);
+      foodData.push({
+        title: x,
+        data: grouped[x],
+      });
     });
-  });
-  auth.setKindOfFood(titles);
-  // console.log({ grouped, foodData });
-  return foodData;
+    auth.setKindOfFood(titles);
+    return foodData;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const calcCartTotal = (foodData = []) => {

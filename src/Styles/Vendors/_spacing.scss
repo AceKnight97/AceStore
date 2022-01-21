@@ -75,13 +75,17 @@ $pc-20: calc(100% / 4);
   &-16 {
     margin-right: 1rem;
   }
-
   &-24 {
     margin-right: 1.5rem;
   }
-
+  &-32 {
+    margin-right: 2rem;
+  }
   &-40 {
     margin-right: 2.5rem;
+  }
+  &-64 {
+    margin-right: 4rem;
   }
 }
 
@@ -137,6 +141,10 @@ $pc-20: calc(100% / 4);
 
   &-24 {
     margin-left: 1.5rem;
+  }
+
+  &-32 {
+    margin-left: 2rem;
   }
 
   &-40 {

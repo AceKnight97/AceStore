@@ -17,6 +17,7 @@ import {
 import { calcCartTotal } from "../../Components/Pages/Home/HomeBody/helper";
 import { getPrice } from "../../Helpers";
 import AnyCustomerModal from "../../Components/Modals/AnyCustomerModal";
+import InputCT from "../../Components/Inputs/InputCT";
 
 const FoodOrder = (props) => {
   const location = useLocation();
@@ -24,12 +25,16 @@ const FoodOrder = (props) => {
   const [state, setState] = useMergeState({
     foodData: getFoodData(location.state),
     anyCustomerVisible: false,
+    notes: "",
   });
   const { className } = props;
-  const { foodData, anyCustomerVisible } = state;
+  const { foodData, anyCustomerVisible, notes } = state;
   useEffect(() => {}, []);
   const { total } = calcCartTotal(location.state);
   const { address, phone, email } = auth.getDataLogin();
+  const onChange = (key, value) => {
+    setState({ [key]: value });
+  };
 
   const generateColumns = () => {
     const columns = [
@@ -85,7 +90,7 @@ const FoodOrder = (props) => {
       return;
     }
     setState({ loading: true });
-    const res = await mutationCreateOrder(foodData, email);
+    const res = await mutationCreateOrder(foodData, email, notes);
     if (res.isSuccess) {
       alert("Successfully creating order!");
       auth.setFoodData(undefined);
@@ -120,6 +125,18 @@ const FoodOrder = (props) => {
             <span className="ml-4">{phone}</span>
           </div>
         </div>
+        {email && (
+          <InputCT
+            titleClassName="b"
+            title="Notes"
+            name="notes"
+            value={notes}
+            onChange={onChange}
+            placeholder="Enter your notes"
+            className="mt-16"
+            type="TEXTAREA"
+          />
+        )}
         <div className="food-order-body-btns">
           <Button onClick={onClickBack}>Back</Button>
           <Button type="primary" onClick={onClickConfirm}>

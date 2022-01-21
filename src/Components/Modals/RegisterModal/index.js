@@ -169,7 +169,8 @@ const RegisterModal = (props) => {
         className="mt-16"
         errMes={addressErr}
       />
-      <InputCT
+      {/*
+        <InputCT
         title="Notes"
         name="notes"
         value={notes}
@@ -179,6 +180,7 @@ const RegisterModal = (props) => {
         type="TEXTAREA"
         errMes={notesErr}
       />
+      */}
     </>
   );
 

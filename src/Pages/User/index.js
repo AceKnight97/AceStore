@@ -24,7 +24,7 @@ const { ADD_FOOD, EDIT_FOOD, FOOD_ORDER, USER_PROFILE } = TABS;
 const User = (props) => {
   const history = useHistory();
   const [state, setState] = useMergeState({
-    activeTab: FOOD_ORDER,
+    activeTab: USER_PROFILE,
   });
   const { className } = props;
   const { activeTab } = state;
@@ -80,10 +80,12 @@ const User = (props) => {
                       <span className="b mr-4">Address:</span>
                       <span>{address}</span>
                     </div>
+                    {/*
                     <div className="flex">
                       <span className="b mr-4">Notes:</span>
                       <span>{notes}</span>
                     </div>
+                    */}
                     <div className="flex">
                       <span className="b mr-4">Role:</span>
                       <span>{role || "Customer"}</span>

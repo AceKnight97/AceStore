@@ -182,3 +182,18 @@
   width: 100%;
   font-size: 12px;
 }
+
+.no-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  height: max-content;
+  // background-color: rgba(0, 0, 0, 0.45);
+}

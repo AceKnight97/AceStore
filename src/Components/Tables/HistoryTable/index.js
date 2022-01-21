@@ -20,7 +20,7 @@ const HistoryTable = (props) => {
     isShow: props.isShow,
   });
 
-  const { className, data, date, fetchHistory } = props; // index
+  const { className, data, date, fetchHistory, notes, status } = props; // index
   const { visibleCloneOrder, loading, isShow } = state;
   useEffect(() => {
     if (!isShow) {
@@ -70,7 +70,7 @@ const HistoryTable = (props) => {
 
   const onCloneOrder = async () => {
     setState({ loading: true });
-    const res = await mutationCloneOrder(data);
+    const res = await mutationCloneOrder(data, notes);
     const obj = { loading: false };
     if (res.isSuccess) {
       alert("Successfully cloning order!");
@@ -94,19 +94,24 @@ const HistoryTable = (props) => {
           <span>{getOrderTotal(data)}</span>
         </div>
 
-        <Button
-          type="link"
-          onClick={toggleShow}
-          // className="food-table-show-btn"
-        >
+        <Button type="link" onClick={toggleShow}>
           {isShow ? "Hide" : "Show"}
         </Button>
         <Button type="link" onClick={toggleCloneOrder}>
           Clone order
         </Button>
       </div>
-
       <div ref={toggleRef}>
+        <div className="fr mt-16">
+          <div className="flex mr-64">
+            <span className="b mr-4">Status: </span>
+            <span>{status}</span>
+          </div>
+          <div className="flex">
+            <span className="b mr-4">Notes: </span>
+            <span>{notes}</span>
+          </div>
+        </div>
         <AntdTable
           className="mt-16"
           rowKey="index"
@@ -132,6 +137,8 @@ HistoryTable.defaultProps = {
   date: undefined,
   fetchHistory: () => {},
   // index: 0,
+  status: "",
+  notes: "",
 };
 
 HistoryTable.propTypes = {
@@ -140,6 +147,8 @@ HistoryTable.propTypes = {
   date: PropTypes.string,
   fetchHistory: PropTypes.func,
   // index: PropTypes.number,
+  status: PropTypes.string,
+  notes: PropTypes.string,
 };
 
 export default HistoryTable;

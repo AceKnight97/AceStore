@@ -20,11 +20,17 @@ export const getFoodData = (foodData = []) => {
   return arr;
 };
 
-export const mutationCreateOrder = async (foodData = [], email = "") => {
+export const mutationCreateOrder = async (
+  foodData = [],
+  email = "",
+  notes = ""
+) => {
   const sendingData = foodData.map((x) => ({
     food_id: x.id,
     quantity: parseFloat(x.quantity.slice(0, 3)),
     email,
+    notes,
+    status: "Pending",
   }));
   // console.log({ data, sendingData });
   return await handleCreateOrder(sendingData);
@@ -36,11 +42,14 @@ export const createOrderForAnyCustomer = async (
 ) => {
   const { email, username, address, phone, notes } = anyCustomerData;
   const food = foodData.map((x) => ({
+    // FoodOrder
     food_id: x.id,
     quantity: parseFloat(x.quantity.slice(0, 3)),
     email,
+    notes,
+    status: "Pending",
   }));
-  const customer = { email, username, address, phone, notes, password: phone };
+  const customer = { email, username, address, phone, password: phone };
   const sendingData = { food, customer };
   console.log({ foodData, anyCustomerData, sendingData });
   return await handleCreateAnyCustomerOrder(sendingData);

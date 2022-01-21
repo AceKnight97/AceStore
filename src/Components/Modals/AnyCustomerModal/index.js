@@ -107,6 +107,7 @@ const AnyCustomerModal = (props) => {
               <span className="b">Notes:</span>
               <span className="ml-4">{notes}</span>
             </div>
+
             <div className="fcen mt-16 b">Do you want to order now?</div>
           </div>
         ) : (
@@ -154,6 +155,7 @@ const AnyCustomerModal = (props) => {
               onChange={onChange}
               placeholder="Enter your notes"
               className="mt-16"
+              type="TEXTAREA"
             />
           </div>
         )}
