@@ -3,5 +3,8 @@
   min-width: 520px;
   &-main {
     padding: 1.5rem;
+    img {
+      max-width: 100%;
+    }
   }
 }
