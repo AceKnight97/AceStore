@@ -20,6 +20,7 @@ const RadioCT = (props) => {
     name,
     isObj,
     loading,
+    disabled,
   } = props;
 
   let itemMagrinTop = "mt18";
@@ -57,6 +58,7 @@ const RadioCT = (props) => {
         <Radio.Group
           onChange={(e) => onChange(name, e.target.value)}
           value={value}
+          disabled={disabled}
         >
           {isObj
             ? _.map(data, (x, i) => (
@@ -106,6 +108,7 @@ RadioCT.defaultProps = {
   value: undefined,
   isObj: false,
   loading: false,
+  disabled: false,
 };
 RadioCT.propTypes = {
   name: PropTypes.string,
@@ -124,6 +127,7 @@ RadioCT.propTypes = {
   type: PropTypes.string,
   isObj: PropTypes.bool,
   loading: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default RadioCT;

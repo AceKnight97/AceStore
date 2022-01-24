@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { useMergeState } from "../../../Helpers/customHooks";
 import FoodOrderDrawer from "../../Modals/FoodOrderDrawer";
+import DisplayStatus from "../../UI/DisplayStatus";
 import AntdTable from "../AntdTable";
 import "./_customer-orders-table.scss";
 
@@ -48,8 +49,9 @@ const CustomerOrdersTable = (props) => {
         dataIndex: "phone",
       },
       {
-        title: "Notes",
-        dataIndex: "notes",
+        title: "Status",
+        dataIndex: "status",
+        render: (cell) => <DisplayStatus cell={cell}></DisplayStatus>,
       },
     ];
     return columns;
@@ -82,6 +84,7 @@ const CustomerOrdersTable = (props) => {
         data={foodOrderData}
         onClose={onCloseFoodOrderDrawer}
         onUpdateFoodOrder={onUpdateFoodOrder}
+        isEditable={props.isEditable}
       />
     </div>
   );
@@ -95,6 +98,7 @@ CustomerOrdersTable.defaultProps = {
   isShow: false,
   status: "",
   notes: "",
+  isEditable: true,
 };
 
 CustomerOrdersTable.propTypes = {
@@ -105,6 +109,7 @@ CustomerOrdersTable.propTypes = {
   isShow: PropTypes.bool,
   status: PropTypes.string,
   notes: PropTypes.string,
+  isEditable: PropTypes.bool,
 };
 
 export default CustomerOrdersTable;

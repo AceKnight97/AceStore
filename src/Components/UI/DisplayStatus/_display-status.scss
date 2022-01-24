@@ -1,0 +1,14 @@
+.display-status {
+  .--pending {
+    color: #faad14;
+  }
+  .--on-going {
+    color: #1890ff;
+  }
+  .--done {
+    color: #52c41a;
+  }
+  .--cancel {
+    color: #ff4d4f;
+  }
+}

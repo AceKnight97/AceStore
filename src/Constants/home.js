@@ -36,6 +36,8 @@ export const PACKAGE_DATA = ["1 pc", "2 pcs", "3 psc", "4 psc"];
 
 export const QUANTITY_TYPES_ADD_FOOD = ["Kg", "Package/Dish"];
 
+export const STATUS_ENUM = ["Pending", "On Going", "Done", "Cancel"];
+
 export const MOCKING_FOOD_TABLE = [
   {
     title: "Seafood",

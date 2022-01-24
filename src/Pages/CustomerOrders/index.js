@@ -25,7 +25,10 @@ const CustomerOrders = (props) => {
       return;
     }
     try {
-      const res = await mutationGetFoodOrders({ currentDate });
+      const res = await mutationGetFoodOrders({
+        currentDate,
+        email: props.email,
+      });
       setState({ data: res, loading: false });
     } catch (error) {
       setState({ loading: false });
@@ -42,39 +45,34 @@ const CustomerOrders = (props) => {
 
   return (
     <div className={classnames("customer-orders", className)}>
-      <DatepickerCT
-        className="customer-orders-cur-date"
-        placeholder="Choose date"
-        value={currentDate}
-        onChange={onChange}
-        name="currentDate"
-      ></DatepickerCT>
-      <CustomerOrdersTable data={data}></CustomerOrdersTable>
-      {/*
-     {data.length === 0 ? (
-        <div className="no-data">There is no data to display</div>
-      ) : (
-        _.map(data, (x, i) => (
-          <AdminOrderTable
-            key={i}
-            data={x.data}
-            index={i}
-            date={x.date}
-            isShow={i === 0}
-            notes={x.notes}
-            status={x.status}
-          ></AdminOrderTable>
-        ))
-      )}
-    */}
+      <div className="flex">
+        <DatepickerCT
+          className="customer-orders-cur-date"
+          placeholder="Choose date"
+          value={currentDate}
+          onChange={onChange}
+          name="currentDate"
+        ></DatepickerCT>
+
+        <div className="customer-orders-date">
+          {moment(currentDate).format("dddd, MMMM DD, YYYY")}
+        </div>
+      </div>
+
+      <CustomerOrdersTable
+        data={data}
+        isEditable={!props.email}
+      ></CustomerOrdersTable>
     </div>
   );
 };
 CustomerOrders.defaultProps = {
   className: "",
+  email: undefined,
 };
 CustomerOrders.propTypes = {
   className: PropTypes.string,
+  email: PropTypes.string,
 };
 
 export default CustomerOrders;

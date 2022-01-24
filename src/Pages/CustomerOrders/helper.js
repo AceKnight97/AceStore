@@ -13,9 +13,10 @@ const formatOrderHisData = (y, index) => ({
 });
 
 export const mutationGetFoodOrders = async (filterObj = {}) => {
-  const { currentDate } = filterObj;
+  const { currentDate, email } = filterObj;
   const sendingData = {
     createdAt: moment(currentDate).toISOString(),
+    email,
   };
   // console.log({ sendingData });
   const res = await handleGetFoodOrders(sendingData);
@@ -30,7 +31,7 @@ export const mutationGetFoodOrders = async (filterObj = {}) => {
       index: i,
       date: x,
       data,
-      notes: grouped[x]?.[0]?.foodOrder?.notes || "",
+      // notes: grouped[x]?.[0]?.foodOrder?.notes || "",
       status: grouped[x]?.[0]?.foodOrder?.status || "",
       username: grouped[x]?.[0]?.user?.username || "",
       total: getOrderTotal(data),

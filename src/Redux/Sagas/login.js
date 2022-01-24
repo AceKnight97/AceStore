@@ -16,7 +16,7 @@ export function* loginRequest() {
       user: _.cloneDeep(data.user),
       token: data.token,
     };
-    console.log({ result });
+    // console.log({ result });
     auth.login(result);
     yield put({ type: AppFlowActions.LOGIN_COMPLETE, data: result });
     // if (result.isSuccess === true) {

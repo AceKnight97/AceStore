@@ -56,7 +56,7 @@ const HomeBody = (props) => {
   const fetchMasterData = async () => {
     try {
       const foodData = await getFoodMasterData();
-      console.log({ foodData });
+      // console.log({ foodData });
       auth.setMasterData(foodData);
       setState({ foodData, rawFoodData: foodData, loading: false });
     } catch (error) {

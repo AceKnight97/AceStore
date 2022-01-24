@@ -32,11 +32,10 @@ const User = (props) => {
   const { email, username, phone, address, notes, role } = auth.getDataLogin();
 
   useEffect(() => {
-    if (auth.getToken()) {
-      // console.log({ HNavelogin: props.login });
-    } else {
-      // console.log({ Nologin: props.login });
+    if (!auth.getToken()) {
       history.push("/home");
+      setState({});
+      // console.log({ Nologin: props.login });
     }
   }, [props.login]);
 
@@ -54,45 +53,45 @@ const User = (props) => {
           onChange={onChangeTab}
           className="mt-12"
         >
-          {isAdmin && (
-            <>
-              <TabPane
-                tab={<div className="user-body-title">User profile</div>}
-                key={USER_PROFILE}
-              >
-                <div className="user-body-profile">
-                  <div className="fr-sb">
-                    <div className="flex">
-                      <span className="b mr-4">Email:</span>
-                      <span>{email}</span>
-                    </div>
-                    <div className="flex">
-                      <span className="b mr-4">Username:</span>
-                      <span>{username}</span>
-                    </div>
-                    <div className="flex">
-                      <span className="b mr-4">Phone:</span>
-                      <span>{phone}</span>
-                    </div>
-                  </div>
-                  <div className="fr-sb">
-                    <div className="flex">
-                      <span className="b mr-4">Address:</span>
-                      <span>{address}</span>
-                    </div>
-                    {/*
+          <TabPane
+            tab={<div className="user-body-title">User profile</div>}
+            key={USER_PROFILE}
+          >
+            <div className="user-body-profile">
+              <div className="fr-sb">
+                <div className="flex">
+                  <span className="b mr-4">Email:</span>
+                  <span>{email}</span>
+                </div>
+                <div className="flex">
+                  <span className="b mr-4">Username:</span>
+                  <span>{username}</span>
+                </div>
+                <div className="flex">
+                  <span className="b mr-4">Phone:</span>
+                  <span>{phone}</span>
+                </div>
+              </div>
+              <div className="fr-sb">
+                <div className="flex">
+                  <span className="b mr-4">Address:</span>
+                  <span>{address}</span>
+                </div>
+                {/*
                     <div className="flex">
                       <span className="b mr-4">Notes:</span>
                       <span>{notes}</span>
                     </div>
                     */}
-                    <div className="flex">
-                      <span className="b mr-4">Role:</span>
-                      <span>{role || "Customer"}</span>
-                    </div>
-                  </div>
+                <div className="flex">
+                  <span className="b mr-4">Role:</span>
+                  <span>{role || "Customer"}</span>
                 </div>
-              </TabPane>
+              </div>
+            </div>
+          </TabPane>
+          {isAdmin && (
+            <>
               <TabPane
                 tab={<div className="user-body-title">Add food</div>}
                 key={ADD_FOOD}

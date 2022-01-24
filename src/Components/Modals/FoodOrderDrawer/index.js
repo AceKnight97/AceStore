@@ -5,6 +5,7 @@ import _ from "lodash";
 import moment from "moment";
 import PropTypes from "prop-types";
 import React from "react";
+import { STATUS_ENUM } from "../../../Constants/home";
 import { getPrice } from "../../../Helpers";
 import { useMergeState } from "../../../Helpers/customHooks";
 import RadioCT from "../../Inputs/RadioCT";
@@ -15,9 +16,9 @@ const FoodOrderDrawer = (props) => {
   const [state, setState] = useMergeState({
     loading: false,
   });
-  const { visible, className, loading, data, onClose, onUpdateFoodOrder } =
-    props;
-  const { date, status, foodOrderId } = data;
+  const { visible, className, data, onClose, onUpdateFoodOrder } = props;
+  const { date, status, foodOrderId, notes } = data;
+  const { loading } = state;
 
   const onChangeStatus = async (key, value) => {
     console.log({ key, value, foodOrderId });
@@ -58,13 +59,14 @@ const FoodOrderDrawer = (props) => {
         </div>
 
         <RadioCT
-          data={["Pending", "On Going", "Done", "Cancel"]}
+          data={STATUS_ENUM}
           value={status}
           title="Status:"
           titleClassName="b pos-re"
           className="mt-16 mb-16"
           onChange={onChangeStatus}
           loading={loading}
+          disabled={!props.isEditable}
         ></RadioCT>
 
         <div className="mt-16">
@@ -79,6 +81,10 @@ const FoodOrderDrawer = (props) => {
             )} - Quantity: ${x.quantity}`}
           </div>
         ))}
+        <div className="food-order-drawer-total">
+          <span className="b mr-4">Notes: </span>
+          <span>{data.notes || ""}</span>
+        </div>
       </div>
     </Drawer>
   );
@@ -86,11 +92,11 @@ const FoodOrderDrawer = (props) => {
 FoodOrderDrawer.defaultProps = {
   className: "",
   data: {},
-  loading: false,
   visible: false,
   toggleClick: () => {},
   onClose: () => {},
   onUpdateFoodOrder: () => {},
+  isEditable: true,
 };
 FoodOrderDrawer.propTypes = {
   className: PropTypes.string,
@@ -99,7 +105,7 @@ FoodOrderDrawer.propTypes = {
   onClose: PropTypes.func,
   onUpdateFoodOrder: PropTypes.func,
   visible: PropTypes.bool,
-  loading: PropTypes.bool,
+  isEditable: PropTypes.bool,
 };
 
 export default FoodOrderDrawer;

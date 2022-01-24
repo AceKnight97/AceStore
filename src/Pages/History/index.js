@@ -9,6 +9,7 @@ import HistoryTable from "../../Components/Tables/HistoryTable";
 import Loading from "../../Components/UI/Loading";
 import auth from "../../Helpers/auth";
 import { useMergeState } from "../../Helpers/customHooks";
+import CustomerOrders from "../CustomerOrders";
 import { getFoodData } from "../FoodOrder/helper";
 import { queryHistory } from "./helper";
 import "./_history.scss";
@@ -33,22 +34,21 @@ const History = (props) => {
   const { orderHistory, loading } = state;
 
   useEffect(() => {
-    if (auth.getToken()) {
-      fetchHistory();
-    } else {
+    if (!auth.getToken()) {
+      console.log({ login: props.login, auth: auth.getToken() });
       history.push("/home");
+      setState({});
+      // console.log({ Nologin: props.login });
+    } else {
+      fetchHistory();
     }
   }, [props.login]);
-
-  const onChange = (key, value) => {
-    setState({ [key]: value });
-  };
-
   return (
     <div className={classnames("history", className)}>
       <HomeHeader></HomeHeader>
       <div className="history-body">
-        {orderHistory.length === 0 ? (
+        {/*
+       {orderHistory.length === 0 ? (
           <div className="history-body-no-his">There is no data to display</div>
         ) : (
           _.map(orderHistory, (x, index) => (
@@ -63,6 +63,8 @@ const History = (props) => {
             ></HistoryTable>
           ))
         )}
+      */}
+        <CustomerOrders email={auth.getDataLogin()?.email}></CustomerOrders>
       </div>
       {loading && <Loading></Loading>}
     </div>
