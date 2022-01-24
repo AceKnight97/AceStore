@@ -9,6 +9,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.14.1",
+    "axios": "^0.25.0",
     "classnames": "^2.2.6",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^8.0.0",
@@ -73,7 +74,6 @@
   },
   "devDependencies": {
     "antd-img-crop": "^4.1.0",
-    "axios": "^0.24.0",
     "gh-pages": "^3.2.3",
     "react-image-file-resizer": "^0.4.7"
   },
