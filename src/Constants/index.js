@@ -14,7 +14,7 @@ export default AppFlowActions;
 
 export const PAGE_MANAGER = {
   HOME_PAGE: "https://github.com/AceKnight97/staticpromotionalwebsite",
-  HOME: "/home",
+  HOME: "/acestore",
   OUR_TEAM: "/our-team",
   MY_CV: "/staticpromotionalwebsite",
   BUSINESS: "/business",

@@ -36,7 +36,7 @@ const History = (props) => {
   useEffect(() => {
     if (!auth.getToken()) {
       console.log({ login: props.login, auth: auth.getToken() });
-      history.push("/home");
+      history.push("/acestore");
       setState({});
       // console.log({ Nologin: props.login });
     } else {

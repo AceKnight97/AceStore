@@ -40,7 +40,7 @@ const HomeHeader = (props) => {
   const onClickLogout = () => {
     auth.logout();
     props.logoutRequest();
-    history.push("/home");
+    history.push("/acestore");
     setState({});
   };
 

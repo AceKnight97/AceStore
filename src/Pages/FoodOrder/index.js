@@ -68,7 +68,7 @@ const FoodOrder = (props) => {
       auth.setFoodData(undefined);
       _.assign(obj, { anyCustomerVisible: false });
       setTimeout(() => {
-        history.push("/home");
+        history.push("/acestore");
       }, 300);
     } else {
       alert("Failed to create order: ", res.message);
@@ -77,7 +77,7 @@ const FoodOrder = (props) => {
   };
 
   const onClickBack = () => {
-    history.push("/home");
+    history.push("/acestore");
   };
 
   const onClickCancel = () => {
@@ -94,7 +94,7 @@ const FoodOrder = (props) => {
     if (res.isSuccess) {
       alert("Successfully creating order!");
       auth.setFoodData(undefined);
-      history.push("/home");
+      history.push("/acestore");
     } else {
       alert("Failed to create order: ", res.message);
     }

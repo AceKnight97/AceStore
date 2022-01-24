@@ -33,7 +33,7 @@ const User = (props) => {
 
   useEffect(() => {
     if (!auth.getToken()) {
-      history.push("/home");
+      history.push("/acestore");
       setState({});
       // console.log({ Nologin: props.login });
     }
