@@ -51,7 +51,7 @@ export const disabledRegister = (state = {}) => {
       return true;
     }
   } else {
-    if (!username || !phone || !address || !notes) {
+    if (!username || !phone || !address) {
       return true;
     }
   }
