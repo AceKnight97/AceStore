@@ -10,7 +10,6 @@ export const handleRightBtnClick = (state = {}) => {
     username,
     phone,
     address,
-    notes,
     loading,
     isStep1,
   } = state;
@@ -60,14 +59,13 @@ export const disabledRegister = (state = {}) => {
 
 export const mutationCreateUser = async (data) => {
   console.log({ data });
-  const { email, username, password, phone, address, notes } = data;
+  const { email, username, password, phone, address } = data;
   const res = await handleRegister({
     email,
     username,
     password,
     phone,
     address,
-    notes,
   });
   return res;
 };
@@ -80,7 +78,6 @@ export const setDefaultData = () => {
     username: "AceKnight",
     phone: "0819541897",
     address: "329 le van Luong, P.Tan Quy, Q.7, TPHCM",
-    notes: "Soon",
   };
   return data;
 };

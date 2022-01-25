@@ -115,7 +115,7 @@ const AdminOrderTable = (props) => {
         toggleClick={toggleUserInfo}
         loading={loading}
         data={data?.[0]?.user}
-      />
+      ></UserInfoModal>
     </div>
   );
 };

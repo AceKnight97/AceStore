@@ -130,29 +130,6 @@ const HomeBody = (props) => {
 
   const renderToper = () => (
     <div className="home-body-toper">
-      {/*  <InforBlock
-        name1="name"
-        value1={name}
-        title1="Name:"
-        name2="phone"
-        value2={phone}
-        title2="Phone number:"
-        onChange={onChange}
-        className="home-body-toper-block-1"
-        type="NAME_PHONE"
-      />
-      <InforBlock
-        name1="address"
-        value1={address}
-        title1="Address:"
-        name2="notes"
-        value2={notes}
-        title2="Notes:"
-        onChange={onChange}
-        className="home-body-toper-block-2"
-        type="ADDRESS_NOTES"
-      />
-     */}
       <FilterBlock onFilterFood={onFilterFood}></FilterBlock>
       <HomeTotal
         className="home-body-toper-block-3"

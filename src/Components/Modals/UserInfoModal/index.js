@@ -10,7 +10,7 @@ import "./_user-info-modal.scss";
 
 const UserInfoModal = (props) => {
   const { visible, className, toggleClick, loading, data } = props;
-  const { username, email, address, phone, notes } = data;
+  const { username, email, address, phone } = data;
   return (
     <Modal
       className="user-info-modal"
@@ -41,12 +41,6 @@ const UserInfoModal = (props) => {
             <span className="b">Phone number:</span>
             <span className="ml-4">{phone}</span>
           </div>
-          {/*
-          <div className="fr-sb">
-            <span className="b">Notes:</span>
-            <span className="ml-4">{notes}</span>
-          </div>
-          */}
         </div>
       </div>
     </Modal>

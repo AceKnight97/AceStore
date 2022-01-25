@@ -22,7 +22,6 @@ const DEFAULT_DATA = {
   username: "",
   phone: "",
   address: "",
-  notes: "",
 
   emailErr: "",
   passwordErr: "",
@@ -30,7 +29,6 @@ const DEFAULT_DATA = {
   usernameErr: "",
   phoneErr: "",
   addressErr: "",
-  notesErr: "",
   loading: false,
   isStep1: true,
 };
@@ -47,14 +45,12 @@ const RegisterModal = (props) => {
     username,
     phone,
     address,
-    notes,
     emailErr,
     passwordErr,
     confirmPasswordErr,
     usernameErr,
     phoneErr,
     addressErr,
-    notesErr,
     loading,
     isStep1,
   } = state;
@@ -80,7 +76,6 @@ const RegisterModal = (props) => {
         usernameErr: "",
         phoneErr: "",
         addressErr: "",
-        notesErr: "",
       });
       setState(obj);
     }
@@ -169,18 +164,6 @@ const RegisterModal = (props) => {
         className="mt-16"
         errMes={addressErr}
       />
-      {/*
-        <InputCT
-        title="Notes"
-        name="notes"
-        value={notes}
-        onChange={onChange}
-        placeholder="Enter your notes"
-        className="mt-16"
-        type="TEXTAREA"
-        errMes={notesErr}
-      />
-      */}
     </>
   );
 
