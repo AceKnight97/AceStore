@@ -1,19 +1,17 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import { Modal } from "antd";
 import classnames from "classnames";
 import _ from "lodash";
-import { Modal } from "antd";
-import ModalHeader from "../ModalHeader";
-import ModalFooter from "../ModalFooter";
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
 import { useMergeState } from "../../../Helpers/customHooks";
 import InputCT from "../../Inputs/InputCT";
+import ModalFooter from "../ModalFooter";
+import ModalHeader from "../ModalHeader";
 import {
   disabledRegister,
   handleRightBtnClick,
   mutationCreateUser,
-  setDefaultData,
 } from "./helper";
-import auth from "../../../Helpers/auth";
 
 const DEFAULT_DATA = {
   email: "",
@@ -154,6 +152,7 @@ const RegisterModal = (props) => {
         className="mt-16"
         type="NUMBER"
         errMes={phoneErr}
+        allowLeadingZeros
       />
       <InputCT
         title="Address"

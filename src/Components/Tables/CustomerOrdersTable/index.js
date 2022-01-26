@@ -11,8 +11,6 @@ import "./_customer-orders-table.scss";
 
 const CustomerOrdersTable = (props) => {
   const [state, setState] = useMergeState({
-    visibleUserInfo: false,
-    isShow: props.isShow,
     foodOrderData: {},
   });
 
@@ -20,9 +18,9 @@ const CustomerOrdersTable = (props) => {
     setState({ foodOrderData });
   };
 
-  const { className, data, date, fetchHistory, status, notes } = props; // index
-
-  const { visibleUserInfo, loading, isShow, foodOrderData } = state;
+  const { className, data } = props; // index
+  //date, fetchHistory, status, notes
+  const { foodOrderData } = state;
 
   const generateColumns = () => {
     const columns = [
@@ -38,7 +36,6 @@ const CustomerOrdersTable = (props) => {
       {
         title: "Total",
         dataIndex: "total",
-        // render: (cell) => getPrice(cell, undefined, ""),
       },
       {
         title: "Address",
@@ -58,7 +55,6 @@ const CustomerOrdersTable = (props) => {
   };
 
   const onRowClick = (rowIndex, record) => {
-    console.log({ rowIndex, record });
     setState({ foodOrderData: record });
   };
 

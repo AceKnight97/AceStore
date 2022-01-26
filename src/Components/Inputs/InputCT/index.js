@@ -90,7 +90,7 @@ const InputCT = (props) => {
           allowNegative={allowNegative}
           // allowedDecimalSeparators={allowedDecimalSeparators}
           // allowNegative={false}
-          // allowLeadingZeros={allowLeadingZeros}
+          allowLeadingZeros={allowLeadingZeros}
           // thousandSeparator={thousandSeparator}
           // inputMode="numeric"
           // prefix={prefix}

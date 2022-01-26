@@ -1,6 +1,5 @@
 import handleCreateAnyCustomerOrder from "../../Apollo/Functions/Handle/handleCreateAnyCustomerOrder";
 import handleCreateOrder from "../../Apollo/Functions/Handle/handleCreateOrder";
-import auth from "../../Helpers/auth";
 
 export const temp = "";
 
@@ -31,8 +30,9 @@ export const mutationCreateOrder = async (
     email,
     notes,
     status: "Pending",
+    price: x.price,
   }));
-  // console.log({ data, sendingData });
+  // console.log({ sendingData, foodData });
   return await handleCreateOrder(sendingData);
 };
 
@@ -48,9 +48,10 @@ export const createOrderForAnyCustomer = async (
     email,
     notes,
     status: "Pending",
+    price: x.price,
   }));
   const customer = { email, username, address, phone, password: phone };
   const sendingData = { food, customer };
-  console.log({ foodData, anyCustomerData, sendingData });
+  // console.log({ foodData, anyCustomerData, sendingData });
   return await handleCreateAnyCustomerOrder(sendingData);
 };

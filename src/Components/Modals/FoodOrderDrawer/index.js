@@ -81,10 +81,10 @@ const FoodOrderDrawer = (props) => {
             )} - Quantity: ${x.quantity}`}
           </div>
         ))}
-        <div className="food-order-drawer-total">
-          <span className="b mr-4">Notes: </span>
-          <span>{data.notes || ""}</span>
+        <div className="mt-16">
+          <span className="b">Notes: </span>
         </div>
+        <div className="food-order-drawer-notes">{notes || ""}</div>
       </div>
     </Drawer>
   );

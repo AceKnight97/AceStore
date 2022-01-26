@@ -22,5 +22,6 @@ export const PAGE_MANAGER = {
   LIGHT_NOVEL: "/light-novel",
 };
 export const CONFIG = {
-  APOLLO_HOST_URL: "https://localhost:44360",
+  // APOLLO_HOST_URL: "https://localhost:44360",
+  APOLLO_HOST_URL: "http://localhost:8080",
 };

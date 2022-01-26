@@ -147,6 +147,7 @@ const AnyCustomerModal = (props) => {
               className="mt-16"
               errMes={phoneErr}
               type="NUMBER"
+              allowLeadingZeros
             />
             <InputCT
               title="Notes"

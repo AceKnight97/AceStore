@@ -1,15 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
 import classnames from "classnames";
-import _ from "lodash";
-import "./_customer-orders.scss";
-import { useMergeState } from "../../Helpers/customHooks";
-import AdminOrderTable from "../../Components/Tables/AdminOrderTable";
-import DatepickerCT from "../../Components/Inputs/DatepickerCT";
 import moment from "moment";
-import { mutationGetFoodOrders } from "./helper";
-import { useEffect } from "react";
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import DatepickerCT from "../../Components/Inputs/DatepickerCT";
 import CustomerOrdersTable from "../../Components/Tables/CustomerOrdersTable";
+import { useMergeState } from "../../Helpers/customHooks";
+import { mutationGetFoodOrders } from "./helper";
+import "./_customer-orders.scss";
 
 const CustomerOrders = (props) => {
   const [state, setState] = useMergeState({
@@ -55,7 +52,7 @@ const CustomerOrders = (props) => {
         ></DatepickerCT>
 
         <div className="customer-orders-date">
-          {moment(currentDate).format("dddd, MMMM DD, YYYY")}
+          {moment(currentDate || undefined).format("dddd, MMMM DD, YYYY")}
         </div>
       </div>
 

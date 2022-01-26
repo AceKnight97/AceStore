@@ -24,14 +24,14 @@ export const mutationGetFoodOrders = async (filterObj = {}) => {
   // const grouped = _.groupBy(res, (x) => x.email);
   const orderHistory = [];
   const grouped = _.groupBy(res, (order) => order?.foodOrder?.createdAt);
-  console.log({ grouped });
+  // console.log({ grouped });
   Object.keys(grouped).forEach((x, i) => {
     const data = _.map(grouped[x], (y, index) => formatOrderHisData(y, index));
     orderHistory.push({
       index: i,
       date: x,
       data,
-      // notes: grouped[x]?.[0]?.foodOrder?.notes || "",
+      notes: grouped[x]?.[0]?.foodOrder?.notes || "",
       status: grouped[x]?.[0]?.foodOrder?.status || "",
       username: grouped[x]?.[0]?.user?.username || "",
       total: getOrderTotal(data),
@@ -41,6 +41,6 @@ export const mutationGetFoodOrders = async (filterObj = {}) => {
       foodOrderId: grouped[x]?.[0]?.foodOrder?.id || "",
     });
   });
-  console.log({ res, grouped, orderHistory });
+  // console.log({ res, grouped, orderHistory });
   return _.orderBy(orderHistory, [(x) => moment(x.date).valueOf()], ["desc"]);
 };
