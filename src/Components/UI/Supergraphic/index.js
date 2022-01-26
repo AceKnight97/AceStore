@@ -18,7 +18,7 @@ const Supergraphic = (props) => {
   useEffect(() => {}, []);
 
   const onClickHome = (e) => {
-    history.push("/acestore");
+    history.push("/retail-store");
   };
 
   const renderLocationTitle = () => {
@@ -39,7 +39,7 @@ const Supergraphic = (props) => {
     }
     return (
       <div className="bosch-header-title">
-        <NavLink to="/acestore" onClick={onClickHome}>
+        <NavLink to="/retail-store" onClick={onClickHome}>
           Home
         </NavLink>
         {title ? (
@@ -66,8 +66,8 @@ const Supergraphic = (props) => {
         </div>
         <div className="bosch-header-group">Canteen - Group 4</div>
       </div>
-      {pathname !== "/acestore" && (
-        <NavLink to="/acestore" className="not-home-back-btn">
+      {pathname !== "/retail-store" && (
+        <NavLink to="/retail-store" className="not-home-back-btn">
           Go back
         </NavLink>
       )}

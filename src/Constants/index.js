@@ -14,7 +14,7 @@ export default AppFlowActions;
 
 export const PAGE_MANAGER = {
   HOME_PAGE: "https://github.com/AceKnight97/staticpromotionalwebsite",
-  HOME: "/acestore",
+  HOME: "/retail-store",
   OUR_TEAM: "/our-team",
   MY_CV: "/staticpromotionalwebsite",
   BUSINESS: "/business",
@@ -22,5 +22,5 @@ export const PAGE_MANAGER = {
   LIGHT_NOVEL: "/light-novel",
 };
 export const CONFIG = {
-  APOLLO_HOST_URL: "http://localhost:8080",
+  APOLLO_HOST_URL: "https://localhost:44360",
 };
