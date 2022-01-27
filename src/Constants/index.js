@@ -24,4 +24,5 @@ export const PAGE_MANAGER = {
 export const CONFIG = {
   // APOLLO_HOST_URL: "https://localhost:44360",
   APOLLO_HOST_URL: "http://localhost:8080",
+  // APOLLO_HOST_URL: "https://graphql-save.herokuapp.com",
 };
