@@ -23,4 +23,5 @@ export const PAGE_MANAGER = {
 };
 export const CONFIG = {
   APOLLO_HOST_URL: "http://localhost:8080",
+  HEADERS: { withCredentials: true }
 };

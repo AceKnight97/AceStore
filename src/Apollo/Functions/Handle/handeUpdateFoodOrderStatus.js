@@ -7,6 +7,7 @@ const handeUpdateFoodOrderStatus = async (variables = {}) => {
       method: "PUT",
       url: `${CONFIG.APOLLO_HOST_URL}/api/foodorder/changeorderstatus`,
       data: variables,
+      headers: CONFIG.HEADERS
     });
     return res.data;
   } catch (error) {

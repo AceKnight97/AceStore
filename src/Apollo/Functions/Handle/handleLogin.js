@@ -5,7 +5,8 @@ const handleLogin = async (variables) => {
   try {
     const res = await axios.post(
       `${CONFIG.APOLLO_HOST_URL}/api/public/login`,
-      variables
+      variables, 
+      CONFIG.HEADERS
     );
     return res.data;
   } catch (error) {

@@ -9,6 +9,7 @@ const handleAddFood = async (variables = {}, isAdd = false) => {
         isAdd ? "addfood" : "updatefood"
       }`,
       data: variables,
+      headers: CONFIG.HEADERS
     });
     return res.data;
   } catch (error) {

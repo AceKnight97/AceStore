@@ -8,6 +8,7 @@ const fetchHistory = async () => {
     const res = await axios({
       method: "get",
       url: `${CONFIG.APOLLO_HOST_URL}/api/foodorder/history/${email}`,
+      headers: CONFIG.HEADERS
     });
     // const res = await axios({
     //   method: "GET",

@@ -112,13 +112,13 @@ const HomeHeader = (props) => {
               >
                 Login
               </Button>
-              <Button
+              {/* <Button
                 type="link"
                 onClick={onClickRegister}
                 className="home-header-register-btn"
               >
                 Register
-              </Button>
+              </Button> */}
             </>
           )}
         </div>

@@ -5,7 +5,8 @@ const handleCreateAnyCustomerOrder = async (variables) => {
   try {
     const res = await axios.post(
       `${CONFIG.APOLLO_HOST_URL}/api/foodorder/createanycustomerorder`,
-      variables
+      variables,
+      CONFIG.HEADERS
     );
     return res.data;
   } catch (error) {

@@ -3,7 +3,7 @@ import { CONFIG } from "../../../Constants";
 
 const fetchMenu = async () => {
   try {
-    const res = await axios.get(`${CONFIG.APOLLO_HOST_URL}/api/canteen/menu`);
+    const res = await axios.get(`${CONFIG.APOLLO_HOST_URL}/api/canteen/menu`,CONFIG.HEADERS);
     return res.data;
   } catch (error) {
     throw error;

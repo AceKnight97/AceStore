@@ -3,7 +3,7 @@ import { CONFIG } from "../../../Constants";
 
 const fetchMasterData = async () => {
   try {
-    const res = await axios.get(`${CONFIG.APOLLO_HOST_URL}/masterdata`);
+    const res = await axios.get(`${CONFIG.APOLLO_HOST_URL}/masterdata`, CONFIG.HEADERS);
     return res.data;
   } catch (error) {
     throw error;

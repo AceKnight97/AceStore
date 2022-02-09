@@ -7,6 +7,7 @@ const handleGetFoodOrders = async (variables = {}) => {
       method: "POST",
       url: `${CONFIG.APOLLO_HOST_URL}/api/foodorder/adminhistory`,
       data: variables,
+      headers: CONFIG.HEADERS
     });
     return res.data;
   } catch (error) {
