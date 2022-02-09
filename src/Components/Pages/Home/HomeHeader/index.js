@@ -10,6 +10,7 @@ import { useMergeState } from "../../../../Helpers/customHooks";
 import { loginRequest, logoutRequest } from "../../../../Redux/Actions/login";
 import LoginModal from "../../../Modals/LoginModal";
 import RegisterModal from "../../../Modals/RegisterModal";
+import { mutationSignIn } from "./helper";
 
 const HomeHeader = (props) => {
   const history = useHistory();
@@ -20,8 +21,17 @@ const HomeHeader = (props) => {
   });
   const { className } = props;
   const { visibleLogin, visibleRegister } = state;
-  const onClickLogin = () => {
-    setState({ visibleLogin: !visibleLogin });
+  const onClickLogin = async () => {
+    // setState({ visibleLogin: !visibleLogin });
+    const resLogin = await mutationSignIn(state);
+    // console.log({ resLogin });
+    if (resLogin.isSuccess) {
+      auth.setDatalogin(resLogin?.data?.user);
+      props.loginRequest(resLogin?.data);
+      // onClickCancel();
+    } else {
+      alert("Login failed " + resLogin.message);
+    }
   };
   const onClickRegister = () => {
     setState({ visibleRegister: !visibleRegister });
