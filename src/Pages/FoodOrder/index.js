@@ -128,7 +128,7 @@ const FoodOrder = (props) => {
         {email && (
           <InputCT
             titleClassName="b"
-            title="Notes"
+            title="Destination:"
             name="notes"
             value={notes}
             onChange={onChange}
