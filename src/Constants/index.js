@@ -1,4 +1,4 @@
-const AppFlowActions = {
+const APP_FLOW_ACTIONS = {
   LOGIN_REQUEST: "LOGIN_REQUEST",
   LOGIN_COMPLETE: "LOGIN_COMPLETE",
 
@@ -10,7 +10,7 @@ const AppFlowActions = {
   LOGOUT_REQUEST: "LOGOUT_REQUEST",
   LOGOUT_COMPLETE: "LOGOUT_COMPLETE",
 };
-export default AppFlowActions;
+export default APP_FLOW_ACTIONS;
 
 export const PAGE_MANAGER = {
   HOME_PAGE: "https://github.com/AceKnight97/staticpromotionalwebsite",

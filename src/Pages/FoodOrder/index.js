@@ -1,23 +1,24 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import { Button } from "antd";
 import classnames from "classnames";
 import _ from "lodash";
-import { Button } from "antd";
-import { useMergeState } from "../../Helpers/customHooks";
-import auth from "../../Helpers/auth";
-import "./_food-order.scss";
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
+import InputCT from "../../Components/Inputs/InputCT";
+import AnyCustomerModal from "../../Components/Modals/AnyCustomerModal";
+import { calcCartTotal } from "../../Components/Pages/Home/HomeBody/helper";
 import HomeHeader from "../../Components/Pages/Home/HomeHeader";
-import { useHistory, useLocation, useParams } from "react-router-dom";
 import AntdTable from "../../Components/Tables/AntdTable";
+import { getPrice } from "../../Helpers";
+import auth from "../../Helpers/auth";
+import { useMergeState } from "../../Helpers/customHooks";
 import {
   createOrderForAnyCustomer,
   getFoodData,
   mutationCreateOrder,
 } from "./helper";
-import { calcCartTotal } from "../../Components/Pages/Home/HomeBody/helper";
-import { getPrice } from "../../Helpers";
-import AnyCustomerModal from "../../Components/Modals/AnyCustomerModal";
-import InputCT from "../../Components/Inputs/InputCT";
+import "./_food-order.scss";
 
 const FoodOrder = (props) => {
   const location = useLocation();
@@ -28,10 +29,20 @@ const FoodOrder = (props) => {
     notes: "",
   });
   const { className } = props;
+
   const { foodData, anyCustomerVisible, notes } = state;
-  useEffect(() => {}, []);
+
+  useEffect(() => {
+    if (!auth.isSuccess()) {
+      console.log({ login: props.login, auth: auth.isSuccess() });
+      history.push("/retail-store");
+      setState({});
+    }
+  }, [props.login]);
+
   const { total } = calcCartTotal(location.state);
   const { address, phone, email } = auth.getDataLogin();
+
   const onChange = (key, value) => {
     setState({ [key]: value });
   };
@@ -166,4 +177,10 @@ FoodOrder.propTypes = {
   className: PropTypes.string,
 };
 
-export default FoodOrder;
+const mapStateToProps = (state) => ({
+  login: state.login,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FoodOrder);

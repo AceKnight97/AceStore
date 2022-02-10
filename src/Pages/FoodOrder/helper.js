@@ -33,7 +33,13 @@ export const mutationCreateOrder = async (
     price: x.price,
   }));
   console.log({ sendingData, foodData });
-  return await handleCreateOrder({ input: sendingData });
+  try {
+    const res = await handleCreateOrder({ input: sendingData });
+    return res;
+  } catch (error) {
+    console.log("Failed to create order: ", { error });
+    return { isSuccess: false, message: error };
+  }
 };
 
 export const createOrderForAnyCustomer = async (

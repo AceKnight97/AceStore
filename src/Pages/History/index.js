@@ -44,6 +44,7 @@ History.defaultProps = {
 };
 History.propTypes = {
   className: PropTypes.string,
+  login: PropTypes.shape().isRequired,
 };
 
 const mapStateToProps = (state) => ({

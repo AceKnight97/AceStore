@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { connect } from "react-redux";
 import {
   BrowserRouter as Router,
@@ -15,6 +15,10 @@ import FoodOrder from "./FoodOrder";
 import Home from "./Home";
 import History from "./History";
 import User from "./User";
+import APP_FLOW_ACTIONS from "../Constants";
+import { useEmitter, useMergeState } from "../Helpers/customHooks";
+import { loginRequest, logoutRequest } from "../Redux/Actions/login";
+import auth from "../Helpers/auth";
 
 const Main = (props) => {
   // const location = useLocation();
@@ -28,6 +32,14 @@ const Main = (props) => {
     //   props.reloadPageRequest();
     // };
   }, []);
+
+  const loginRequestListener = useCallback(() => {
+    auth.logout();
+    props.logoutRequest();
+  }, []);
+
+  useEmitter(APP_FLOW_ACTIONS.LOGOUT_REQUEST, loginRequestListener, []);
+
   return (
     <main className="div-root">
       <Router>
@@ -57,10 +69,12 @@ Main.propTypes = {
 
 const mapStateToProps = (state) => ({
   isLoading: state.isLoading,
+  logoutRequest: PropTypes.func.isRequired,
 });
 
 const mapDispatchToProps = {
   reloadPageRequest,
+  logoutRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

@@ -11,8 +11,8 @@ import { CONFIG } from "../Constants";
 import auth from "../Helpers/auth";
 
 // import CONFIG from '../Config';
-// import EMITTER_CONSTANTS from '../Constants/';
-// import emitter from '../Utils/eventEmitter';
+import APP_FLOW_ACTIONS from "../Constants";
+import emitter from "../Utils/eventEmitter";
 
 const cache = new InMemoryCache({ addTypename: false });
 
@@ -50,11 +50,16 @@ const createClient = async (
           onError(
             ({ graphQLErrors, networkError, response, operation, forward }) => {
               if (graphQLErrors) {
-                // _.map(graphQLErrors, ({ message, extensions }) => {
-                //   if (_.includes(message, '403') || _.includes(message, '400') || extensions.code === 'UNAUTHENTICATED') {
-                //     emitter.emit(EMITTER_CONSTANTS.LOGOUT);
-                //   }
-                // });
+                _.map(graphQLErrors, ({ message, extensions }) => {
+                  console.log({ errMes: message });
+                  if (
+                    _.includes(message, "403") ||
+                    _.includes(message, "400") ||
+                    extensions.code === "UNAUTHENTICATED"
+                  ) {
+                    emitter.emit(APP_FLOW_ACTIONS.LOGOUT_REQUEST);
+                  }
+                });
               } else if (networkError) {
                 console.error(`[Network error]: ${networkError}`);
                 // if (!isNotShowDisconnect) {

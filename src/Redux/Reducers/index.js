@@ -10,6 +10,7 @@ const appReducer = combineReducers({
 
 function rootReducer(state, action) {
   if (action.type === AppFlowActions.LOGOUT_REQUEST) {
+    console.log("heare");
     auth.logout();
     return initialState;
   }
