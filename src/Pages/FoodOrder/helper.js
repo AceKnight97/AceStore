@@ -25,15 +25,15 @@ export const mutationCreateOrder = async (
   notes = ""
 ) => {
   const sendingData = foodData.map((x) => ({
-    food_id: x.id,
+    food: x.id,
     quantity: parseFloat(x.quantity.slice(0, 3)),
     email,
     notes,
     status: "Pending",
     price: x.price,
   }));
-  // console.log({ sendingData, foodData });
-  return await handleCreateOrder(sendingData);
+  console.log({ sendingData, foodData });
+  return await handleCreateOrder({ input: sendingData });
 };
 
 export const createOrderForAnyCustomer = async (
@@ -43,7 +43,7 @@ export const createOrderForAnyCustomer = async (
   const { email, username, address, phone, notes } = anyCustomerData;
   const food = foodData.map((x) => ({
     // FoodOrder
-    food_id: x.id,
+    food: x.id,
     quantity: parseFloat(x.quantity.slice(0, 3)),
     email,
     notes,

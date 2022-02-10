@@ -1,5 +1,5 @@
 import moment from "moment";
-import handleGetFoodOrders from "../../Apollo/Functions/Handle/handleGetFoodOrders";
+import fetchOrderHistory from "../../Apollo/Functions/Fetch/fetchOrderHistory";
 import { getOrderTotal } from "../../Helpers";
 
 export const e = "";
@@ -8,18 +8,18 @@ const formatOrderHisData = (y, index) => ({
   // index: index + 1,
   name: y?.food?.name || "",
   price: y?.food?.price || "",
-  food_id: y?.food?.id || "",
+  food: y?.food?.id || "",
   quantity: y?.foodOrder?.quantity || "",
 });
 
 export const mutationGetFoodOrders = async (filterObj = {}) => {
   const { currentDate, email } = filterObj;
   const sendingData = {
-    createdAt: moment(currentDate).toISOString(),
+    date: moment(currentDate).format("DD/MM/YYYY"),
     email,
   };
   // console.log({ sendingData });
-  const res = await handleGetFoodOrders(sendingData);
+  const res = await fetchOrderHistory(sendingData);
   // console.log({ res });
   // const grouped = _.groupBy(res, (x) => x.email);
   const orderHistory = [];

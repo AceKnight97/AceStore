@@ -2,9 +2,9 @@ import handeUpdateFoodOrderStatus from "../../../Apollo/Functions/Handle/handeUp
 
 export const a = "";
 
-export const mutationChangeStatus = async (food_id = "", status = "") => {
+export const mutationChangeStatus = async (food = "", status = "") => {
   const sendingData = {
-    food_id,
+    food,
     status,
   };
   try {

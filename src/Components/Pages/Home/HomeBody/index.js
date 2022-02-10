@@ -25,7 +25,7 @@ const HomeBody = (props) => {
     loading: true,
     rawFoodData: auth.getFoodData().length !== 0 ? auth.getFoodData() : [], //_.cloneDeep([MOCKING_FOOD_TABLE])
   });
-  const fetchMasterData = async () => {
+  const fetchMenuData = async () => {
     try {
       const foodData = await getFoodMasterData();
       auth.setMasterData(foodData);
@@ -36,7 +36,7 @@ const HomeBody = (props) => {
   };
 
   useEffect(() => {
-    fetchMasterData();
+    fetchMenuData();
   }, []);
   const { className } = props;
   const {

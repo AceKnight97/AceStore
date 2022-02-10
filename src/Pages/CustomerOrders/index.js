@@ -24,8 +24,9 @@ const CustomerOrders = (props) => {
     try {
       const res = await mutationGetFoodOrders({
         currentDate,
-        email: props.email,
+        isAll: props.isAll,
       });
+      console.log({ res });
       setState({ data: res, loading: false });
     } catch (error) {
       setState({ loading: false });
@@ -58,18 +59,18 @@ const CustomerOrders = (props) => {
 
       <CustomerOrdersTable
         data={data}
-        isEditable={!props.email}
+        isEditable={props.isAll}
       ></CustomerOrdersTable>
     </div>
   );
 };
 CustomerOrders.defaultProps = {
   className: "",
-  email: undefined,
+  isAll: false,
 };
 CustomerOrders.propTypes = {
   className: PropTypes.string,
-  email: PropTypes.string,
+  isAll: PropTypes.bool,
 };
 
 export default CustomerOrders;

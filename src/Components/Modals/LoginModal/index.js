@@ -17,8 +17,8 @@ const DEFAULT_DATA = {
 
 const LoginModal = (props) => {
   const [state, setState] = useMergeState({
-    email: "",
-    password: "",
+    email: "tttriet19971@gmail.com",
+    password: "0819541897",
     emailErr: "",
     passwordErr: "",
     loading: false,
@@ -39,7 +39,7 @@ const LoginModal = (props) => {
     if (res.isSuccess) {
       setState({ loading: true });
       const resLogin = await mutationSignIn(state);
-      // console.log({ resLogin });
+      console.log({ resLogin });
       if (resLogin.isSuccess) {
         auth.setDatalogin(resLogin.data.user);
         props.loginRequest(resLogin.data);

@@ -33,7 +33,7 @@ const History = (props) => {
     <div className={classnames("history", className)}>
       <HomeHeader></HomeHeader>
       <div className="history-body">
-        <CustomerOrders email={auth.getDataLogin()?.email}></CustomerOrders>
+        <CustomerOrders isAll></CustomerOrders>
       </div>
       {loading && <Loading></Loading>}
     </div>

@@ -82,7 +82,7 @@ const FoodOrderDrawer = (props) => {
           </div>
         ))}
         <div className="mt-16">
-          <span className="b">Notes: </span>
+          <span className="b">Destination: </span>
         </div>
         <div className="food-order-drawer-notes">{notes || ""}</div>
       </div>

@@ -8,13 +8,13 @@ const formatOrderHisData = (y, index) => ({
   index: index + 1,
   name: y?.food?.name || "",
   price: y?.food?.price || "",
-  food_id: y?.food?.id || "",
+  food: y?.food?.id || "",
   quantity: y?.foodOrder?.quantity || "",
   email: y?.user?.email,
 });
 
 // food: {id: 2, title: "Seafood", name: "Crab", rating: 5, price: 200000, quantityType: "PACKAGE",…}
-// foodOrder: {id: 16, quantity: 1, food_id: 2, createdAt: "2022-01-18T19:40:47", email: "tttriet19977@gmail.com"}
+// foodOrder: {id: 16, quantity: 1, food: 2, createdAt: "2022-01-18T19:40:47", email: "tttriet19977@gmail.com"}
 // user: {id: 2, email: "tttriet19977@gmail.com", phone: "0819541897",…}
 
 export const queryHistory = async () => {
