@@ -13,6 +13,7 @@ const MENU = gql`
       price
       quantityType
       createdAt
+      image
     }
   }
 `;

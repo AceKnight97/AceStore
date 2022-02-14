@@ -47,17 +47,21 @@ export const createOrderForAnyCustomer = async (
   anyCustomerData = {}
 ) => {
   const { email, username, address, phone, notes } = anyCustomerData;
-  const food = foodData.map((x) => ({
-    // FoodOrder
+  const orders = foodData.map((x) => ({
     food: x.id,
     quantity: parseFloat(x.quantity.slice(0, 3)),
     email,
     notes,
     status: "Pending",
     price: x.price,
+    destination: "",
   }));
   const customer = { email, username, address, phone, password: phone };
-  const sendingData = { food, customer };
+  const sendingData = { orders, customer };
   // console.log({ foodData, anyCustomerData, sendingData });
-  return await handleCreateAnyCustomerOrder(sendingData);
+  try {
+    return await handleCreateAnyCustomerOrder({ input: sendingData });
+  } catch (error) {
+    return { isSuccess: false, message: error };
+  }
 };

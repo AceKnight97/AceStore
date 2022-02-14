@@ -17,7 +17,7 @@ const DEFAULT_DATA = {
 
 const LoginModal = (props) => {
   const [state, setState] = useMergeState({
-    email: "tttriet19971@gmail.com",
+    email: "tttriet1997@gmail.com",
     password: "0819541897",
     emailErr: "",
     passwordErr: "",

@@ -1,5 +1,6 @@
 import { data } from "jquery";
 import handleRegister from "../../../Apollo/Functions/Handle/handleRegister";
+import { checkServerErr } from "../../../Helpers";
 import { isValidEmail } from "../../../Utils";
 
 export const handleRightBtnClick = (state = {}) => {
@@ -60,14 +61,21 @@ export const disabledRegister = (state = {}) => {
 export const mutationCreateUser = async (data) => {
   console.log({ data });
   const { email, username, password, phone, address } = data;
-  const res = await handleRegister({
-    email,
-    username,
-    password,
-    phone,
-    address,
-  });
-  return res;
+  try {
+    return await handleRegister({
+      email,
+      username,
+      password,
+      phone,
+      address,
+    });
+  } catch (error) {
+    console.log("Failed to create user: ", error);
+    return {
+      isSuccess: false,
+      message: checkServerErr(error),
+    };
+  }
 };
 
 export const setDefaultData = () => {

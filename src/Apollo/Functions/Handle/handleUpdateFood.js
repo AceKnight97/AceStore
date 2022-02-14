@@ -3,16 +3,16 @@
 import gql from "graphql-tag";
 import createClient from "../../apolloClient";
 
-const ADD_FOOD = gql`
-  mutation addFood($input: [AddFoodInput]!) {
-    addFood(input: $input) {
+const UPDATE_FOOD = gql`
+  mutation updateFood($input: [UpdateFoodInput]!) {
+    updateFood(input: $input) {
       isSuccess
       message
     }
   }
 `;
 
-const handleAddFood = async (variables = {}) => {
+const handleUpdateFood = async (variables = {}) => {
   try {
     // const res = await axios({
     //   method: isAdd ? "POST" : "PUT",
@@ -24,14 +24,14 @@ const handleAddFood = async (variables = {}) => {
     // return res.data;
     const client = await createClient();
     const result = await client.mutate({
-      mutation: ADD_FOOD,
+      mutation: UPDATE_FOOD,
       variables,
     });
-    const { addFood } = result?.data;
-    return addFood;
+    const { updateFood } = result?.data;
+    return updateFood;
   } catch (error) {
     throw error;
   }
 };
 
-export default handleAddFood;
+export default handleUpdateFood;

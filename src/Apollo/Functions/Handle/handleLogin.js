@@ -1,5 +1,5 @@
-import axios from "axios";
-import { CONFIG } from "../../../Constants";
+// import axios from "axios";
+// import { CONFIG } from "../../../Constants";
 import gql from "graphql-tag";
 import { client } from "../../apolloClient";
 

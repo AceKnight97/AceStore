@@ -14,12 +14,12 @@ import {
 } from "./helper";
 
 const DEFAULT_DATA = {
-  email: "",
-  password: "",
-  confirmPassword: "",
-  username: "",
-  phone: "",
-  address: "",
+  email: "tttriet19971@gmai.com",
+  password: "123456",
+  confirmPassword: "123456",
+  username: "Ace 1",
+  phone: "0819541897",
+  address: "329 LVL",
 
   emailErr: "",
   passwordErr: "",

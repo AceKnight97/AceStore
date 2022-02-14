@@ -3,7 +3,11 @@ import { isValidEmail } from "../../../Utils";
 
 export const mutationSignIn = async (data = {}) => {
   const { email, password } = data;
-  return await handleLogin({ email, password });
+  try {
+    return await handleLogin({ email, password });
+  } catch (error) {
+    return { isSuccess: false, message: "Incorrect password" };
+  }
 };
 
 export const checkValidLogin = (state = {}) => {

@@ -36,3 +36,13 @@ export const getOrderTotal = (data = []) => {
   });
   return getPrice(total, undefined, "");
 };
+
+export const checkServerErr = (error = {}) => {
+  if (
+    error?.graphQLErrors?.[0]?.message?.includes("E11000 duplicate key error")
+  ) {
+    return "Email already existed!";
+  }
+
+  return "";
+};

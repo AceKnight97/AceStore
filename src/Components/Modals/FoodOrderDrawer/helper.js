@@ -4,13 +4,13 @@ export const a = "";
 
 export const mutationChangeStatus = async (food = "", status = "") => {
   const sendingData = {
-    food,
     status,
+    orderId: food,
   };
   try {
     const res = await handeUpdateFoodOrderStatus(sendingData);
     return res;
   } catch (error) {
-    throw error;
+    throw { isSuccess: false, message: error };
   }
 };
