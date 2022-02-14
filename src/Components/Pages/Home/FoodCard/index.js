@@ -57,6 +57,7 @@ const FoodCard = (props) => {
   if (!props.title || props.title === "null") {
     console.log({ rating });
   }
+
   return (
     <div>
       <div

@@ -6,29 +6,24 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import auth from "../../../../Helpers/auth";
 import { useMergeState } from "../../../../Helpers/customHooks";
+import Loading from "../../../UI/Loading";
 import FilterBlock from "../FilterBlock";
 import FoodTable from "../FoodTable";
 import HomeTotal from "../HomeTotal";
 import { calcCartTotal, getFoodMasterData, handleFilterFood } from "./helper";
-import Loading from "../../../UI/Loading";
 
 const HomeBody = (props) => {
   const history = useHistory();
   const [state, setState] = useMergeState({
-    name: "",
-    phone: "",
-    address: "",
-    notes: "",
-    // cartTags: [],
     foodData: auth.getFoodData().length !== 0 ? auth.getFoodData() : [], //_.cloneDeep([MOCKING_FOOD_TABLE])
     arrImages: [],
     loading: true,
     rawFoodData: auth.getFoodData().length !== 0 ? auth.getFoodData() : [], //_.cloneDeep([MOCKING_FOOD_TABLE])
   });
+
   const fetchMenuData = async () => {
     try {
-      const foodData = await getFoodMasterData();
-      auth.setMasterData(foodData);
+      const foodData = (await getFoodMasterData()) || [];
       setState({ foodData, rawFoodData: foodData, loading: false });
     } catch (error) {
       setState({ loading: false });
@@ -36,23 +31,16 @@ const HomeBody = (props) => {
   };
 
   useEffect(() => {
+    if (auth.getFoodData().length !== 0) {
+      return;
+    }
     fetchMenuData();
   }, []);
+
   const { className } = props;
-  const {
-    name,
-    phone,
-    address,
-    notes, // total, // cartTags,
-    foodData,
-    loading,
-  } = state;
+  const { foodData, loading } = state;
 
   const { cartTags, total } = calcCartTotal(foodData);
-
-  const onChange = (key, value) => {
-    setState({ [key]: value });
-  };
 
   const onClickReset = () => {
     const newFoodData = _.cloneDeep(foodData);
@@ -77,6 +65,7 @@ const HomeBody = (props) => {
     const { data } = _.find(foodData, (x) => x.title === title);
     const cardTemp = _.find(data, (x) => x.name === item.name);
     _.assign(cardTemp, { ...item });
+    auth.setFoodData(foodData);
     setState({ foodData });
   };
 

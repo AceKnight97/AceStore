@@ -1,7 +1,7 @@
 // import axios from "axios";
 // import { CONFIG } from "../../../Constants";
 import gql from "graphql-tag";
-import createClient from "../../apolloClient";
+import { client } from "../../apolloClient";
 
 const ADD_FOOD = gql`
   mutation createAnyCustomerOrder($input: AnyCustomerOrderInput!) {
@@ -19,7 +19,6 @@ const handleCreateAnyCustomerOrder = async (variables) => {
     //   variables
     // );
     // return res.data;
-    const client = await createClient();
     const result = await client.mutate({
       mutation: ADD_FOOD,
       variables,

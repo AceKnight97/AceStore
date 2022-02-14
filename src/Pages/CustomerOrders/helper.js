@@ -20,7 +20,6 @@ export const mutationGetFoodOrders = async (filterObj = {}) => {
   };
   // console.log({ sendingData });
   const res = await fetchOrderHistory(sendingData);
-  // console.log({ res });
   // const grouped = _.groupBy(res, (x) => x.email);
   const orderHistory = [];
   const grouped = _.groupBy(res, (order) => order?.foodOrder?.createdAt);

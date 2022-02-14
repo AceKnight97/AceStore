@@ -31,6 +31,8 @@ export const getFoodMasterData = async () => {
       });
     });
     auth.setKindOfFood(titles);
+    auth.setMasterData(foodData);
+    auth.setFoodData(undefined);
     return foodData;
   } catch (error) {
     throw error;
@@ -43,14 +45,11 @@ export const calcCartTotal = (foodData = []) => {
   _.forEach(foodData, (x) => {
     total += _.sumBy(x.data, (z) => {
       if (z.isBuy) {
-        // console.log({ z })
         if (z.quantityType === QUANTITY_TYPES.WEIGHT) {
-          // console.log({ a: quantity, z, z1: z.quantity })
           const quantity = z.quantity.slice(0, 3);
           cartTags.push(`${z.name} (${z.price} * ${quantity})`);
           return parseFloat(quantity) * z.price;
         }
-        // console.log({ b: quantity })
         const quantity = z.quantity.slice(0, 1);
         cartTags.push(`${z.name} (${z.price} * ${quantity})`);
         return parseInt(quantity, 10) * z.price;

@@ -32,13 +32,13 @@ const FoodOrder = (props) => {
 
   const { foodData, anyCustomerVisible, notes } = state;
 
-  useEffect(() => {
-    if (!auth.isSuccess()) {
-      console.log({ login: props.login, auth: auth.isSuccess() });
-      history.push("/retail-store");
-      setState({});
-    }
-  }, [props.login]);
+  // useEffect(() => {
+  //   if (!auth.isSuccess()) {
+  //     console.log({ login: props.login, auth: auth.isSuccess() });
+  //     history.push("/retail-store");
+  //     setState({});
+  //   }
+  // }, [props.login]);
 
   const { total } = calcCartTotal(location.state);
   const { address, phone, email } = auth.getDataLogin();

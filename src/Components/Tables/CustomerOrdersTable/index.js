@@ -27,7 +27,7 @@ const CustomerOrdersTable = (props) => {
       {
         title: "Date",
         dataIndex: "date",
-        render: (cell) => moment(cell).format("HH:mm, DD/MM/YY"),
+        render: (cell) => moment(cell).format("HH:mm"),
       },
       {
         title: "Username",

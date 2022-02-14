@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import HomeHeader from "../../Components/Pages/Home/HomeHeader";
 import auth from "../../Helpers/auth";
 import { useMergeState } from "../../Helpers/customHooks";
-import AddNewFood from "../AddNewFood";
+import HandleChangeFood from "../HandleChangeFood";
 import CustomerOrders from "../CustomerOrders";
 import "./_user.scss";
 
@@ -16,10 +16,11 @@ const { TabPane } = Tabs;
 const TABS = {
   ADD_FOOD: "ADD_FOOD",
   EDIT_FOOD: "EDIT_FOOD",
+  DELETE_FOOD: "DELETE_FOOD",
   FOOD_ORDER: "FOOD_ORDER",
   USER_PROFILE: "USER_PROFILE",
 };
-const { ADD_FOOD, EDIT_FOOD, FOOD_ORDER, USER_PROFILE } = TABS;
+const { ADD_FOOD, EDIT_FOOD, DELETE_FOOD, FOOD_ORDER, USER_PROFILE } = TABS;
 
 const User = (props) => {
   const history = useHistory();
@@ -96,13 +97,19 @@ const User = (props) => {
                 tab={<div className="user-body-title">Add food</div>}
                 key={ADD_FOOD}
               >
-                <AddNewFood isAdd></AddNewFood>
+                <HandleChangeFood></HandleChangeFood>
               </TabPane>
               <TabPane
                 tab={<div className="user-body-title">Edit food</div>}
                 key={EDIT_FOOD}
               >
-                <AddNewFood></AddNewFood>
+                <HandleChangeFood type="EDIT"></HandleChangeFood>
+              </TabPane>
+              <TabPane
+                tab={<div className="user-body-title">Delete food</div>}
+                key={DELETE_FOOD}
+              >
+                <HandleChangeFood type="DELETE"></HandleChangeFood>
               </TabPane>
               <TabPane
                 tab={<div className="user-body-title">Food orders</div>}

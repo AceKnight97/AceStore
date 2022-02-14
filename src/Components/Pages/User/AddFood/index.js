@@ -23,13 +23,14 @@ const DEFAULT_DATA = {
   name: "",
   nameErr: "",
   price: "",
+  id: "",
   priceErr: "",
   title: "",
   titleErr: "",
   rating: 1,
   quantityType: undefined,
   quanityTypeErr: "",
-  id: undefined,
+  displayingName: undefined,
 };
 
 const AddFood = (props) => {
@@ -38,7 +39,7 @@ const AddFood = (props) => {
     ...DEFAULT_DATA,
   });
 
-  const { className, index, onChangeFood, onDeleteFood, isAdd } = props;
+  const { className, index, onChangeFood, onDeleteFood, type } = props;
 
   const onChangeStar = (rating = 1) => {
     if (rating !== state.rating) {
@@ -63,19 +64,25 @@ const AddFood = (props) => {
     rating,
     quantityType,
     quanityTypeErr,
+    displayingName,
     id,
   } = state;
 
-  const inputId = `${isAdd ? "add" : "edit"}-img-id-${index}`;
+  const inputId = `${type}-img-id-${index}`;
+  const isAdd = type === "ADD";
 
   useEffect(() => {
     if (!isAdd) {
       menuRef.current = auth.getMenu();
     }
   }, []);
+
   useEffect(() => {
-    const item = _.find(menuRef.current, (x) => x.id === id);
-    console.log({ item });
+    const item = _.find(
+      menuRef.current,
+      (x) => x.title + "." + x.name === displayingName
+    );
+    // console.log({ item });
     if (!_.isEmpty(item)) {
       setState({
         ...item,
@@ -85,7 +92,7 @@ const AddFood = (props) => {
           ],
       });
     }
-  }, [id]);
+  }, [displayingName]);
 
   useEffect(() => {
     onChangeFood(index, {
@@ -95,12 +102,12 @@ const AddFood = (props) => {
       title,
       rating,
       quantityType,
+      displayingName,
       id,
     });
-  }, [image, name, price, title, rating, quantityType, id]);
+  }, [image, name, price, title, rating, quantityType, displayingName]);
 
   const onChange = (key, value) => {
-    // console.log({ key, value });
     setState({
       [key]: value,
       nameErr: "",
@@ -113,12 +120,6 @@ const AddFood = (props) => {
   const onClickDelete = () => {
     onDeleteFood(index);
   };
-
-  // const onChangeImgCrop = async ({ fileList = [] }) => {
-  //   console.log({ fileList });
-  //   if (fileList && fileList[0]?.originFileObj) {
-  //   }
-  // };
 
   const onChangeImg = async (event = {}) => {
     const file = event?.target?.files[0];
@@ -135,7 +136,7 @@ const AddFood = (props) => {
 
   const onClickImg = () => {
     const e = document.getElementById(inputId);
-    console.log({ e });
+    // console.log({ e });
     if (e) {
       e.click();
     }
@@ -145,12 +146,12 @@ const AddFood = (props) => {
     <div className={classnames("add-food", className)}>
       {!isAdd && (
         <SelectCT
-          title="Food id"
-          name="id"
-          value={id}
+          title="Food"
+          name="displayingName"
+          value={displayingName}
           onChange={onChange}
-          placeholder="Select food id"
-          data={_.map(auth.getMenu(), (x) => x.id)}
+          placeholder="Select food name"
+          data={_.map(auth.getMenu(), (x) => x.title + "." + x.name)}
           className="mb-16"
         />
       )}
@@ -178,37 +179,6 @@ const AddFood = (props) => {
             className="dis-none"
             accept="image/png, .jpeg, .jpg, .webp"
           ></input>
-
-          {/*   <ImgCrop shape="round">
-            <Upload
-              onChange={onChangeImgCrop}
-              itemRender={() => null}
-              accept="image/png, .jpeg, .jpg"
-              // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              action="/api/upload_file"
-              showUploadList={{ showPreviewIcon: false }}
-              listType="picture"
-            >
-              {image ? (
-                <img
-                  src={image}
-                  alt="Food card img"
-                  className="food-card-img"
-                  // onClick={onClickImg}
-                />
-              ) : (
-                <div
-                  className="food-card-img"
-                  // onClick={onClickImg}
-                >
-                  <FileImageTwoTone />
-                  <div className="food-card-img-text">
-                    <span>Upload image</span>
-                  </div>
-                </div>
-              )}
-            </Upload>
-          </ImgCrop> */}
           <InputCT
             className="mt-16"
             title="Food name"
@@ -278,7 +248,7 @@ AddFood.defaultProps = {
   data: {},
   onChangeFood: () => {},
   onDeleteFood: () => {},
-  isAdd: false,
+  type: "ADD",
 };
 AddFood.propTypes = {
   className: PropTypes.string,
@@ -286,7 +256,7 @@ AddFood.propTypes = {
   data: PropTypes.shape(),
   onChangeFood: PropTypes.func,
   onDeleteFood: PropTypes.func,
-  isAdd: PropTypes.bool,
+  type: PropTypes.string,
 };
 
 export default AddFood;
