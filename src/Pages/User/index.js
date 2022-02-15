@@ -34,7 +34,7 @@ const User = (props) => {
 
   useEffect(() => {
     if (!auth.isSuccess()) {
-      history.push("/retail-store");
+      history.push("/acestore");
       setState({});
       // console.log({ Nologin: props.login });
     }
@@ -115,7 +115,7 @@ const User = (props) => {
                 tab={<div className="user-body-title">Food orders</div>}
                 key={FOOD_ORDER}
               >
-                <CustomerOrders></CustomerOrders>
+                <CustomerOrders isAll></CustomerOrders>
               </TabPane>
             </>
           )}

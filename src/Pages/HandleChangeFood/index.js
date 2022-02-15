@@ -7,7 +7,7 @@ import { getFoodMasterData } from "../../Components/Pages/Home/HomeBody/helper";
 import AddFood from "../../Components/Pages/User/AddFood";
 import { useMergeState } from "../../Helpers/customHooks";
 import { checkDisabledFoodList, handleMutationAddFood } from "./helper";
-import "./_add-new-food.scss";
+import "./_handle-change-food.scss";
 
 const HandleChangeFood = (props) => {
   const [state, setState] = useMergeState({
@@ -19,6 +19,7 @@ const HandleChangeFood = (props) => {
 
   const isAdd = type === "ADD";
   const isEdit = type === "EDIT";
+  const isDelete = type === "DELETE";
 
   const onClickNewFood = () => {
     foodList.push(undefined);
@@ -38,7 +39,7 @@ const HandleChangeFood = (props) => {
 
   const onClickAddFood = async () => {
     setState({ loading: true });
-    const res = await handleMutationAddFood(foodList, isAdd);
+    const res = await handleMutationAddFood(foodList, type);
     const obj = { loading: false };
     if (res.isSuccess) {
       alert(
@@ -66,11 +67,11 @@ const HandleChangeFood = (props) => {
     }, 200);
   };
 
-  const isDisabledBtn = checkDisabledFoodList(foodList);
+  const isDisabledBtn = checkDisabledFoodList(foodList, isDelete);
 
   return (
-    <div className={classnames("add-new-food", className)}>
-      <div className="add-new-food-add-food">
+    <div className={classnames("handle-change-food", className)}>
+      <div className="handle-change-food-add-food">
         {_.map(foodList, (x, i) => (
           <AddFood
             key={i}
@@ -83,7 +84,7 @@ const HandleChangeFood = (props) => {
           />
         ))}
       </div>
-      <div className="add-new-food-add-btns">
+      <div className="handle-change-food-add-btns">
         <Button
           type="dashed"
           onClick={onClickNewFood}

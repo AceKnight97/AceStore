@@ -1,8 +1,8 @@
 import _ from "lodash";
 import handleAddFood from "../../Apollo/Functions/Handle/handleAddFood";
+import handleDeleteFood from "../../Apollo/Functions/Handle/handleDeleteFood";
 import handleUpdateFood from "../../Apollo/Functions/Handle/handleUpdateFood";
 import { QUANTITY_TYPES, QUANTITY_TYPES_ADD_FOOD } from "../../Constants/home";
-import auth from "../../Helpers/auth";
 
 const formatFood = (x = {}, id = null) => {
   const quantityType =
@@ -23,14 +23,29 @@ const formatFood = (x = {}, id = null) => {
   return obj;
 };
 
-export const handleMutationAddFood = async (food = [], isAdd = false) => {
+export const handleMutationAddFood = async (food = [], type = "ADD") => {
+  const isAdd = type === "ADD";
+  const isEdit = type === "EDIT";
   console.log({ food });
-  const sendingData = {
-    input: _.map(food, (x) => formatFood(x, isAdd ? null : x.id)),
-  };
+  const sendingData = {};
+  switch (type) {
+    case "ADD":
+    case "EDIT":
+      _.assign(sendingData, {
+        input: _.map(food, (x) => formatFood(x, isAdd ? null : x.id)),
+      });
+      break;
+    default:
+      _.assign(sendingData, { input: _.map(food, (x) => x.id) });
+      break;
+  }
   console.log({ sendingData });
   try {
-    const func = isAdd ? handleAddFood : handleUpdateFood;
+    const func = isAdd
+      ? handleAddFood
+      : isEdit
+      ? handleUpdateFood
+      : handleDeleteFood;
     const res = await func(sendingData);
     return res;
   } catch (error) {
@@ -38,13 +53,19 @@ export const handleMutationAddFood = async (food = [], isAdd = false) => {
   }
 };
 
-export const checkDisabledFoodList = (foodList = []) => {
+export const checkDisabledFoodList = (foodList = [], isDelete = false) => {
   if (!foodList || foodList?.length === 0 || !foodList[0]) {
     return true;
   }
   const res = _.find(
     foodList,
-    (x) => !x || !x.name || !x.price || !x.title || !x.quantityType // || !x.image
+    (x) =>
+      !x ||
+      !x.name ||
+      !x.price ||
+      !x.title ||
+      !x.quantityType ||
+      (!x.image && !isDelete)
   );
   // console.log({ res });
   return !!res;

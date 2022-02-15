@@ -9,20 +9,28 @@ import starInactiveIc from "../../../Images/Pages/Home/star-inactive.svg";
 
 const DisplayRating = (props) => {
   const { className, rating, onClick, isButton } = props;
+  const isDisabled = onClick === null;
+  const curNotAllowed = isDisabled ? "cur-not-allowed" : "cur-pointer";
   return (
     <div className={classnames("display-rating", className)}>
       {isButton ? (
         <>
           {_.map(_.range(rating), (x, i) => (
-            <button className="bas-btn" key={x} onClick={() => onClick(i + 1)}>
+            <button
+              className={`bas-btn ${curNotAllowed}`}
+              key={x}
+              onClick={() => onClick(i + 1)}
+              disabled={isDisabled}
+            >
               <img src={starIc} alt="Star ic" />
             </button>
           ))}
           {_.map(_.range(5 - rating), (x, i) => (
             <button
-              className="bas-btn"
+              className={`bas-btn ${curNotAllowed}`}
               key={x}
               onClick={() => onClick(rating + i + 1)}
+              disabled={isDisabled}
             >
               <img src={starInactiveIc} alt="Star inactive ic" />
             </button>

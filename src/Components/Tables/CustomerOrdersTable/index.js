@@ -55,6 +55,7 @@ const CustomerOrdersTable = (props) => {
   };
 
   const onRowClick = (rowIndex, record) => {
+    console.log({ record });
     setState({ foodOrderData: record });
   };
 

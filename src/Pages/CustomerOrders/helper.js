@@ -31,6 +31,7 @@ export const mutationGetFoodOrders = async (filterObj = {}) => {
       date: x,
       data,
       notes: grouped[x]?.[0]?.foodOrder?.notes || "",
+      destination: grouped[x]?.[0]?.foodOrder?.destination || "",
       status: grouped[x]?.[0]?.foodOrder?.status || "",
       username: grouped[x]?.[0]?.user?.username || "",
       total: getOrderTotal(data),

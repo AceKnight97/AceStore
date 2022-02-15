@@ -22,11 +22,13 @@ const DEFAULT_DATA = {
   phone: "",
   address: "",
   notes: "",
+  destination: "",
 
   emailErr: "",
   usernameErr: "",
   phoneErr: "",
   addressErr: "",
+  destinationErr: "",
   loading: false,
   isConfirm: false,
 };
@@ -52,13 +54,22 @@ const AnyCustomerModal = (props) => {
     phone,
     address,
     notes,
+    destination,
     phoneErr,
     addressErr,
+    destinationErr,
     isConfirm,
   } = state;
 
   const onChange = (key, value) => {
-    setState({ [key]: value, emailErr: "", usernameErr: "" });
+    setState({
+      [key]: value,
+      emailErr: "",
+      usernameErr: "",
+      destinationErr: "",
+      phoneErr: "",
+      addressErr: "",
+    });
   };
 
   const onClickRightBtn = async () => {
@@ -107,6 +118,10 @@ const AnyCustomerModal = (props) => {
               <span className="b">Notes:</span>
               <span className="ml-4">{notes}</span>
             </div>
+            <div className="fr-sb">
+              <span className="b">Destination:</span>
+              <span className="ml-4">{destination}</span>
+            </div>
 
             <div className="fcen mt-16 b">Do you want to order now?</div>
           </div>
@@ -150,6 +165,15 @@ const AnyCustomerModal = (props) => {
               allowLeadingZeros
             />
             <InputCT
+              title="Destination"
+              name="destination"
+              value={destination}
+              onChange={onChange}
+              placeholder="Enter destination"
+              errMes={destinationErr}
+              className="mt-16"
+            />
+            <InputCT
               title="Notes"
               name="notes"
               value={notes}
@@ -162,7 +186,7 @@ const AnyCustomerModal = (props) => {
         )}
 
         <ModalFooter
-          disabled={!email || !username || !address || !phone}
+          disabled={!email || !username || !address || !phone || !destination}
           leftTitle={isConfirm ? "Back" : "Cancel"}
           rightTitle={isConfirm ? "Yes" : "Order"}
           onClickLeftBtn={isConfirm ? onClickBack : onClickCancel}

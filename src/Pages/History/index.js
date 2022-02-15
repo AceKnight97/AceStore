@@ -25,7 +25,7 @@ const History = (props) => {
   useEffect(() => {
     if (!auth.isSuccess()) {
       console.log({ login: props.login, auth: auth.isSuccess() });
-      history.push("/retail-store");
+      history.push("/acestore");
       setState({});
     }
   }, [props.login]);
@@ -33,7 +33,7 @@ const History = (props) => {
     <div className={classnames("history", className)}>
       <HomeHeader></HomeHeader>
       <div className="history-body">
-        <CustomerOrders isAll></CustomerOrders>
+        <CustomerOrders isAll={false}></CustomerOrders>
       </div>
       {loading && <Loading></Loading>}
     </div>

@@ -1,26 +1,26 @@
 import PropTypes from "prop-types";
-import React, { useEffect, useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { connect } from "react-redux";
 import {
   BrowserRouter as Router,
   Redirect,
   Route,
   Switch,
-  useLocation,
+  useHistory,
 } from "react-router-dom";
 import Supergraphic from "../Components/UI/Supergraphic";
-import { PAGE_MANAGER } from "../Constants";
+import APP_FLOW_ACTIONS, { MESSAGES } from "../Constants";
+import auth from "../Helpers/auth";
+import { useEmitter } from "../Helpers/customHooks";
+import { logoutRequest } from "../Redux/Actions/login";
 import reloadPageRequest from "../Redux/Actions/reload";
 import FoodOrder from "./FoodOrder";
-import Home from "./Home";
 import History from "./History";
+import Home from "./Home";
 import User from "./User";
-import APP_FLOW_ACTIONS from "../Constants";
-import { useEmitter, useMergeState } from "../Helpers/customHooks";
-import { loginRequest, logoutRequest } from "../Redux/Actions/login";
-import auth from "../Helpers/auth";
 
 const Main = (props) => {
+  const history = useHistory();
   // const location = useLocation();
   // console.log({ location });
   useEffect(() => {
@@ -34,8 +34,10 @@ const Main = (props) => {
   }, []);
 
   const loginRequestListener = useCallback(() => {
+    alert(MESSAGES.EXPIRED_TOKEN);
     auth.logout();
     props.logoutRequest();
+    history.push("/acestore");
   }, []);
 
   useEmitter(APP_FLOW_ACTIONS.LOGOUT_REQUEST, loginRequestListener, []);
@@ -45,7 +47,7 @@ const Main = (props) => {
       <Router>
         <Supergraphic></Supergraphic>
         <Switch>
-          <Route exact path="/retail-store" name="Home" component={Home} />
+          <Route exact path="/acestore" name="Home" component={Home} />
           <Route exact path="/history" name="Home" component={History} />
           <Route exact path="/user" name="Home" component={User} />
           <Route
@@ -54,7 +56,7 @@ const Main = (props) => {
             name="Food Order"
             component={FoodOrder}
           />
-          <Redirect path="/" to={{ pathname: "/retail-store" }} />
+          <Redirect path="/" to={{ pathname: "/acestore" }} />
         </Switch>
       </Router>
     </main>

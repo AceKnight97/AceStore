@@ -27,15 +27,16 @@ const FoodOrder = (props) => {
     foodData: getFoodData(location.state),
     anyCustomerVisible: false,
     notes: "",
+    destination: "",
   });
   const { className } = props;
 
-  const { foodData, anyCustomerVisible, notes } = state;
+  const { foodData, anyCustomerVisible, notes, destination } = state;
 
   // useEffect(() => {
   //   if (!auth.isSuccess()) {
   //     console.log({ login: props.login, auth: auth.isSuccess() });
-  //     history.push("/retail-store");
+  //     history.push("/acestore");
   //     setState({});
   //   }
   // }, [props.login]);
@@ -79,7 +80,7 @@ const FoodOrder = (props) => {
       auth.setFoodData(undefined);
       _.assign(obj, { anyCustomerVisible: false });
       setTimeout(() => {
-        history.push("/retail-store");
+        history.push("/acestore");
       }, 300);
     } else {
       alert("Failed to create order: ", res.message);
@@ -88,7 +89,7 @@ const FoodOrder = (props) => {
   };
 
   const onClickBack = () => {
-    history.push("/retail-store");
+    history.push("/acestore");
   };
 
   const onClickCancel = () => {
@@ -101,11 +102,11 @@ const FoodOrder = (props) => {
       return;
     }
     setState({ loading: true });
-    const res = await mutationCreateOrder(foodData, email, notes);
+    const res = await mutationCreateOrder(foodData, email, notes, destination);
     if (res.isSuccess) {
       alert("Successfully creating order!");
       auth.setFoodData(undefined);
-      history.push("/retail-store");
+      history.push("/acestore");
     } else {
       alert("Failed to create order: ", res.message);
     }
@@ -137,16 +138,27 @@ const FoodOrder = (props) => {
           </div>
         </div>
         {email && (
-          <InputCT
-            titleClassName="b"
-            title="Notes"
-            name="notes"
-            value={notes}
-            onChange={onChange}
-            placeholder="Enter your notes"
-            className="mt-16"
-            type="TEXTAREA"
-          />
+          <>
+            <InputCT
+              titleClassName="b"
+              title="Destination"
+              name="destination"
+              value={destination}
+              onChange={onChange}
+              placeholder="Enter your notes"
+              className="mt-16"
+            />
+            <InputCT
+              titleClassName="b"
+              title="Notes"
+              name="notes"
+              value={notes}
+              onChange={onChange}
+              placeholder="Enter your notes"
+              className="mt-16"
+              type="TEXTAREA"
+            />
+          </>
         )}
         <div className="food-order-body-btns">
           <Button onClick={onClickBack}>Back</Button>

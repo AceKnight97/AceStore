@@ -115,8 +115,13 @@
   overflow: hidden;
   height: 100%;
 }
-.cur-pointer {
-  cursor: pointer;
+.cur {
+  &-pointer {
+    cursor: pointer;
+  }
+  &-not-allowed {
+    cursor: not-allowed;
+  }
 }
 .avatar-120-br100 {
   height: 120px;
