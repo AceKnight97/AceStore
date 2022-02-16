@@ -32,6 +32,7 @@ const HomeBody = (props) => {
 
   useEffect(() => {
     if (auth.getFoodData().length !== 0) {
+      setState({ loading: false });
       return;
     }
     fetchMenuData();
@@ -62,9 +63,11 @@ const HomeBody = (props) => {
   };
 
   const onChangeCart = (item = {}, title = "") => {
+    console.log({ item });
     const { data } = _.find(foodData, (x) => x.title === title);
     const cardTemp = _.find(data, (x) => x.name === item.name);
     _.assign(cardTemp, { ...item });
+    console.log({ foodData });
     auth.setFoodData(foodData);
     setState({ foodData });
   };
@@ -89,6 +92,8 @@ const HomeBody = (props) => {
       />
     </div>
   );
+
+  // console.log({ foodData });
 
   return (
     <div>

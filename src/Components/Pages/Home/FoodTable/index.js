@@ -16,12 +16,14 @@ const FoodTable = (props) => {
   });
   const { className, data, title, onChangeCart } = props;
   const { isShow } = state;
+
   useEffect(() => {
     if (!isShow) {
       const el = findDOMNode(toggleRef.current);
       $(el).slideUp("slow");
     }
   }, []);
+
   const toggleShow = () => {
     if (debounceRef.current) {
       clearTimeout(debounceRef.current);
@@ -34,14 +36,7 @@ const FoodTable = (props) => {
       setState({ isShow: !isShow });
     }, 200);
   };
-
-  // const  = (isBuy = false, itemData = {}) => {
-  //   console.log({ isBuy, itemData });
-  // }
-  // console.log({ title });
-  // if (title === "null") {
-  //   console.log(data);
-  // }
+  // console.log({ data });
 
   return (
     <div className={classnames("food-table", className)}>

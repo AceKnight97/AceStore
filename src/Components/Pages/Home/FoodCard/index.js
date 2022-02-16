@@ -23,10 +23,11 @@ const FoodCard = (props) => {
     price: props.price,
     rating: props.rating,
     isBuy: props.isBuy,
-    quantity:
-      props.quantity || props.quantityType === QUANTITY_TYPES.WEIGHT
-        ? WEIGHT_DATA[0]
-        : PACKAGE_DATA[0],
+    quantity: props.quantity
+      ? props.quantity
+      : props.quantityType === QUANTITY_TYPES.WEIGHT
+      ? WEIGHT_DATA[0]
+      : PACKAGE_DATA[0],
     quantityType: props.quantityType,
     visibleFoodInfo: false,
   });
@@ -53,11 +54,6 @@ const FoodCard = (props) => {
     setState({ visibleFoodInfo: !visibleFoodInfo });
   };
 
-  // console.log({ title });
-  if (!props.title || props.title === "null") {
-    console.log({ rating });
-  }
-
   return (
     <div>
       <div
@@ -74,13 +70,6 @@ const FoodCard = (props) => {
               alt="Food card img"
               className="food-card-img-dis"
             ></img>
-            {/*
-          
-          <img
-            src={image}
-            alt="Food card img"
-            className="food-card-img-child"
-          ></img>*/}
           </div>
         ) : (
           <div className="food-card-img" onClick={toggleIsBuy} />
@@ -118,16 +107,6 @@ const FoodCard = (props) => {
               <Button className="mt-10" onClick={toggleVisibleFoodInfo}>
                 More info
               </Button>
-
-              {/*
-              <CheckboxCT
-                name="isBuy"
-                data="Buy"
-                isCheck={isBuy}
-                onChange={onChange}
-                className="mt-4"
-              />
-              */}
             </div>
           </div>
         </div>
@@ -149,7 +128,7 @@ FoodCard.defaultProps = {
   price: 0,
   rating: 3,
   isBuy: false,
-  quantity: undefined,
+  quantity: "",
   quantityType: QUANTITY_TYPES.WEIGHT,
   image: "",
   unit: "VND",

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import DatepickerCT from "../../Components/Inputs/DatepickerCT";
 import CustomerOrdersTable from "../../Components/Tables/CustomerOrdersTable";
+import Loading from "../../Components/UI/Loading";
 import { useMergeState } from "../../Helpers/customHooks";
 import { mutationGetFoodOrders } from "./helper";
 import "./_customer-orders.scss";
@@ -15,18 +16,19 @@ const CustomerOrders = (props) => {
     loading: true,
   });
   const { className } = props;
-  const { currentDate, data } = state;
+  const { currentDate, data, loading } = state;
 
   const getFoodOrders = async () => {
     if (!currentDate) {
       return;
     }
+    setState({ loading: true });
     try {
       const res = await mutationGetFoodOrders({
         currentDate,
         isAll: props.isAll,
       });
-      console.log({ res });
+      // console.log({ res });
       setState({ data: res, loading: false });
     } catch (error) {
       setState({ loading: false });
@@ -61,6 +63,7 @@ const CustomerOrders = (props) => {
         data={data}
         isEditable={props.isAll}
       ></CustomerOrdersTable>
+      {loading && <Loading></Loading>}
     </div>
   );
 };

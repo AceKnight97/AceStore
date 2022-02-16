@@ -19,9 +19,7 @@ const FoodOrderDrawer = (props) => {
   const { visible, className, data, onClose, onUpdateFoodOrder } = props;
   const { date, status, foodOrderId, notes, destination } = data;
   const { loading } = state;
-  console.log({ destination });
   const onChangeStatus = async (key, value) => {
-    console.log({ key, value, foodOrderId });
     if (!foodOrderId || !value) {
       return;
     }

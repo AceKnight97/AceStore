@@ -1,3 +1,4 @@
+import { Spin } from "antd";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
@@ -7,7 +8,8 @@ const Loading = (props) => {
   const { className } = props;
   return (
     <div className={classnames("loading", className)}>
-      <div className="loader-gif"></div>
+      {/*<div className="loader-gif"></div>*/}
+      <Spin />
     </div>
   );
 };

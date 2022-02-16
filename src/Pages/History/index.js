@@ -4,23 +4,14 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import HomeHeader from "../../Components/Pages/Home/HomeHeader";
-import Loading from "../../Components/UI/Loading";
 import auth from "../../Helpers/auth";
-import { useMergeState } from "../../Helpers/customHooks";
 import CustomerOrders from "../CustomerOrders";
-import { getFoodData } from "../FoodOrder/helper";
 import "./_history.scss";
 
 const History = (props) => {
   const location = useLocation();
   const history = useHistory();
-  const [state, setState] = useMergeState({
-    orderHistory: getFoodData(location.state),
-    loading: true,
-  });
   const { className } = props;
-
-  const { loading } = state;
 
   useEffect(() => {
     if (!auth.isSuccess()) {
@@ -29,13 +20,13 @@ const History = (props) => {
       setState({});
     }
   }, [props.login]);
+
   return (
     <div className={classnames("history", className)}>
       <HomeHeader></HomeHeader>
       <div className="history-body">
         <CustomerOrders isAll={false}></CustomerOrders>
       </div>
-      {loading && <Loading></Loading>}
     </div>
   );
 };

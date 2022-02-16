@@ -10,6 +10,7 @@ import AnyCustomerModal from "../../Components/Modals/AnyCustomerModal";
 import { calcCartTotal } from "../../Components/Pages/Home/HomeBody/helper";
 import HomeHeader from "../../Components/Pages/Home/HomeHeader";
 import AntdTable from "../../Components/Tables/AntdTable";
+import Loading from "../../Components/UI/Loading";
 import { getPrice } from "../../Helpers";
 import auth from "../../Helpers/auth";
 import { useMergeState } from "../../Helpers/customHooks";
@@ -28,10 +29,11 @@ const FoodOrder = (props) => {
     anyCustomerVisible: false,
     notes: "",
     destination: "",
+    loading: false,
   });
   const { className } = props;
 
-  const { foodData, anyCustomerVisible, notes, destination } = state;
+  const { foodData, anyCustomerVisible, notes, destination, loading } = state;
 
   // useEffect(() => {
   //   if (!auth.isSuccess()) {
@@ -179,6 +181,7 @@ const FoodOrder = (props) => {
         onClickCancel={onClickCancel}
         onClick={orderAnyCustomer}
       ></AnyCustomerModal>
+      {loading && <Loading></Loading>}
     </div>
   );
 };

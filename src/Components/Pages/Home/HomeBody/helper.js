@@ -39,27 +39,34 @@ export const getFoodMasterData = async () => {
   }
 };
 
+const calWeight = (z = {}, cartTags = []) => {
+  const quantity = z.quantity.slice(0, 3);
+  const res = parseFloat(quantity) * z.price;
+  if (res > 0) {
+    cartTags.push(`${z.name} (${z.price} * ${quantity})`);
+  }
+  return res;
+};
+
+const calPackage = (z = {}, cartTags) => {
+  const quantity = z.quantity.slice(0, 1);
+  const res = parseFloat(quantity) * z.price;
+  if (res > 0) {
+    cartTags.push(`${z.name} (${z.price} * ${quantity})`);
+  }
+  return res;
+};
+
 export const calcCartTotal = (foodData = []) => {
   let total = 0;
   const cartTags = [];
   _.forEach(foodData, (x) => {
     total += _.sumBy(x.data, (z) => {
       if (z.isBuy) {
-        if (z.quantityType === QUANTITY_TYPES.WEIGHT) {
-          const quantity = z.quantity.slice(0, 3);
-          cartTags.push(`${z.name} (${z.price} * ${quantity})`);
-          return parseFloat(quantity) * z.price;
-        }
-        const quantity = z.quantity.slice(0, 1);
-        cartTags.push(`${z.name} (${z.price} * ${quantity})`);
-        return parseInt(quantity, 10) * z.price;
+        return calPackage(z, cartTags) || calWeight(z, cartTags);
       }
       return 0;
     });
-    // _.forEach(x.data, y => {
-    //   if (y.isBuy) {
-    //   }
-    // })
   });
   // console.log({ foodData, total, cartTags });
   return { total, cartTags };

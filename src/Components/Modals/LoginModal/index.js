@@ -39,7 +39,7 @@ const LoginModal = (props) => {
     if (res.isSuccess) {
       setState({ loading: true });
       const resLogin = await mutationSignIn(state);
-      console.log({ resLogin });
+      // console.log({ resLogin });
       if (resLogin.isSuccess) {
         auth.setDatalogin(resLogin.data.user);
         props.loginRequest(resLogin.data);

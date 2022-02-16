@@ -85,7 +85,7 @@ const RegisterModal = (props) => {
       const obj = { loading: false };
       setState({ loading: true });
       const resFinish = await mutationCreateUser(state);
-      console.log({ resFinish });
+      // console.log({ resFinish });
 
       if (resFinish.isSuccess) {
         // auth.setHeaderData(resFinish.data);
