@@ -1,0 +1,23 @@
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(255, 255, 255, 0.7);
+  .loader-gif {
+    display: block;
+    width: 100%;
+    background-image: url("../../../Images/loading.gif");
+    background-position: left;
+    background-repeat: no-repeat;
+    // height: 200px;
+    height: 100%;
+    background-size: 100%;
+  }
+}

@@ -44,6 +44,7 @@
 // FLEX
 .flex {
   display: flex;
+  align-items: center;
 }
 .f1 {
   flex: 1;
@@ -437,6 +438,9 @@
 }
 .ml24 {
   margin-left: 24px;
+}
+.ml32 {
+  margin-left: 32px;
 }
 //
 .mb-2 {

@@ -1,14 +1,16 @@
 {
-  "homepage": "https://AceKnight97.github.io/acestore",
   "name": "acestore",
+  "homepage": "https://AceKnight97.github.io/acestore",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
+    "@apollo/client": "^3.5.8",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "antd": "^4.14.1",
+    "antd": "^4.18.5",
+    "axios": "^0.25.0",
     "classnames": "^2.2.6",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^8.0.0",
@@ -21,6 +23,7 @@
     "fbemitter": "^2.1.1",
     "file-loader": "^6.2.0",
     "font-awesome-sass-loader": "^2.0.1",
+    "graphql": "^16.3.0",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.1",
     "jquery": "^3.6.0",
@@ -72,6 +75,11 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^3.2.3"
+    "antd-img-crop": "^4.1.0",
+    "gh-pages": "^3.2.3",
+    "react-image-file-resizer": "^0.4.7"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
   }
 }

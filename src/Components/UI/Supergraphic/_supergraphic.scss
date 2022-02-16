@@ -1,0 +1,49 @@
+.supergraphic {
+  height: 12px;
+  width: 100%;
+  background-image: url(../../../Images/supergraphic.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+  max-height: 1.5vh;
+}
+
+.bosch-header {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+  margin-bottom: 2px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: white;
+  &-group {
+    padding-right: 2rem;
+    font-weight: bold;
+    font-size: 22px;
+    white-space: pre;
+    overflow-wrap: break-word;
+  }
+  &-logo {
+    max-height: 32px;
+  }
+  &-title {
+    margin-left: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    white-space: pre;
+    overflow-wrap: break-word;
+    span {
+      margin-left: 0.5rem;
+    }
+  }
+}
+.not-home-back-btn {
+  position: absolute;
+  margin-left: 4.5rem;
+  padding: 0.25rem 0.5rem;
+  top: 4.5rem;
+  border: 1px solid #1890ff;
+  width: max-content;
+}

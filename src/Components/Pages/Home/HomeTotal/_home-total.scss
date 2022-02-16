@@ -1,9 +1,11 @@
 .home-total {
-  width: 32%;
-  min-width: 368px;
+  // width: 32%;
+  // min-width: 368px;
+  width: 20rem;
+  height: 140px;
   padding: 1rem;
   border: 1px solid $gray-5;
-  border-radius: 0.25rem;
+  // border-radius: 0.25rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -1,139 +1,170 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import _ from 'lodash';
-import { Modal } from 'antd';
-import ModalHeader from '../ModalHeader';
-import ModalFooter from '../ModalFooter';
-import { useMergeState } from '../../../Helpers/customHooks';
-import InputCT from '../../Inputs/InputCT';
-import { disabledRegister, handleRightBtnClick, mutationCreateUser } from './helper';
+import { Modal } from "antd";
+import classnames from "classnames";
+import _ from "lodash";
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import { useMergeState } from "../../../Helpers/customHooks";
+import InputCT from "../../Inputs/InputCT";
+import ModalFooter from "../ModalFooter";
+import ModalHeader from "../ModalHeader";
+import {
+  disabledRegister,
+  handleRightBtnClick,
+  mutationCreateUser,
+} from "./helper";
+
+const DEFAULT_DATA = {
+  email: "tttriet19971@gmai.com",
+  password: "123456",
+  confirmPassword: "123456",
+  username: "Ace 1",
+  phone: "0819541897",
+  address: "329 LVL",
+
+  emailErr: "",
+  passwordErr: "",
+  confirmPasswordErr: "",
+  usernameErr: "",
+  phoneErr: "",
+  addressErr: "",
+  loading: false,
+  isStep1: true,
+};
 
 const RegisterModal = (props) => {
   const [state, setState] = useMergeState({
-    email: '',
-    password: '', confirmPassword: '',
-    username: '', phone: '', address: '', notes: '',
-
-    emailErr: '',
-    passwordErr: '', confirmPasswordErr: '',
-    usernameErr: '', phoneErr: '', addressErr: '', notesErr: '',
-
-    loading: false,
-    isStep1: true,
+    ...DEFAULT_DATA,
   });
   const { className, visible, onClickCancel } = props;
   const {
-    email, password, confirmPassword,
-    username, phone, address, notes,
-    emailErr, passwordErr, confirmPasswordErr,
-    usernameErr, phoneErr, addressErr, notesErr,
-    loading, isStep1
+    email,
+    password,
+    confirmPassword,
+    username,
+    phone,
+    address,
+    emailErr,
+    passwordErr,
+    confirmPasswordErr,
+    usernameErr,
+    phoneErr,
+    addressErr,
+    loading,
+    isStep1,
   } = state;
 
+  useEffect(() => {
+    // setState({ ...setDefaultData() });
+    if (!visible) {
+      setState({ ...DEFAULT_DATA });
+    }
+  }, [visible]);
+
   const onClickBack = () => {
-    setState({ isStep1: true })
-  }
+    setState({ isStep1: true });
+  };
 
   const onChange = (key, value) => {
     const obj = { [key]: value };
     if (isStep1) {
-      _.assign(obj, { emailErr: '', passwordErr: '', confirmPasswordErr: '', })
+      _.assign(obj, { emailErr: "", passwordErr: "", confirmPasswordErr: "" });
       setState(obj);
     } else {
       _.assign(obj, {
-        usernameErr: '', phoneErr: '', addressErr: '', notesErr: '',
-      })
+        usernameErr: "",
+        phoneErr: "",
+        addressErr: "",
+      });
       setState(obj);
     }
-  }
+  };
 
   const onClickRightBtn = async () => {
     const res = handleRightBtnClick(state);
     if (res.finish) {
+      const obj = { loading: false };
       setState({ loading: true });
       const resFinish = await mutationCreateUser(state);
-      setState(resFinish);
+      // console.log({ resFinish });
+
+      if (resFinish.isSuccess) {
+        // auth.setHeaderData(resFinish.data);
+        alert("Successfully creating user!");
+        onClickCancel();
+      } else {
+        alert("Failed to create user: " + resFinish.message);
+      }
+      setState(obj);
     } else {
       setState(res);
     }
-  }
+  };
 
   const renderStep1 = () => (
     <>
       <InputCT
-        title='Email'
-        name='email'
+        title="Email"
+        name="email"
         value={email}
         onChange={onChange}
-        placeholder='Enter your email'
+        placeholder="Enter your email"
         errMes={emailErr}
       />
       <InputCT
-        title='Password'
-        name='password'
+        title="Password"
+        name="password"
         value={password}
         onChange={onChange}
-        placeholder='Enter your email'
-        type='PASSWORD'
-        className='mt-16'
+        placeholder="Enter your email"
+        type="PASSWORD"
+        className="mt-16"
         errMes={passwordErr}
       />
       <InputCT
-        title='Confirm password'
-        name='confirmPassword'
+        title="Confirm password"
+        name="confirmPassword"
         value={confirmPassword}
         onChange={onChange}
-        placeholder='Enter your confirm password'
-        type='PASSWORD'
-        className='mt-16'
+        placeholder="Enter your confirm password"
+        type="PASSWORD"
+        className="mt-16"
         errMes={confirmPasswordErr}
       />
     </>
-  )
+  );
 
   const renderStep2 = () => (
     <>
       <InputCT
-        title='Username'
-        name='username'
+        title="Username"
+        name="username"
         value={username}
         onChange={onChange}
-        placeholder='Enter your username'
+        placeholder="Enter your username"
         errMes={usernameErr}
       />
       <InputCT
-        title='Phone number'
-        name='phone'
+        title="Phone number"
+        name="phone"
         value={phone}
         onChange={onChange}
-        placeholder='Enter your phone number'
-        className='mt-16'
-        type='NUMBER'
+        placeholder="Enter your phone number"
+        className="mt-16"
+        type="NUMBER"
         errMes={phoneErr}
+        allowLeadingZeros
       />
       <InputCT
-        title='Address'
-        name='address'
+        title="Address"
+        name="address"
         value={address}
         onChange={onChange}
-        placeholder='Enter your address'
-        className='mt-16'
+        placeholder="Enter your address"
+        className="mt-16"
         errMes={addressErr}
       />
-      <InputCT
-        title='Notes'
-        name='notes'
-        value={notes}
-        onChange={onChange}
-        placeholder='Enter your notes'
-        className='mt-16'
-        type='TEXTAREA'
-        errMes={notesErr}
-      />
-
     </>
-  )
+  );
 
   return (
     <Modal
@@ -144,20 +175,20 @@ const RegisterModal = (props) => {
       closable={false}
       centered
     >
-      <div className={classnames('register-modal-wrapper', className)}>
-        <ModalHeader title={`Register step ${isStep1 ? '1' : '2'}/2`} onClick={onClickCancel} />
+      <div className={classnames("register-modal-wrapper", className)}>
+        <ModalHeader
+          title={`Register step ${isStep1 ? "1" : "2"}/2`}
+          onClick={onClickCancel}
+        />
 
         <div className="register-modal-main">
-          {
-            isStep1 ? renderStep1() : renderStep2()
-          }
-
+          {isStep1 ? renderStep1() : renderStep2()}
         </div>
 
         <ModalFooter
           disabled={disabledRegister(state)}
-          leftTitle={isStep1 ? 'Cancel' : 'Back to step 1'}
-          rightTitle={isStep1 ? 'Next' : 'Finish'}
+          leftTitle={isStep1 ? "Cancel" : "Back to step 1"}
+          rightTitle={isStep1 ? "Next" : "Finish"}
           onClickLeftBtn={isStep1 ? onClickCancel : onClickBack}
           onClickRightBtn={onClickRightBtn}
           loading={loading}
@@ -167,15 +198,14 @@ const RegisterModal = (props) => {
   );
 };
 RegisterModal.defaultProps = {
-  className: '',
+  className: "",
   visible: false,
-  onClickCancel: () => { }
+  onClickCancel: () => {},
 };
 RegisterModal.propTypes = {
   className: PropTypes.string,
   visible: PropTypes.bool,
   onClickCancel: PropTypes.func,
-
 };
 
 export default RegisterModal;

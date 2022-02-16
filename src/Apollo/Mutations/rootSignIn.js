@@ -1,14 +1,12 @@
-import gql from 'graphql-tag';
-import { USER } from '../fragments/user';
+import gql from "graphql-tag";
+import { USER } from "../Fragments/user";
 
 const ROOT_SIGN_IN = gql`
-  mutation rootSignIn($email: EmailAddress!, $password: String!) {
-    rootSignIn(email: $email, password: $password) {
+  mutation signIn($username: String!, $password: String!) {
+    signIn(username: $username, password: $password) {
       isSuccess
-      message
-      accessToken
-      accessToken
-      me {
+      token
+      user {
         ...${USER}
       }
     }

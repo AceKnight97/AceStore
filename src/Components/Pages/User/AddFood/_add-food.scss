@@ -1,0 +1,32 @@
+@import "../../../../Styles/style.scss";
+
+.add-food {
+  margin-top: 1.5rem;
+  border: $size-1 solid $gray-5;
+  padding: 1rem;
+  width: 526px;
+  &-row {
+    display: flex;
+    flex-direction: row;
+    .food-card-img {
+      width: 248px;
+      height: 248px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .anticon-file-image {
+        font-size: 4rem;
+      }
+      &-text {
+        margin-top: 0.5rem;
+      }
+    }
+  }
+  &-name-price {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1.5rem;
+    width: 220px;
+  }
+}

@@ -1,46 +1,48 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import _ from 'lodash';
-import { } from 'antd';
-import { useMergeState } from '../../../../Helpers/customHooks';
-import InputCT from '../../../Inputs/InputCT'
+import React from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import _ from "lodash";
+
+import { useMergeState } from "../../../../Helpers/customHooks";
+import InputCT from "../../../Inputs/InputCT";
 
 const InforBlock = (props) => {
-  const [state, setState] = useMergeState({
-  });
+  const [state, setState] = useMergeState({});
   const {
-    className, onChange,
-    value1, value2,
-    name1, name2,
-    placeholder1, placeholder2,
-    title1, title2,
+    className,
+    onChange,
+    value1,
+    value2,
+    name1,
+    name2,
+    placeholder1,
+    placeholder2,
+    title1,
+    title2,
     type,
   } = props;
 
   let type1;
   let type2;
   switch (type) {
-    case 'NAME_PHONE':
-      type2 = 'NUMBER'
+    case "NAME_PHONE":
+      type2 = "NUMBER";
       break;
-    case 'ADDRESS_NOTES':
-
+    case "ADDRESS_NOTES":
       break;
     default:
       break;
   }
 
   return (
-    <div className={classnames('infor-block', className)}>
-
+    <div className={classnames("infor-block", className)}>
       <InputCT
         title={title1}
         name={name1}
         value={value1}
         onChange={onChange}
         placeholder={placeholder1}
-        className=''
+        className=""
         type={type1}
       />
 
@@ -50,24 +52,23 @@ const InforBlock = (props) => {
         value={value2}
         onChange={onChange}
         placeholder={placeholder2}
-        className='mt-16'
+        className="mt-16"
         type={type2}
       />
-
     </div>
   );
 };
 InforBlock.defaultProps = {
-  className: '',
-  value1: '',
-  value2: '',
-  name1: '',
-  name2: '',
+  className: "",
+  value1: "",
+  value2: "",
+  name1: "",
+  name2: "",
   placeholder1: undefined,
   placeholder2: undefined,
-  title1: '',
-  title2: '',
-  type: ''
+  title1: "",
+  title2: "",
+  type: "",
 };
 InforBlock.propTypes = {
   className: PropTypes.string,

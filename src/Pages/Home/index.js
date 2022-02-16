@@ -1,24 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import _ from 'lodash';
-import { } from 'antd';
-import { useMergeState } from '../../Helpers/customHooks';
-import HomeHeader from '../../Components/Pages/Home/HomeHeader';
-import HomeFooter from '../../Components/Pages/Home/HomeFooter';
-import HomeBody from '../../Components/Pages/Home/HomeBody';
-
+import classnames from "classnames";
+import PropTypes from "prop-types";
+import React from "react";
+import HomeBody from "../../Components/Pages/Home/HomeBody";
+import HomeFooter from "../../Components/Pages/Home/HomeFooter";
+import HomeHeader from "../../Components/Pages/Home/HomeHeader";
 
 const Home = (props) => {
-  const [state, setState] = useMergeState({
-    data: [],
-  });
   const { className } = props;
-  const onChange = (key, value) => {
-    setState({ [key]: value });
-  }
   return (
-    <div className={classnames('home', className)}>
+    <div className={classnames("home", className)}>
       <HomeHeader />
 
       <HomeBody />
@@ -28,7 +18,7 @@ const Home = (props) => {
   );
 };
 Home.defaultProps = {
-  className: '',
+  className: "",
 };
 Home.propTypes = {
   className: PropTypes.string,

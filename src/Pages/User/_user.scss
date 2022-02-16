@@ -1,0 +1,36 @@
+.user {
+  height: 100%;
+  padding: 0 3rem;
+  background-color: #dedede;
+  overflow: auto;
+  &-body {
+    height: 100%;
+    padding: 3rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 0.125rem;
+    min-width: 850px;
+    overflow: auto;
+    .ant-tabs {
+      overflow: unset;
+    }
+    &-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    &-profile {
+      .flex {
+        width: calc(100% / 3);
+        // white-space: pre;
+        // overflow-wrap: break-word;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .fr-sb {
+        margin-top: 1.5rem;
+      }
+    }
+  }
+}

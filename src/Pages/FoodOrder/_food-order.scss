@@ -1,0 +1,48 @@
+.food-order {
+  height: 100%;
+  padding: 0 3rem;
+  background-color: #dedede;
+  overflow: auto;
+  &-body {
+    height: 100%;
+    padding: 3rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 0.125rem;
+    min-width: 850px;
+    &-toper {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+    &-btns {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      button {
+        width: 200px;
+        margin: 0 1rem;
+      }
+    }
+    &-cent {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    &-main {
+    }
+    &-cart-tag {
+      margin-top: 1.5rem;
+      display: flex;
+      &-title {
+        font-weight: bold;
+        margin-right: 0.5rem;
+      }
+      &-item {
+      }
+    }
+  }
+}

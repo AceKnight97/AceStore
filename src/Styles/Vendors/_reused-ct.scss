@@ -84,6 +84,7 @@
   border: none;
   outline: none !important;
   background-color: transparent;
+  cursor: pointer;
   // padding: 0;
   // margin: 0;
 }
@@ -114,8 +115,13 @@
   overflow: hidden;
   height: 100%;
 }
-.cur-pointer {
-  cursor: pointer;
+.cur {
+  &-pointer {
+    cursor: pointer;
+  }
+  &-not-allowed {
+    cursor: not-allowed;
+  }
 }
 .avatar-120-br100 {
   height: 120px;
@@ -180,4 +186,19 @@
   color: $red-6;
   width: 100%;
   font-size: 12px;
+}
+
+.no-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  height: max-content;
+  // background-color: rgba(0, 0, 0, 0.45);
 }

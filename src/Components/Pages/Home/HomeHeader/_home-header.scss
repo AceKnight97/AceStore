@@ -1,15 +1,16 @@
 .home-header {
   position: relative;
-  height: 120px;
+  // height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: $home-header-bg;
   border-radius: 0.125rem;
+  min-width: 850px;
   &-btns {
     position: absolute;
     bottom: -31px;
-    right: 0;
+    right: 1.5rem;
   }
   &-login-btn {
     border-right: 1px solid $gray-4 !important;

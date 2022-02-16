@@ -1,12 +1,14 @@
-import { useRef, useState, useEffect } from 'react';
-import _ from 'lodash';
+import _ from "lodash";
+import { useEffect, useRef, useState } from "react";
+import emitter from "../Utils/eventEmitter";
 
 export const useMergeState = (initialState) => {
   const [state, setState] = useState(initialState);
-  const setMergedState = (newState) => setState((prevState) => {
-    const expectedState = _.assign(prevState, newState);
-    return { ...expectedState };
-  });
+  const setMergedState = (newState) =>
+    setState((prevState) => {
+      const expectedState = _.assign(prevState, newState);
+      return { ...expectedState };
+    });
   return [state, setMergedState];
 };
 
@@ -20,4 +22,17 @@ export const useUpdateEffect = (effect, dependencies = [], cleanup) => {
     }
     return cleanup;
   }, dependencies);
+};
+
+export const useEmitter = (key, callback, deps) => {
+  useEffect(() => {
+    if (!(key && callback)) {
+      return;
+    }
+    const listener = emitter.addListener(key, callback);
+    return () => {
+      listener.remove();
+    };
+  }, [key, ...deps]);
+  return emitter;
 };

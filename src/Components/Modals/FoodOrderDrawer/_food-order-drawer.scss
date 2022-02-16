@@ -1,0 +1,30 @@
+.food-order-drawer {
+  // width: unset !important;
+  // min-width: 520px;
+  &-created-at {
+    display: flex;
+  }
+
+  &-total {
+    display: flex;
+    margin: 1rem 0;
+  }
+  &-notes {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &-wrapper {
+    padding: 1.5rem;
+  }
+
+  &-row {
+    margin-top: 0.5rem;
+  }
+  .ant-drawer-header-title {
+    flex-direction: row-reverse;
+    .ant-drawer-close {
+      margin: 0;
+    }
+  }
+}

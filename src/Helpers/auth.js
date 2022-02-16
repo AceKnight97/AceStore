@@ -2,14 +2,62 @@ const { localStorage } = global.window;
 
 const auth = {
   login(data) {
-    console.log('login data: ', data);
-    const { user, isSuccess } = data;
-    const { username, _id } = user;
+    console.log("login data: ", data);
+    const { user, isSuccess, token } = data;
+    // const { username, _id } = user;
 
-    localStorage.username = username;
-    localStorage.userId = _id;
+    // console.log({ user });
+
     localStorage.isSuccess = isSuccess;
+    localStorage.token = token;
+    localStorage.user = JSON.stringify(user);
     localStorage.role = user.role;
+    // localStorage.username = username;
+    // localStorage.userId = _id;
+    // localStorage.isSuccess = isSuccess;
+    // localStorage.role = user.role;
+  },
+
+  getRole() {
+    return localStorage.role;
+  },
+  setMenu(data) {
+    localStorage.menu = JSON.stringify(data);
+  },
+  getMenu() {
+    return localStorage.menu && localStorage.menu !== "undefined"
+      ? JSON.parse(localStorage.menu)
+      : [];
+  },
+  setKindOfFood(data) {
+    localStorage.kindOfFood = JSON.stringify(data);
+  },
+  getKindOfFood() {
+    return localStorage.kindOfFood && localStorage.kindOfFood !== "undefined"
+      ? JSON.parse(localStorage.kindOfFood)
+      : [];
+  },
+  getToken() {
+    return localStorage.token;
+  },
+
+  setFoodData(data) {
+    localStorage.foodData = JSON.stringify(data);
+  },
+  getFoodData() {
+    return localStorage.foodData && localStorage.foodData !== "undefined"
+      ? JSON.parse(localStorage.foodData)
+      : [];
+  },
+
+  setMasterData(data) {
+    localStorage.masterData = JSON.stringify(data);
+  },
+
+  getMasterData() {
+    return localStorage.masterData && localStorage.masterData !== "undefined"
+      ? JSON.parse(localStorage.masterData)
+      : [];
   },
 
   setDatalogin(data) {
@@ -17,7 +65,9 @@ const auth = {
   },
 
   getDataLogin() {
-    return localStorage.login ? JSON.parse(localStorage.login) : undefined;
+    return localStorage.login && localStorage.login !== "undefined"
+      ? JSON.parse(localStorage.login)
+      : {};
   },
 
   isSuccess() {
@@ -33,13 +83,7 @@ const auth = {
   },
 
   role() {
-    return localStorage.role;// || 'MD'; // || 'NURSE';
-  },
-  isMD() {
-    return localStorage.role === 'MD';
-  },
-  isNurse() {
-    return localStorage.role === 'NURSE';
+    return localStorage.role; // || 'MD'; // || 'NURSE';
   },
 
   logout() {

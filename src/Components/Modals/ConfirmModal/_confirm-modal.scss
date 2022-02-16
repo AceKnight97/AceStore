@@ -1,0 +1,61 @@
+@import "../../../Styles/style.scss";
+
+.confirm-modal {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: $size-32;
+
+  box-shadow: $elevation-1;
+  border-radius: $size-2;
+  &-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .cl-body-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    .row-title {
+      margin-left: $size-16;
+      font-weight: 600;
+      font-size: $size-16;
+      line-height: $size-24;
+      color: $gray-9;
+    }
+
+    .row-icon {
+      width: $size-24;
+      height: $size-24;
+      color: $gold-6;
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .cl-body-content {
+      margin-top: $size-8;
+      width: 100%;
+      padding: 0 0 0 $size-40;
+      color: $gray-8;
+    }
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: $size-24;
+
+    .cl-footer-buttons {
+      display: flex;
+    }
+  }
+  &-reload-icon {
+    font-size: 1.3125rem;
+    padding: 0.09375rem;
+    color: $blue-6;
+  }
+}

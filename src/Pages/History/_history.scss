@@ -1,0 +1,36 @@
+.history {
+  height: 100%;
+  padding: 0 3rem;
+  background-color: #dedede;
+  overflow: auto;
+  &-body {
+    height: 100%;
+    padding: 3rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 0.125rem;
+    min-width: 850px;
+    overflow: auto;
+    &-toper {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+    &-btns {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      button {
+        width: 200px;
+        margin: 0 1rem;
+      }
+    }
+    &-no-his {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2rem;
+    }
+  }
+}

@@ -10,7 +10,7 @@ const ModalHeader = props => (
       <span>{props.title}</span>
     </div>
 
-    <Button ghost onClick={props.onClick} className={props.btnClassName} disabled={props.loading}>
+    <Button ghost onClick={props.onClick} className={props.btnClassName} disabled={props.loading} className='modal-header-close-btn'>
       {props.btnTitle || <CloseOutlined />}
     </Button>
   </div>

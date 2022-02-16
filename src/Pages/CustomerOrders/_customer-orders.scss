@@ -1,0 +1,11 @@
+.customer-orders {
+  margin-top: 1.5rem;
+  &-cur-date {
+    max-width: 400px;
+  }
+  &-date {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-left: 1.5rem;
+  }
+}
