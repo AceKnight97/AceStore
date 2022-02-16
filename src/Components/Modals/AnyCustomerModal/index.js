@@ -9,11 +9,11 @@ import ModalHeader from "../ModalHeader";
 import "./_any-customer-modal.scss";
 
 const MY_DATA = {
-  email: "tttriet1997@gmail.com",
-  username: "AceKnight",
-  phone: "0819541897",
-  address: "3 Le van luong, P.Tan Quy, Q.7",
-  notes: "Soon",
+  email: "",
+  username: "",
+  phone: "",
+  address: "",
+  notes: "",
 };
 
 const DEFAULT_DATA = {

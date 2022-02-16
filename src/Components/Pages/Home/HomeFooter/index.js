@@ -20,13 +20,11 @@ const HomeFooter = (props) => {
 
       <div className="home-footer-address">
         <div className="b">Address</div>
-        <div className="mt-2">
-          364 Cộng Hòa, Phường 13, Tân Bình, Thành phố Hồ Chí Minh
-        </div>
+        <div className="mt-2">329 Lê Văn Lương, District.7, HCM city.</div>
         <div className="mt-2">(+84) 819 541 897 (Zalo)</div>
       </div>
 
-      <div className="home-footer-copyright">© 2021 - Bosch Canteen</div>
+      <div className="home-footer-copyright">© 2021 - Acestore</div>
     </div>
   );
 };

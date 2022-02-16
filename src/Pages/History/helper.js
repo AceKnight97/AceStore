@@ -1,6 +1,5 @@
 import moment from "moment";
 import fetchHistory from "../../Apollo/Functions/Fetch/fetchHistory";
-import auth from "../../Helpers/auth";
 
 export const a = "a";
 
@@ -12,10 +11,6 @@ const formatOrderHisData = (y, index) => ({
   quantity: y?.foodOrder?.quantity || "",
   email: y?.user?.email,
 });
-
-// food: {id: 2, title: "Seafood", name: "Crab", rating: 5, price: 200000, quantityType: "PACKAGE",…}
-// foodOrder: {id: 16, quantity: 1, food: 2, createdAt: "2022-01-18T19:40:47", email: "tttriet19977@gmail.com"}
-// user: {id: 2, email: "tttriet19977@gmail.com", phone: "0819541897",…}
 
 export const queryHistory = async () => {
   try {

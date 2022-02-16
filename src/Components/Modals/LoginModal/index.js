@@ -11,14 +11,14 @@ import InputCT from "../../Inputs/InputCT";
 import { checkValidLogin, mutationSignIn } from "./helper";
 
 const DEFAULT_DATA = {
-  email: "tttriet1997@gmail.com",
-  password: "0819541897",
+  email: "",
+  password: "",
 };
 
 const LoginModal = (props) => {
   const [state, setState] = useMergeState({
-    email: "tttriet1997@gmail.com",
-    password: "0819541897",
+    email: "",
+    password: "",
     emailErr: "",
     passwordErr: "",
     loading: false,
