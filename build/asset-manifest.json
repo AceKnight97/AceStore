@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/acestore/static/css/main.1103db07.chunk.css",
-    "main.js": "/acestore/static/js/main.1d1bf6d6.chunk.js",
-    "main.js.map": "/acestore/static/js/main.1d1bf6d6.chunk.js.map",
+    "main.css": "/acestore/static/css/main.6e3f56bb.chunk.css",
+    "main.js": "/acestore/static/js/main.fd1b24d1.chunk.js",
+    "main.js.map": "/acestore/static/js/main.fd1b24d1.chunk.js.map",
     "runtime-main.js": "/acestore/static/js/runtime-main.d93f47d7.js",
     "runtime-main.js.map": "/acestore/static/js/runtime-main.d93f47d7.js.map",
     "static/css/2.7393f959.chunk.css": "/acestore/static/css/2.7393f959.chunk.css",
@@ -12,7 +12,7 @@
     "static/js/3.1e2cbd54.chunk.js.map": "/acestore/static/js/3.1e2cbd54.chunk.js.map",
     "index.html": "/acestore/index.html",
     "static/css/2.7393f959.chunk.css.map": "/acestore/static/css/2.7393f959.chunk.css.map",
-    "static/css/main.1103db07.chunk.css.map": "/acestore/static/css/main.1103db07.chunk.css.map",
+    "static/css/main.6e3f56bb.chunk.css.map": "/acestore/static/css/main.6e3f56bb.chunk.css.map",
     "static/js/2.fb5c19a6.chunk.js.LICENSE.txt": "/acestore/static/js/2.fb5c19a6.chunk.js.LICENSE.txt",
     "static/media/bosch-logo-new-flat.e412f7ba.png": "/acestore/static/media/bosch-logo-new-flat.e412f7ba.png",
     "static/media/_loading.scss": "/acestore/static/media/loading.a3ffacb9.gif",
@@ -23,7 +23,7 @@
     "static/js/runtime-main.d93f47d7.js",
     "static/css/2.7393f959.chunk.css",
     "static/js/2.fb5c19a6.chunk.js",
-    "static/css/main.1103db07.chunk.css",
-    "static/js/main.1d1bf6d6.chunk.js"
+    "static/css/main.6e3f56bb.chunk.css",
+    "static/js/main.fd1b24d1.chunk.js"
   ]
 }

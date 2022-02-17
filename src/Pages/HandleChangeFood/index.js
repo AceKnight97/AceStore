@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { getFoodMasterData } from "../../Components/Pages/Home/HomeBody/helper";
 import AddFood from "../../Components/Pages/User/AddFood";
+import Loading from "../../Components/UI/Loading";
 import { useMergeState } from "../../Helpers/customHooks";
 import { checkDisabledFoodList, handleMutationAddFood } from "./helper";
 import "./_handle-change-food.scss";
@@ -101,6 +102,7 @@ const HandleChangeFood = (props) => {
           {isAdd ? "Add food" : isEdit ? "Edit food" : "Delete food"}
         </Button>
       </div>
+      {loading && <Loading></Loading>}
     </div>
   );
 };

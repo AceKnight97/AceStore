@@ -57,14 +57,17 @@ const Supergraphic = (props) => {
       <div className={classnames("supergraphic", className)}></div>
       <div className="bosch-header">
         <div className="flex">
-          <img
+          {/* <img
             src={boschLogo}
             alt="Bosch ic"
             className="bosch-header-logo"
-          ></img>
+          ></img> */}
+          {/* <div className="supergraphic-title">
+            Acestore
+          </div> */}
           {renderLocationTitle()}
         </div>
-        <div className="bosch-header-group">Canteen - Group 4</div>
+      <div className="bosch-header-group">Acestore</div>
       </div>
       {pathname !== "/acestore" && (
         <NavLink to="/acestore" className="not-home-back-btn">
