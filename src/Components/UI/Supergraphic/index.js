@@ -1,13 +1,11 @@
-import React, { useEffect } from "react";
-import { NavLink, useHistory, useLocation, useParams } from "react-router-dom";
-import PropTypes from "prop-types";
-import classnames from "classnames";
-import _ from "lodash";
-
-import "./_supergraphic.scss";
-import { useMergeState, useUpdateEffect } from "../../../Helpers/customHooks";
-import boschLogo from "../../../Images/bosch-logo-new-flat.png";
+// import boschLogo from "../../../Images/bosch-logo-new-flat.png";
 import { RightOutlined } from "@ant-design/icons";
+import classnames from "classnames";
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
+import { useMergeState } from "../../../Helpers/customHooks";
+import "./_supergraphic.scss";
 
 const Supergraphic = (props) => {
   const location = useLocation();
@@ -67,9 +65,9 @@ const Supergraphic = (props) => {
           </div> */}
           {renderLocationTitle()}
         </div>
-      <div className="bosch-header-group">Acestore</div>
+        <div className="bosch-header-group">Acestore</div>
       </div>
-      {pathname !== "/acestore" && (
+      {!pathname.includes("/acestore") && (
         <NavLink to="/acestore" className="not-home-back-btn">
           Go back
         </NavLink>
