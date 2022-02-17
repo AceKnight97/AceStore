@@ -57,6 +57,7 @@ const Main = (props) => {
             component={FoodOrder}
           />
           <Redirect path="/" to={{ pathname: "/acestore" }} />
+          <Redirect path="*" to={{ pathname: "/acestore" }} />
         </Switch>
       </Router>
     </main>
