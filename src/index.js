@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { sessionService } from "redux-react-session";
 import reportWebVitals from "./reportWebVitals";
+import { ApolloProvider } from "@apollo/client";
+import { client } from "./Apollo/apolloClient";
 
 import App from "./App";
 import configureStore from "./Redux/Store";
@@ -12,7 +14,9 @@ sessionService.initSessionService(store);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
   </Provider>,
   document.getElementById("root")
 );

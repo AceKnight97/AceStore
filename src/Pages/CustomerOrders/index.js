@@ -2,6 +2,7 @@ import classnames from "classnames";
 import moment from "moment";
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
+import SubscribeNewFoodOrders from "../../Apollo/Functions/Subscribe/subscribeNewFoodOrders";
 import DatepickerCT from "../../Components/Inputs/DatepickerCT";
 import CustomerOrdersTable from "../../Components/Tables/CustomerOrdersTable";
 import Loading from "../../Components/UI/Loading";
@@ -15,7 +16,7 @@ const CustomerOrders = (props) => {
     currentDate: moment(),
     loading: true,
   });
-  const { className } = props;
+  const { className, isAll } = props;
   const { currentDate, data, loading } = state;
 
   const getFoodOrders = async () => {
@@ -26,7 +27,7 @@ const CustomerOrders = (props) => {
     try {
       const res = await mutationGetFoodOrders({
         currentDate,
-        isAll: props.isAll,
+        isAll,
       });
       // console.log({ res });
       setState({ data: res, loading: false });
@@ -58,6 +59,7 @@ const CustomerOrders = (props) => {
           {moment(currentDate || undefined).format("dddd, MMMM DD, YYYY")}
         </div>
       </div>
+      {SubscribeNewFoodOrders()}
 
       <CustomerOrdersTable
         data={data}

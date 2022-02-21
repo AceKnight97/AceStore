@@ -8,6 +8,7 @@ import {
   Switch,
   useHistory,
 } from "react-router-dom";
+import client from "../Apollo/apolloClient2";
 // import subscribeNewFoodOrders from "../Apollo/Functions/Subscribe/subscribeNewFoodOrders";
 import Supergraphic from "../Components/UI/Supergraphic";
 import APP_FLOW_ACTIONS, { MESSAGES } from "../Constants";
@@ -15,7 +16,7 @@ import auth from "../Helpers/auth";
 import { useEmitter } from "../Helpers/customHooks";
 import { logoutRequest } from "../Redux/Actions/login";
 import reloadPageRequest from "../Redux/Actions/reload";
-import apolloSubscriptions from "../Utils/apolloSubscriptions";
+// import apolloSubscriptions from "../Utils/apolloSubscriptions";
 import FoodOrder from "./FoodOrder";
 import History from "./History";
 import Home from "./Home";
@@ -23,16 +24,11 @@ import User from "./User";
 
 const Main = (props) => {
   const history = useHistory();
-  // const location = useLocation();
-  // console.log({ location });
   useEffect(() => {
     window.onbeforeunload = () => {};
     window.onload = () => {
       props.reloadPageRequest();
     };
-    // window.onload = () => {
-    //   props.reloadPageRequest();
-    // };
   }, []);
 
   // const subscribe = async () => {
@@ -46,7 +42,7 @@ const Main = (props) => {
   useEffect(() => {
     if (auth.getRole() === "Admin") {
       // subscribe();
-      apolloSubscriptions.connectToServer();
+      // apolloSubscriptions.connectToServer();
     }
   }, []);
 

@@ -3,30 +3,39 @@
 // import useSubsription from "@apollo/react-hooks";
 import { useSubscription } from "@apollo/client";
 import gql from "graphql-tag";
+import PropTypes from "prop-types";
 import React from "react";
+import FOOD from "../../Fragments/food";
+import FOOD_ORDER from "../../Fragments/foodOrder";
+import USER from "../../Fragments/user";
 
 const NEW_FOOD_ORDERS = gql`
   subscription newFoodOrders {
     newFoodOrders {
       food {
-        id
+        ...${FOOD}
       }
       foodOrder {
-        id
-        food
+        ...${FOOD_ORDER}
       }
       user {
-        id
-        username
-        email
+        ...${USER}
       }
     }
   }
 `;
 
-const subscribeNewFoodOrders = () => {
+const SubscribeNewFoodOrders = (props) => {
   const { data, loading } = useSubscription(NEW_FOOD_ORDERS);
-  return <h4>New rates: {!loading && data}</h4>;
+  console.log({ data, loading });
+  return <h4>New rates: </h4>;
 };
 
-export default subscribeNewFoodOrders;
+SubscribeNewFoodOrders.defaultProps = {
+  className: "",
+};
+SubscribeNewFoodOrders.propTypes = {
+  className: PropTypes.string,
+};
+
+export default SubscribeNewFoodOrders;

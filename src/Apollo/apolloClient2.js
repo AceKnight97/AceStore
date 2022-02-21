@@ -1,21 +1,19 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { ApolloProvider } from "react-apollo";
-import { ApolloClient } from "apollo-client";
-import { getMainDefinition } from "apollo-utilities";
-import { ApolloLink, split } from "apollo-link";
-import { HttpLink } from "apollo-link-http";
-import { WebSocketLink } from "apollo-link-ws";
-import { InMemoryCache } from "apollo-cache-inmemory";
-
-import App from "./App";
+import {
+  ApolloClient,
+  ApolloLink,
+  HttpLink,
+  InMemoryCache,
+  split,
+} from "@apollo/client";
+import { WebSocketLink } from "@apollo/client/link/ws";
+import { getMainDefinition } from "@apollo/client/utilities";
 
 const httpLink = new HttpLink({
-  uri: "http://localhost:8000/graphql",
+  uri: "http://localhost:8080/graphql",
 });
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:8000/graphql`,
+  uri: `ws://localhost:8080/graphql`,
   options: {
     reconnect: true,
   },
@@ -39,9 +37,4 @@ const client = new ApolloClient({
   cache,
 });
 
-ReactDOM.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>,
-  document.getElementById("root")
-);
+export default client;
