@@ -16,12 +16,12 @@ import auth from "../Helpers/auth";
 import emitter from "../Utils/eventEmitter";
 
 const httpLink = new HttpLink({
-  uri: CONFIG.APOLLO_HOST_URL,
+  uri: `http://${CONFIG.APOLLO_HOST_URL}`,
   credentials: "same-origin",
 });
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:8080/graphql`,
+  uri: `ws://${CONFIG.APOLLO_HOST_URL}`,
   // uri: CONFIG.APOLLO_HOST_URL,
   options: {
     reconnect: true,
@@ -90,10 +90,7 @@ const createClient = async (
               }
             }
           ),
-          new HttpLink({
-            uri: CONFIG.APOLLO_HOST_URL,
-            credentials: "same-origin",
-          }),
+          httpLink,
         ])
       ),
       cache,

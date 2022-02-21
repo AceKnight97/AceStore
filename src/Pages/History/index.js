@@ -2,22 +2,20 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import HomeHeader from "../../Components/Pages/Home/HomeHeader";
 import auth from "../../Helpers/auth";
 import CustomerOrders from "../CustomerOrders";
 import "./_history.scss";
 
 const History = (props) => {
-  const location = useLocation();
   const history = useHistory();
   const { className } = props;
 
   useEffect(() => {
     if (!auth.isSuccess()) {
       console.log({ login: props.login, auth: auth.isSuccess() });
-      history.push("/acestore");
-      setState({});
+      history?.push("/acestore");
     }
   }, [props.login]);
 
