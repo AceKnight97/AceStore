@@ -2,6 +2,7 @@ import {
   ApolloClient,
   ApolloLink,
   HttpLink,
+  split,
   InMemoryCache,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
@@ -9,10 +10,34 @@ import { onError } from "@apollo/client/link/error";
 import packageJson from "../../package.json";
 import { CONFIG } from "../Constants";
 import auth from "../Helpers/auth";
-
+import { WebSocketLink } from "@apollo/client/link/ws";
+import { SubscriptionClient } from "subscriptions-transport-ws";
 // import CONFIG from '../Config';
 import APP_FLOW_ACTIONS from "../Constants";
 import emitter from "../Utils/eventEmitter";
+import { getMainDefinition } from "@apollo/client/utilities";
+
+const httpLink = new HttpLink({
+  uri: "http://localhost:8080/graphql",
+});
+
+const wsLink = new WebSocketLink({
+  uri: "ws://localhost:8080/graphql",
+  options: {
+    reconnect: true,
+  },
+});
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === "OperationDefinition" &&
+      definition.operation === "subscription"
+    );
+  },
+  wsLink,
+  httpLink
+);
 
 const cache = new InMemoryCache({ addTypename: false });
 
@@ -74,11 +99,23 @@ const createClient = async (
             credentials: "same-origin",
           }),
         ])
+        // ({ query }) => {
+        //   const definition = getMainDefinition(query);
+        //   return (
+        //     definition.kind === "OperationDefinition" &&
+        //     definition.operation === "subscription"
+        //   );
+        // },
+        // wsLink
       ),
+      // link: ApolloLink.from([splitLink]),
       cache,
       defaultOptions: isUsingCache ? undefined : defaultOptions,
       name: "web",
       version: packageJson.version,
+      // client: new SubscriptionClient("ws://localhost:8080/graphql", {
+      //   reconnect: true,
+      // }),
     });
   } catch (error) {
     throw error;

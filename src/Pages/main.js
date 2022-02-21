@@ -8,12 +8,14 @@ import {
   Switch,
   useHistory,
 } from "react-router-dom";
+// import subscribeNewFoodOrders from "../Apollo/Functions/Subscribe/subscribeNewFoodOrders";
 import Supergraphic from "../Components/UI/Supergraphic";
 import APP_FLOW_ACTIONS, { MESSAGES } from "../Constants";
 import auth from "../Helpers/auth";
 import { useEmitter } from "../Helpers/customHooks";
 import { logoutRequest } from "../Redux/Actions/login";
 import reloadPageRequest from "../Redux/Actions/reload";
+import apolloSubscriptions from "../Utils/apolloSubscriptions";
 import FoodOrder from "./FoodOrder";
 import History from "./History";
 import Home from "./Home";
@@ -33,6 +35,21 @@ const Main = (props) => {
     // };
   }, []);
 
+  // const subscribe = async () => {
+  //   try {
+  //     subscribeNewFoodOrders();
+  //   } catch (error) {
+  //     console.log("Failed to subscribe: ", error);
+  //   }
+  // };
+
+  useEffect(() => {
+    if (auth.getRole() === "Admin") {
+      // subscribe();
+      apolloSubscriptions.connectToServer();
+    }
+  }, []);
+
   const loginRequestListener = useCallback(() => {
     alert(MESSAGES.EXPIRED_TOKEN);
     auth.logout();
@@ -40,7 +57,12 @@ const Main = (props) => {
     history.push("/acestore");
   }, []);
 
+  const newFoodOrdersListener = useCallback((data) => {
+    console.log({ data });
+  }, []);
+
   useEmitter(APP_FLOW_ACTIONS.LOGOUT_REQUEST, loginRequestListener, []);
+  useEmitter(APP_FLOW_ACTIONS.NEW_FOOD_ORDERS, newFoodOrdersListener, []);
 
   return (
     <main className="div-root">

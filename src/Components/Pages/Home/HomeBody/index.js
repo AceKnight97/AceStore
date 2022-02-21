@@ -63,22 +63,22 @@ const HomeBody = (props) => {
   };
 
   const onChangeCart = (item = {}, title = "") => {
-    console.log({ item });
+    // console.log({ item });
     const { data } = _.find(foodData, (x) => x.title === title);
     const cardTemp = _.find(data, (x) => x.name === item.name);
     _.assign(cardTemp, { ...item });
-    console.log({ foodData });
+    // console.log({ foodData });
     auth.setFoodData(foodData);
     setState({ foodData });
   };
 
   const onFilterFood = (filterObject = {}) => {
-    setState({ foodData: [] });
+    setState({ foodData: [], loading: true });
     setTimeout(() => {
       const newFoodata = handleFilterFood(filterObject, state.rawFoodData);
       // console.log({ newFoodata });
-      setState({ foodData: _.cloneDeep(newFoodata) });
-    }, 1);
+      setState({ foodData: _.cloneDeep(newFoodata), loading: false });
+    }, 400);
   };
 
   const renderToper = () => (
@@ -92,8 +92,6 @@ const HomeBody = (props) => {
       />
     </div>
   );
-
-  // console.log({ foodData });
 
   return (
     <div>

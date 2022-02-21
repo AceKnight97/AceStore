@@ -1,0 +1,21 @@
+.handle-user-ui {
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  &-edit-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &-editing {
+    margin-top: 2rem;
+    width: 400px;
+  }
+  &-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // width: 400px;
+    margin-top: 2rem;
+  }
+}

@@ -20,6 +20,7 @@ const SIGN_IN = gql`
           address
           phone
           dob
+          isVerified
         }
       }
     }

@@ -13,9 +13,13 @@ const Supergraphic = (props) => {
   const { pathname } = location;
   const [state, setState] = useMergeState({});
   const { className } = props;
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
+  const isAtHome = pathname.includes("/acestore");
 
-  const onClickHome = (e) => {
+  const onClickHome = () => {
+    if (isAtHome) {
+      return;
+    }
     history.push("/acestore");
   };
 
@@ -37,7 +41,11 @@ const Supergraphic = (props) => {
     }
     return (
       <div className="bosch-header-title">
-        <NavLink to="/acestore" onClick={onClickHome}>
+        <NavLink
+          to="/acestore"
+          onClick={onClickHome}
+          // className={isAtHome ? "cur-not-allowed" : ""}
+        >
           Home
         </NavLink>
         {title ? (
@@ -67,7 +75,7 @@ const Supergraphic = (props) => {
         </div>
         <div className="bosch-header-group">Acestore</div>
       </div>
-      {!pathname.includes("/acestore") && (
+      {!isAtHome && (
         <NavLink to="/acestore" className="not-home-back-btn">
           Go back
         </NavLink>

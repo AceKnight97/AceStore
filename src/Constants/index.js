@@ -9,6 +9,8 @@ const APP_FLOW_ACTIONS = {
 
   LOGOUT_REQUEST: "LOGOUT_REQUEST",
   LOGOUT_COMPLETE: "LOGOUT_COMPLETE",
+
+  NEW_FOOD_ORDERS: "NEW_FOOD_ORDERS",
 };
 export default APP_FLOW_ACTIONS;
 
@@ -23,11 +25,17 @@ export const PAGE_MANAGER = {
 };
 export const CONFIG = {
   // APOLLO_HOST_URL: "https://localhost:44360",
-  APOLLO_HOST_URL: "https://retail-store-java.herokuapp.com/",
-  // APOLLO_HOST_URL: "http://localhost:8080",
+  // APOLLO_HOST_URL: "https://retail-store-java.herokuapp.com/",
+  APOLLO_HOST_URL: "http://localhost:8080/",
   // APOLLO_HOST_URL: "https://graphql-save.herokuapp.com",
 };
 
 export const MESSAGES = {
   EXPIRED_TOKEN: "Your login session has expired, please login again.",
+};
+
+export const EMITTER_CONSTANTS = {
+  CONNECT: "",
+  TEST: "",
+  NEW_CARE_PLAN: "NEW_CARE_PLAN",
 };

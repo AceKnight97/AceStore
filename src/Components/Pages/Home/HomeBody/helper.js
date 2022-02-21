@@ -106,7 +106,7 @@ export const handleFilterFood = (filterObject = {}, foodData = []) => {
   });
   // console.log({ newFoodata, foodData });
 
-  return newFoodata;
+  return _.filter(newFoodata, (x) => x.data?.length !== 0);
 };
 
 // const arr = [

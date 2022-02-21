@@ -5,10 +5,11 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import HomeHeader from "../../Components/Pages/Home/HomeHeader";
+import HandleUserUI from "../../Components/UI/HandleUserUI";
 import auth from "../../Helpers/auth";
 import { useMergeState } from "../../Helpers/customHooks";
-import HandleChangeFood from "../HandleChangeFood";
 import CustomerOrders from "../CustomerOrders";
+import HandleChangeFood from "../HandleChangeFood";
 import "./_user.scss";
 
 const { TabPane } = Tabs;
@@ -30,13 +31,11 @@ const User = (props) => {
   const { className } = props;
   const { activeTab } = state;
   const isAdmin = auth.getRole() === "Admin";
-  const { email, username, phone, address, notes, role } = auth.getDataLogin();
 
   useEffect(() => {
     if (!auth.isSuccess()) {
       history.push("/acestore");
       setState({});
-      // console.log({ Nologin: props.login });
     }
   }, [props.login]);
 
@@ -58,38 +57,7 @@ const User = (props) => {
             tab={<div className="user-body-title">User profile</div>}
             key={USER_PROFILE}
           >
-            <div className="user-body-profile">
-              <div className="fr-sb">
-                <div className="flex">
-                  <span className="b mr-4">Email:</span>
-                  <span>{email}</span>
-                </div>
-                <div className="flex">
-                  <span className="b mr-4">Username:</span>
-                  <span>{username}</span>
-                </div>
-                <div className="flex">
-                  <span className="b mr-4">Phone:</span>
-                  <span>{phone}</span>
-                </div>
-              </div>
-              <div className="fr-sb">
-                <div className="flex">
-                  <span className="b mr-4">Address:</span>
-                  <span>{address}</span>
-                </div>
-                {/*
-                    <div className="flex">
-                      <span className="b mr-4">Notes:</span>
-                      <span>{notes}</span>
-                    </div>
-                    */}
-                <div className="flex">
-                  <span className="b mr-4">Role:</span>
-                  <span>{role || "Customer"}</span>
-                </div>
-              </div>
-            </div>
+            <HandleUserUI className="user-body-profile"></HandleUserUI>
           </TabPane>
           {isAdmin && (
             <>

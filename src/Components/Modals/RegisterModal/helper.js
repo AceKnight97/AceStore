@@ -59,7 +59,7 @@ export const disabledRegister = (state = {}) => {
 };
 
 export const mutationCreateUser = async (data) => {
-  console.log({ data });
+  // console.log({ data });
   const { email, username, password, phone, address } = data;
   try {
     return await handleRegister({
