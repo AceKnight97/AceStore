@@ -203,6 +203,7 @@ InputCT.propTypes = {
     PropTypes.string,
     PropTypes.arrayOf([PropTypes.string]),
     PropTypes.number,
+    PropTypes.shape(),
   ]),
   inputClassName: PropTypes.string,
   maxLength: PropTypes.number,

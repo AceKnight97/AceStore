@@ -1,0 +1,29 @@
+.verify-account {
+  // .styles_react-code-input-container__tpiKG {
+  //   width: unset !important;
+  // }
+  .styles_react-code-input__CRulA {
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    margin-top: 4px;
+  }
+  &-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &-editing {
+    margin-top: 2rem;
+  }
+  &-resend {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+  }
+  &-countdown {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
