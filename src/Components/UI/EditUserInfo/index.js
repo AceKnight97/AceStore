@@ -1,32 +1,38 @@
 import { Button } from "antd";
 import classnames from "classnames";
-import moment from "moment";
+import _ from "lodash";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useRef } from "react";
+import auth from "../../../Helpers/auth";
 import { useMergeState } from "../../../Helpers/customHooks";
 import InputCT from "../../Inputs/InputCT";
 import RadioCT from "../../Inputs/RadioCT";
+import { mutationUpdateUser } from "./helper";
 import "./_edit-user-info.scss";
 
 const EditUserInfo = (props) => {
+  const originalData = useRef({
+    email: props.email,
+    username: props.username,
+    address: props.address,
+    dob: props.dob,
+    gender: props.gender,
+  });
   const [state, setState] = useMergeState({
     email: props.email,
     username: props.username,
-    phone: props.phone,
     address: props.address,
     dob: props.dob,
     gender: props.gender,
     emailErr: "",
     usernameErr: "",
-    phoneErr: "",
     addressErr: "",
-    type: "DISPLAY",
+    loading: false,
   });
-  const { className, role, onClickCancel, onClickConfirm } = props;
+  const { className, role, onClickCancel, phone } = props;
   const {
     email,
     username,
-    phone,
     address,
     dob,
     gender,
@@ -35,10 +41,30 @@ const EditUserInfo = (props) => {
     usernameErr,
     phoneErr,
     addressErr,
+    loading,
   } = state;
 
   const onChange = (key, value) => {
-    setState({ [key]: value });
+    setState({
+      [key]: value,
+      emailErr: "",
+      usernameErr: "",
+      addressErr: "",
+    });
+  };
+
+  const onClickConfirm = async () => {
+    setState({ loading: true });
+    const res = await mutationUpdateUser(state);
+    console.log({ res });
+    if (res.isSuccess) {
+      auth.setDatalogin(res.user);
+      alert("Successfully update user information!");
+      onClickCancel();
+    } else {
+      alert("Failed to update user information, please try again!");
+    }
+    setState({ loading: false });
   };
 
   return (
@@ -116,11 +142,22 @@ const EditUserInfo = (props) => {
         </div>
       </div>
       <div className="handle-user-ui-btns">
-        <Button className="mr-32" onClick={onClickCancel}>
+        <Button className="mr-32" onClick={onClickCancel} disabled={loading}>
           Cancel
         </Button>
 
-        <Button type="primary" onClick={onClickConfirm}>
+        <Button
+          type="primary"
+          onClick={onClickConfirm}
+          loading={loading}
+          disabled={_.isEqual(originalData.current, {
+            email,
+            username,
+            address,
+            dob,
+            gender,
+          })}
+        >
           Confirm
         </Button>
       </div>
@@ -137,7 +174,6 @@ EditUserInfo.defaultProps = {
   gender: "",
   dob: undefined,
   onClickCancel: () => {},
-  onClickConfirm: () => {},
 };
 EditUserInfo.propTypes = {
   className: PropTypes.string,
@@ -147,9 +183,8 @@ EditUserInfo.propTypes = {
   address: PropTypes.string,
   role: PropTypes.string,
   gender: PropTypes.string,
-  dob: PropTypes.shape(),
+  dob: PropTypes.oneOfType([PropTypes.shape(), PropTypes.string]),
   onClickCancel: PropTypes.func,
-  onClickConfirm: PropTypes.func,
 };
 
 export default EditUserInfo;

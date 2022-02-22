@@ -6,7 +6,6 @@ import {
   Redirect,
   Route,
   Switch,
-  useHistory,
 } from "react-router-dom";
 import Supergraphic from "../Components/UI/Supergraphic";
 import APP_FLOW_ACTIONS, { MESSAGES } from "../Constants";
@@ -20,7 +19,6 @@ import Home from "./Home";
 import User from "./User";
 
 const Main = (props) => {
-  const history = useHistory();
   useEffect(() => {
     window.onbeforeunload = () => {};
     window.onload = () => {
@@ -32,7 +30,6 @@ const Main = (props) => {
     alert(MESSAGES.EXPIRED_TOKEN);
     auth.logout();
     props.logoutRequest();
-    history.push("/acestore");
   }, []);
 
   useEmitter(APP_FLOW_ACTIONS.LOGOUT_REQUEST, loginRequestListener, []);

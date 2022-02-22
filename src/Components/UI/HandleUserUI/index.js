@@ -1,12 +1,9 @@
-import { Button } from "antd";
 import classnames from "classnames";
 import moment from "moment";
 import PropTypes from "prop-types";
 import React from "react";
 import auth from "../../../Helpers/auth";
 import { useMergeState } from "../../../Helpers/customHooks";
-import InputCT from "../../Inputs/InputCT";
-import RadioCT from "../../Inputs/RadioCT";
 import ChangeUserPassword from "../ChangeUserPassword";
 import DisplayUserInfo from "../DisplayUserInfo";
 import EditUserInfo from "../EditUserInfo";
@@ -14,41 +11,13 @@ import VerifyAccount from "../VerifyAccount";
 import "./_handle-user-ui.scss";
 
 const HandleUserUI = (props) => {
-  const originalData = auth.getDataLogin();
   const [state, setState] = useMergeState({
-    email: originalData.email || "",
-    username: originalData.username || "",
-    phone: originalData.phone || "",
-    address: originalData.address || "",
-    dob: originalData.dob || "",
-    gender: originalData.gender || "",
-    emailErr: "",
-    usernameErr: "",
-    phoneErr: "",
-    addressErr: "",
     type: "DISPLAY",
   });
   const { className } = props;
-  const { role, isVerified } = originalData;
-  const {
-    email,
-    username,
-    phone,
-    address,
-    dob,
-    gender,
-
-    emailErr,
-    usernameErr,
-    phoneErr,
-    addressErr,
-
-    type,
-  } = state;
-
-  const onChange = (key, value) => {
-    setState({ [key]: value });
-  };
+  const { type } = state;
+  const { role, isVerified, email, username, phone, address, dob, gender } =
+    auth.getDataLogin();
 
   const onClickCancel = () => {
     setState({ type: "DISPLAY" });
@@ -66,10 +35,6 @@ const HandleUserUI = (props) => {
     setState({ type: "CHANGE_PASSWORD" });
   };
 
-  const onClickConfirm = () => {};
-
-  const onClickConfirmChangePas = () => {};
-
   const renderView = () => {
     switch (type) {
       case "EDIT":
@@ -83,7 +48,6 @@ const HandleUserUI = (props) => {
             dob={dob || undefined}
             role={role}
             onClickCancel={onClickCancel}
-            onClickConfirm={onClickConfirm}
           ></EditUserInfo>
         );
       case "CHANGE_PASSWORD":

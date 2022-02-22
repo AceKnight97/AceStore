@@ -1,5 +1,5 @@
 import gql from "graphql-tag";
-import { USER } from "../Fragments/user";
+import USER from "../Fragments/user";
 
 const ROOT_SIGN_IN = gql`
   mutation signIn($username: String!, $password: String!) {

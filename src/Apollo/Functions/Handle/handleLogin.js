@@ -2,6 +2,7 @@
 // import { CONFIG } from "../../../Constants";
 import gql from "graphql-tag";
 import { client } from "../../apolloClient";
+import USER from "../../Fragments/user";
 
 const SIGN_IN = gql`
   mutation signIn($phone: String!, $password: String!) {
@@ -10,17 +11,7 @@ const SIGN_IN = gql`
       data {
         token
         user {
-          id
-          username
-          email
-          role
-          signUpDate
-          status
-          gender
-          address
-          phone
-          dob
-          isVerified
+          ...${USER}
         }
       }
     }

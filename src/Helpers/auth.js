@@ -59,6 +59,7 @@ const auth = {
   },
 
   setDatalogin(data) {
+    // data = user
     localStorage.login = JSON.stringify(data);
   },
 

@@ -35,7 +35,6 @@ const User = (props) => {
   useEffect(() => {
     if (!auth.isSuccess()) {
       history.push("/acestore");
-      setState({});
     }
   }, [props.login]);
 

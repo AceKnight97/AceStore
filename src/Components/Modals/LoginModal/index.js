@@ -39,6 +39,7 @@ const LoginModal = (props) => {
         auth.setDatalogin(resLogin.data.user);
         props.loginRequest(resLogin.data);
         onClickCancel();
+        alert("Login successfully!");
       } else {
         alert("Login failed " + resLogin.message);
       }
