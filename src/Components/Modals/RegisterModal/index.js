@@ -14,19 +14,16 @@ import {
 } from "./helper";
 
 const DEFAULT_DATA = {
-  email: "",
   password: "",
   confirmPassword: "",
-  username: "",
   phone: "",
   address: "",
 
-  emailErr: "",
   passwordErr: "",
   confirmPasswordErr: "",
-  usernameErr: "",
   phoneErr: "",
   addressErr: "",
+
   loading: false,
   isStep1: true,
 };
@@ -37,18 +34,16 @@ const RegisterModal = (props) => {
   });
   const { className, visible, onClickCancel } = props;
   const {
-    email,
     password,
     confirmPassword,
-    username,
     phone,
     address,
-    emailErr,
+
     passwordErr,
     confirmPasswordErr,
-    usernameErr,
     phoneErr,
     addressErr,
+
     loading,
     isStep1,
   } = state;
@@ -80,42 +75,44 @@ const RegisterModal = (props) => {
   };
 
   const onClickRightBtn = async () => {
-    const res = handleRightBtnClick(state);
-    if (res.finish) {
+    const errObj = handleRightBtnClick(state);
+    if (_.isEmpty(errObj)) {
       const obj = { loading: false };
       setState({ loading: true });
-      const resFinish = await mutationCreateUser(state);
-      // console.log({ resFinish });
-
-      if (resFinish.isSuccess) {
-        // auth.setHeaderData(resFinish.data);
+      const res = await mutationCreateUser(state);
+      if (res.isSuccess) {
         alert("Successfully creating user!");
         onClickCancel();
       } else {
-        alert("Failed to create user: " + resFinish.message);
+        alert("Failed to create user: " + res.message);
       }
       setState(obj);
     } else {
-      setState(res);
+      setState(errObj);
     }
   };
 
-  const renderStep1 = () => (
+  const renderMain = () => (
     <>
       <InputCT
-        title="Email"
-        name="email"
-        value={email}
+        title="Phone number"
+        name="phone"
+        value={phone}
         onChange={onChange}
-        placeholder="Enter your email"
-        errMes={emailErr}
+        placeholder="Enter your phone number"
+        className="mt-16"
+        type="NUMBER"
+        errMes={phoneErr}
+        allowLeadingZeros
+        prefix="+"
+        maxLength={15}
       />
       <InputCT
         title="Password"
         name="password"
         value={password}
         onChange={onChange}
-        placeholder="Enter your email"
+        placeholder="Enter your password"
         type="PASSWORD"
         className="mt-16"
         errMes={passwordErr}
@@ -129,30 +126,6 @@ const RegisterModal = (props) => {
         type="PASSWORD"
         className="mt-16"
         errMes={confirmPasswordErr}
-      />
-    </>
-  );
-
-  const renderStep2 = () => (
-    <>
-      <InputCT
-        title="Username"
-        name="username"
-        value={username}
-        onChange={onChange}
-        placeholder="Enter your username"
-        errMes={usernameErr}
-      />
-      <InputCT
-        title="Phone number"
-        name="phone"
-        value={phone}
-        onChange={onChange}
-        placeholder="Enter your phone number"
-        className="mt-16"
-        type="NUMBER"
-        errMes={phoneErr}
-        allowLeadingZeros
       />
       <InputCT
         title="Address"
@@ -176,20 +149,15 @@ const RegisterModal = (props) => {
       centered
     >
       <div className={classnames("register-modal-wrapper", className)}>
-        <ModalHeader
-          title={`Register step ${isStep1 ? "1" : "2"}/2`}
-          onClick={onClickCancel}
-        />
+        <ModalHeader title="Register" onClick={onClickCancel} />
 
-        <div className="register-modal-main">
-          {isStep1 ? renderStep1() : renderStep2()}
-        </div>
+        <div className="register-modal-main">{renderMain()}</div>
 
         <ModalFooter
           disabled={disabledRegister(state)}
-          leftTitle={isStep1 ? "Cancel" : "Back to step 1"}
-          rightTitle={isStep1 ? "Next" : "Finish"}
-          onClickLeftBtn={isStep1 ? onClickCancel : onClickBack}
+          leftTitle={"Cancel"}
+          rightTitle={"Register"}
+          onClickLeftBtn={onClickBack}
           onClickRightBtn={onClickRightBtn}
           loading={loading}
         />

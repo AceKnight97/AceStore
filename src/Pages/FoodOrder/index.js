@@ -2,7 +2,7 @@ import { Button } from "antd";
 import classnames from "classnames";
 import _ from "lodash";
 import PropTypes from "prop-types";
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import InputCT from "../../Components/Inputs/InputCT";
@@ -34,15 +34,6 @@ const FoodOrder = (props) => {
   const { className } = props;
 
   const { foodData, anyCustomerVisible, notes, destination, loading } = state;
-
-  // useEffect(() => {
-  //   if (!auth.isSuccess()) {
-  //     console.log({ login: props.login, auth: auth.isSuccess() });
-  //     history.push("/acestore");
-  //     setState({});
-  //   }
-  // }, [props.login]);
-
   const { total } = calcCartTotal(location.state);
   const { address, phone, email } = auth.getDataLogin();
 

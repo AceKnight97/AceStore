@@ -4,20 +4,8 @@ import gql from "graphql-tag";
 import { client } from "../../apolloClient";
 
 const SIGN_UP = gql`
-  mutation signUp(
-    $username: String!
-    $email: String!
-    $password: String!
-    $phone: String
-    $address: String
-  ) {
-    signUp(
-      username: $username
-      email: $email
-      password: $password
-      phone: $phone
-      address: $address
-    ) {
+  mutation signUp($phone: String!, $password: String!, $address: String!) {
+    signUp(phone: $phone, password: $password, address: $address) {
       isSuccess
       token
     }

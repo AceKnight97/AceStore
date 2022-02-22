@@ -1,72 +1,39 @@
 import { data } from "jquery";
 import handleRegister from "../../../Apollo/Functions/Handle/handleRegister";
-import { checkServerErr } from "../../../Helpers";
+import { checkServerErr, formatPhone } from "../../../Helpers";
 import { isValidEmail } from "../../../Utils";
 
 export const handleRightBtnClick = (state = {}) => {
-  const {
-    email,
-    password,
-    confirmPassword,
-    username,
-    phone,
-    address,
-    loading,
-    isStep1,
-  } = state;
-  if (isStep1) {
-    if (password.length < 6) {
-      return { passwordErr: "Password must have 6 or more characters" };
-    }
-    if (password !== confirmPassword) {
-      return { confirmPasswordErr: "Confirm password is not match" };
-    }
-    if (!isValidEmail(email)) {
-      return { emailErr: "Incorrect email format" };
-    }
-    return { isStep1: false };
-  } else {
-    if (phone.length < 9) {
-      return {};
-    }
-    return { finish: true };
+  const { password, confirmPassword, phone } = state;
+  if (password.length < 6) {
+    return { passwordErr: "Password must have 6 or more characters" };
+  }
+  if (password !== confirmPassword) {
+    return { confirmPasswordErr: "Confirm password is not match" };
+  }
+  // if (!isValidEmail(email)) {
+  //   return { emailErr: "Incorrect email format" };
+  // }
+  if (phone.length < 8) {
+    return { phoneErr: "Invalid phone number!" };
   }
 };
 
 export const disabledRegister = (state = {}) => {
-  const {
-    email,
-    password,
-    confirmPassword,
-    username,
-    phone,
-    address,
-    notes,
-    loading,
-    isStep1,
-  } = state;
+  const { password, confirmPassword, phone, address } = state;
 
-  if (isStep1) {
-    if (!email || !password || !confirmPassword) {
-      return true;
-    }
-  } else {
-    if (!username || !phone || !address) {
-      return true;
-    }
+  if (!phone || !address || !password || !confirmPassword) {
+    return true;
   }
   return false;
 };
 
 export const mutationCreateUser = async (data) => {
-  // console.log({ data });
-  const { email, username, password, phone, address } = data;
+  const { password, phone, address } = data;
   try {
     return await handleRegister({
-      email,
-      username,
+      phone: formatPhone(phone),
       password,
-      phone,
       address,
     });
   } catch (error) {

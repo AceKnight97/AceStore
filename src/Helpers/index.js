@@ -46,3 +46,13 @@ export const checkServerErr = (error = {}) => {
 
   return "";
 };
+
+export const formatPhone = (phone = "") => {
+  if (phone[0] === "0") {
+    return "+84" + phone.slice(1);
+  }
+  if (phone.slice(0, 2) !== "84") {
+    return "+84" + phone;
+  }
+  return "+" + phone;
+};

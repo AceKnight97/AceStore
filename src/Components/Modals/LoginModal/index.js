@@ -1,37 +1,32 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import classnames from "classnames";
-import _ from "lodash";
 import { Modal } from "antd";
-import ModalHeader from "../ModalHeader";
-import ModalFooter from "../ModalFooter";
-import { useMergeState } from "../../../Helpers/customHooks";
+import classnames from "classnames";
+import PropTypes from "prop-types";
+import React from "react";
 import auth from "../../../Helpers/auth";
+import { useMergeState } from "../../../Helpers/customHooks";
 import InputCT from "../../Inputs/InputCT";
+import ModalFooter from "../ModalFooter";
+import ModalHeader from "../ModalHeader";
 import { checkValidLogin, mutationSignIn } from "./helper";
 
 const DEFAULT_DATA = {
-  email: "",
+  phone: "",
   password: "",
 };
 
 const LoginModal = (props) => {
   const [state, setState] = useMergeState({
-    email: "",
+    phone: "",
     password: "",
-    emailErr: "",
+    phoneErr: "",
     passwordErr: "",
     loading: false,
   });
   const { className, visible, onClickCancel } = props;
-  const { email, password, emailErr, passwordErr, loading } = state;
-
-  useEffect(() => {
-    // setState({ ...DEFAULT_DATA });
-  }, []);
+  const { phone, password, phoneErr, passwordErr, loading } = state;
 
   const onChange = (key, value) => {
-    setState({ [key]: value, emailErr: "", passwordErr: "" });
+    setState({ [key]: value, phoneErr: "", passwordErr: "" });
   };
 
   const onClickRightBtn = async () => {
@@ -68,19 +63,23 @@ const LoginModal = (props) => {
 
         <div className="login-modal-main">
           <InputCT
-            title="Email"
-            name="email"
-            value={email}
+            title="Phone number"
+            name="phone"
+            value={phone}
             onChange={onChange}
-            placeholder="Enter your email"
-            errMes={emailErr}
+            placeholder="Enter your phone number"
+            errMes={phoneErr}
+            allowLeadingZeros
+            prefix="+"
+            type="NUMBER"
+            maxLength={15}
           />
           <InputCT
             title="Password"
             name="password"
             value={password}
             onChange={onChange}
-            placeholder="Enter your email"
+            placeholder="Enter your phone"
             type="PASSWORD"
             className="mt-16"
             errMes={passwordErr}
@@ -88,7 +87,7 @@ const LoginModal = (props) => {
         </div>
 
         <ModalFooter
-          disabled={!email || !password}
+          disabled={!phone || !password}
           leftTitle="Cancel"
           rightTitle="Login"
           onClickLeftBtn={onClickCancel}

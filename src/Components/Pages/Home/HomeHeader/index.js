@@ -44,7 +44,7 @@ const HomeHeader = (props) => {
     setState({});
   };
 
-  const { isVerify = true, username } = auth.getDataLogin();
+  const { isVerify = true, phone } = auth.getDataLogin();
 
   useEffect(() => {
     if (_.isEmpty(props.login) && _.isEmpty(auth.getDataLogin())) {
@@ -59,7 +59,7 @@ const HomeHeader = (props) => {
         {/*  <img src={logo} alt="Logo" /> */}
 
         <div className="home-header-btns">
-          {username ? (
+          {phone ? (
             <>
               {!isVerify && (
                 <Button
@@ -76,7 +76,7 @@ const HomeHeader = (props) => {
                 onClick={onClickUsername}
                 className="home-header-username-btn"
               >
-                {username}
+                {phone}
               </Button>
               <Button
                 type="link"

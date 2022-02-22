@@ -4,34 +4,31 @@ const auth = {
   login(data) {
     console.log("login data: ", data);
     const { user, isSuccess, token } = data;
-    // const { username, _id } = user;
-
-    // console.log({ user });
 
     localStorage.isSuccess = isSuccess;
     localStorage.token = token;
     localStorage.user = JSON.stringify(user);
     localStorage.role = user.role;
-    // localStorage.username = username;
-    // localStorage.userId = _id;
-    // localStorage.isSuccess = isSuccess;
-    // localStorage.role = user.role;
   },
 
   getRole() {
     return localStorage.role;
   },
+
   setMenu(data) {
     localStorage.menu = JSON.stringify(data);
   },
+
   getMenu() {
     return localStorage.menu && localStorage.menu !== "undefined"
       ? JSON.parse(localStorage.menu)
       : [];
   },
+
   setKindOfFood(data) {
     localStorage.kindOfFood = JSON.stringify(data);
   },
+
   getKindOfFood() {
     return localStorage.kindOfFood && localStorage.kindOfFood !== "undefined"
       ? JSON.parse(localStorage.kindOfFood)
@@ -44,6 +41,7 @@ const auth = {
   setFoodData(data) {
     localStorage.foodData = JSON.stringify(data);
   },
+
   getFoodData() {
     return localStorage.foodData && localStorage.foodData !== "undefined"
       ? JSON.parse(localStorage.foodData)

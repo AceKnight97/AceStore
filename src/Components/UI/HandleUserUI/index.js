@@ -5,6 +5,7 @@ import React from "react";
 import auth from "../../../Helpers/auth";
 import { useMergeState } from "../../../Helpers/customHooks";
 import InputCT from "../../Inputs/InputCT";
+import RadioCT from "../../Inputs/RadioCT";
 import "./_handle-user-ui.scss";
 
 const HandleUserUI = (props) => {
@@ -14,7 +15,8 @@ const HandleUserUI = (props) => {
     username: originalData.username || "",
     phone: originalData.phone || "",
     address: originalData.address || "",
-    role: originalData.role || "",
+    dob: originalData.dob || "",
+    gender: originalData.gender || "",
     emailErr: "",
     usernameErr: "",
     phoneErr: "",
@@ -22,12 +24,15 @@ const HandleUserUI = (props) => {
     type: "DISPLAY",
   });
   const { className } = props;
+  const { role } = originalData;
   const {
     email,
     username,
     phone,
     address,
-    role,
+    dob,
+    gender,
+
     emailErr,
     usernameErr,
     phoneErr,
@@ -75,7 +80,6 @@ const HandleUserUI = (props) => {
                 onChange={onChange}
                 placeholder="Enter your email"
                 errMes={emailErr}
-                disabled
               />
               <InputCT
                 title="Username"
@@ -96,6 +100,9 @@ const HandleUserUI = (props) => {
                 type="NUMBER"
                 errMes={phoneErr}
                 allowLeadingZeros
+                prefix="+"
+                maxLength={15}
+                disabled
               />
               <InputCT
                 title="Address"
@@ -106,6 +113,24 @@ const HandleUserUI = (props) => {
                 className="mt-16"
                 errMes={addressErr}
               />
+              <InputCT
+                type="DATE"
+                title="Date of birth"
+                name="dob"
+                value={dob}
+                onChange={onChange}
+                placeholder="Enter your dob"
+                className="mt-16"
+              />
+              <RadioCT
+                data={["Male", "Female", "Other"]}
+                value={gender}
+                name="gender"
+                title="Gender"
+                titleClassName="pos-re"
+                className="mt-16"
+                onChange={onChange}
+              ></RadioCT>
             </div>
           </div>
         );
