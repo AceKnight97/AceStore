@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import React from "react";
 import { useMergeState } from "../../../Helpers/customHooks";
 import InputCT from "../../Inputs/InputCT";
+import ConfirmModal from "../../Modals/ConfirmModal";
+import { mutationChangePassword } from "./helper";
 import "./_change-user-password.scss";
 
 const ChangeUserPassword = (props) => {
@@ -15,6 +17,9 @@ const ChangeUserPassword = (props) => {
     passwordErr: "",
     newPasswordErr: "",
     confirmPasswordErr: "",
+
+    visibleChangePass: false,
+    loading: false,
   });
   const { className, onClickCancel } = props;
   const {
@@ -24,14 +29,42 @@ const ChangeUserPassword = (props) => {
     passwordErr,
     newPasswordErr,
     confirmPasswordErr,
+    visibleChangePass,
+    loading,
   } = state;
 
   const onChange = (key, value) => {
-    setState({ [key]: value });
+    setState({
+      [key]: value,
+      confirmPasswordErr: "",
+      newPasswordErr: "",
+      passwordErr: "",
+    });
   };
 
-  const onClickConfirmChangePas = () => {
-    onClickCancel();
+  const toggleClickChangePass = () => {
+    if (password && password.length < 6) {
+      setState({ passwordErr: "Password is too short" });
+      return;
+    }
+    if (confirmPassword && confirmPassword !== newPassword) {
+      setState({ confirmPasswordErr: "Confirm password doesn't match" });
+      return;
+    }
+    if (newPassword && newPassword.length < 6) {
+      setState({ newPasswordErr: "New password is too short" });
+      return;
+    }
+    setState({ visibleChangePass: !visibleChangePass });
+  };
+
+  const onClickChangePass = async () => {
+    setState({ loading: true });
+    const res = await mutationChangePassword(password, newPassword);
+    if (res.isSuccess) {
+      onClickCancel();
+    }
+    setState({ loading: false, visibleChangePass: false });
   };
 
   return (
@@ -72,14 +105,25 @@ const ChangeUserPassword = (props) => {
       </div>
 
       <div className="handle-user-ui-btns">
-        <Button className="mr-32" onClick={onClickCancel}>
+        <Button className="mr-32" onClick={onClickCancel} disabled={loading}>
           Cancel
         </Button>
 
-        <Button type="primary" onClick={onClickConfirmChangePas}>
+        <Button
+          type="primary"
+          onClick={toggleClickChangePass}
+          loading={loading}
+          disabled={!password || !newPassword || !confirmPassword}
+        >
           Change
         </Button>
       </div>
+      <ConfirmModal
+        type="CHANGE_PASSWORD"
+        toggleClick={toggleClickChangePass}
+        onClick={onClickChangePass}
+        visible={visibleChangePass}
+      ></ConfirmModal>
     </div>
   );
 };

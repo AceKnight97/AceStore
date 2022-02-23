@@ -36,6 +36,13 @@ const ConfirmModal = (props) => {
       rightBtnTitle = "Yes";
       break;
     }
+    case "CHANGE_PASSWORD": {
+      title = "Change password";
+      content = "Are you sure want to change new password?";
+      leftBtnTitle = "Cancel";
+      rightBtnTitle = "Yes";
+      break;
+    }
     default: {
       break;
     }
