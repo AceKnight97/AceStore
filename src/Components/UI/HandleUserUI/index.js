@@ -57,7 +57,12 @@ const HandleUserUI = (props) => {
           ></ChangeUserPassword>
         );
       case "VERIFY":
-        return <VerifyAccount onClickCancel={onClickCancel}></VerifyAccount>;
+        return (
+          <VerifyAccount
+            onClickCancel={onClickCancel}
+            email={email}
+          ></VerifyAccount>
+        );
       default:
         return (
           <DisplayUserInfo

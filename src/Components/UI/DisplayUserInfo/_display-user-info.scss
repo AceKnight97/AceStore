@@ -1,2 +1,13 @@
 .display-user-info {
+  .flex {
+    width: calc(100% / 3);
+    // white-space: pre;
+    // overflow-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .fr-sb {
+    margin-top: 1.5rem;
+  }
 }

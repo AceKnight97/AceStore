@@ -3,6 +3,7 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { useMergeState } from "../../../Helpers/customHooks";
+import { isValidEmail } from "../../../Utils";
 import InputCT from "../../Inputs/InputCT";
 import ModalFooter from "../ModalFooter";
 import ModalHeader from "../ModalHeader";
@@ -24,7 +25,6 @@ const DEFAULT_DATA = {
   notes: "",
   destination: "",
 
-  emailErr: "",
   usernameErr: "",
   phoneErr: "",
   addressErr: "",
@@ -48,7 +48,6 @@ const AnyCustomerModal = (props) => {
   const {
     email,
     username,
-    emailErr,
     usernameErr,
     loading,
     phone,
@@ -64,7 +63,6 @@ const AnyCustomerModal = (props) => {
   const onChange = (key, value) => {
     setState({
       [key]: value,
-      emailErr: "",
       usernameErr: "",
       destinationErr: "",
       phoneErr: "",
@@ -133,7 +131,7 @@ const AnyCustomerModal = (props) => {
               value={email}
               onChange={onChange}
               placeholder="Enter your email"
-              errMes={emailErr}
+              errMes={isValidEmail(email) ? "" : "Invalid email!"}
             />
             <InputCT
               title="Username"

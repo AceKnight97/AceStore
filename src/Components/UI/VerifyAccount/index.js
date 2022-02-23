@@ -1,21 +1,31 @@
 import { Button } from "antd";
 import classnames from "classnames";
+import _ from "lodash";
 import PropTypes from "prop-types";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import ReactCodeInput from "react-verification-code-input";
+import auth from "../../../Helpers/auth";
 import { useMergeState } from "../../../Helpers/customHooks";
+import ConfirmModal from "../../Modals/ConfirmModal";
+import { mutationSendCode, mutationVerifiedEmail } from "./helper";
 import "./_verify-account.scss";
 
 const VerifyAccount = (props) => {
-  const showNotificationTime = useRef(0);
   const [state, setState] = useMergeState({
     verifycationCode: "",
     invalidCode: "",
-    countingTime: 60,
+    countingTime: 30,
     loading: false,
+    visibleSendCode: false,
   });
   const { className, onClickCancel } = props;
-  const { verifycationCode, invalidCode, countingTime, loading } = state;
+  const {
+    verifycationCode,
+    invalidCode,
+    countingTime,
+    loading,
+    visibleSendCode,
+  } = state;
 
   useEffect(() => {
     setTimeout(() => {
@@ -29,14 +39,40 @@ const VerifyAccount = (props) => {
     setState({ [key]: value });
   };
 
-  const onClickVerify = () => {
-    setState({ countingTime: 60 });
+  const onClickSendCode = async () => {
+    setState({ loading: true });
+    const res = await mutationSendCode();
+    const obj = { loading: false, visibleSendCode: false };
+    if (res.isSuccess) {
+      _.assign(obj, { countingTime: 60 });
+    }
+    setState(obj);
+  };
+
+  const toggleClickSendCode = () => {
+    setState({ visibleSendCode: !visibleSendCode });
+  };
+
+  const onClickVerify = async () => {
+    setState({ loading: true });
+    const res = await mutationVerifiedEmail(verifycationCode);
+    const obj = { loading: false };
+    if (res.isSuccess) {
+      auth.setDatalogin({ ...auth.getDataLogin(), isVerified: true });
+      onClickCancel();
+    }
+    setState(obj);
   };
 
   return (
     <div className={classnames("verify-account", className)}>
       <div className="verify-account-wrapper">
         <div className="verify-account-editing">
+          <div className="flex">
+            <span className="b mr-4">Email:</span>
+            <span>{props.email}</span>
+          </div>
+
           <ReactCodeInput
             autoFocus={false}
             values={verifycationCode.split()}
@@ -48,6 +84,7 @@ const VerifyAccount = (props) => {
             placeholder={["_", "_", "_", "_", "_", "_"]}
             onChange={(x) => onChange("verifycationCode", x)}
             title="Verify account"
+            className="mt-16"
           />
 
           {invalidCode ? (
@@ -57,25 +94,38 @@ const VerifyAccount = (props) => {
           ) : null}
 
           <div className="verify-account-resend">
-            {/* {countingTime !== 0 && (
-              <div className="verify-account-countdown">{countingTime}</div>
-            )} */}
-            <Button type="link" className="mt-16" disabled={countingTime !== 0}>
-              {`Resend code ${countingTime}`}
+            <Button
+              type="link"
+              className="mt-16"
+              disabled={countingTime !== 0}
+              onClick={toggleClickSendCode}
+            >
+              {`Resend code ${countingTime !== 0 ? countingTime : ""}`}
             </Button>
           </div>
         </div>
       </div>
 
       <div className="handle-user-ui-btns">
-        <Button className="mr-32" onClick={onClickCancel}>
+        <Button className="mr-32" onClick={onClickCancel} disabled={loading}>
           Cancel
         </Button>
 
-        <Button type="primary" onClick={onClickVerify}>
+        <Button
+          type="primary"
+          onClick={onClickVerify}
+          loading={loading}
+          disabled={verifycationCode.length !== 6}
+        >
           Verify
         </Button>
       </div>
+      <ConfirmModal
+        type="SEND_VERIFY_CODE"
+        toggleClick={toggleClickSendCode}
+        onClick={onClickSendCode}
+        visible={visibleSendCode}
+      ></ConfirmModal>
     </div>
   );
 };

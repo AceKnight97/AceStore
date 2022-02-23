@@ -29,6 +29,13 @@ const ConfirmModal = (props) => {
       rightBtnTitle = "Yes";
       break;
     }
+    case "SEND_VERIFY_CODE": {
+      title = "Send code";
+      content = "Are you sure want to send code?";
+      leftBtnTitle = "Cancel";
+      rightBtnTitle = "Yes";
+      break;
+    }
     default: {
       break;
     }

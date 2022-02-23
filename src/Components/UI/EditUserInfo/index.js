@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import React, { useRef } from "react";
 import auth from "../../../Helpers/auth";
 import { useMergeState } from "../../../Helpers/customHooks";
+import { isValidEmail } from "../../../Utils";
 import InputCT from "../../Inputs/InputCT";
 import RadioCT from "../../Inputs/RadioCT";
 import { mutationUpdateUser } from "./helper";
@@ -24,7 +25,6 @@ const EditUserInfo = (props) => {
     address: props.address,
     dob: props.dob,
     gender: props.gender,
-    emailErr: "",
     usernameErr: "",
     addressErr: "",
     loading: false,
@@ -37,7 +37,6 @@ const EditUserInfo = (props) => {
     dob,
     gender,
 
-    emailErr,
     usernameErr,
     phoneErr,
     addressErr,
@@ -47,7 +46,6 @@ const EditUserInfo = (props) => {
   const onChange = (key, value) => {
     setState({
       [key]: value,
-      emailErr: "",
       usernameErr: "",
       addressErr: "",
     });
@@ -77,7 +75,7 @@ const EditUserInfo = (props) => {
             value={email}
             onChange={onChange}
             placeholder="Enter your email"
-            errMes={emailErr}
+            errMes={isValidEmail(email) ? "" : "Invalid email!"}
           />
           <InputCT
             title="Username"
