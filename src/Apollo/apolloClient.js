@@ -21,7 +21,7 @@ const httpLink = new HttpLink({
 });
 
 const wsLink = new WebSocketLink({
-  uri: `ws://${CONFIG.APOLLO_HOST_URL}`,
+  uri: `wss://${CONFIG.APOLLO_HOST_URL}`,
   // uri: CONFIG.APOLLO_HOST_URL,
   options: {
     reconnect: true,
