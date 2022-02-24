@@ -26,7 +26,7 @@ const formatFood = (x = {}, id = null) => {
 export const handleMutationAddFood = async (food = [], type = "ADD") => {
   const isAdd = type === "ADD";
   const isEdit = type === "EDIT";
-  console.log({ food });
+  // console.log({ food });
   const sendingData = {};
   switch (type) {
     case "ADD":
@@ -39,7 +39,7 @@ export const handleMutationAddFood = async (food = [], type = "ADD") => {
       _.assign(sendingData, { input: _.map(food, (x) => x.id) });
       break;
   }
-  console.log({ sendingData });
+  // console.log({ sendingData });
   try {
     const func = isAdd
       ? handleAddFood

@@ -12,7 +12,7 @@ export const mutationUpdateUser = async (data = {}) => {
     address,
     dob: moment(dob).toISOString(),
   };
-  console.log({ sendingData });
+  // console.log({ sendingData });
   try {
     const res = await handleUpdateUser({
       profileInput: sendingData,

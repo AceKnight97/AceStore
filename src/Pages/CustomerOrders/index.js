@@ -58,8 +58,12 @@ const CustomerOrders = (props) => {
         <div className="customer-orders-date">
           {moment(currentDate || undefined).format("dddd, MMMM DD, YYYY")}
         </div>
+
+        <SubscribeNewFoodOrders
+          className="ml-24"
+          updateOrders={getFoodOrders}
+        ></SubscribeNewFoodOrders>
       </div>
-      {SubscribeNewFoodOrders()}
 
       <CustomerOrdersTable
         data={data}

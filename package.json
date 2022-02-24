@@ -1,7 +1,7 @@
 {
   "name": "acestore",
   "homepage": "https://AceKnight97.github.io/acestore",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.3.0",

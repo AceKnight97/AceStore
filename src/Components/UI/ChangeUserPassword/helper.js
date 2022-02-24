@@ -9,7 +9,7 @@ export const mutationChangePassword = async (
   let res;
   try {
     res = await handleChangePassword({ password, newPassword });
-    console.log({ res });
+    // console.log({ res });
   } catch (error) {
     console.log("Failed to change password: ", error);
   }

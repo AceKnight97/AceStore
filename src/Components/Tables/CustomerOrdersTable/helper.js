@@ -11,7 +11,7 @@ export const getOrderTotal = (data = []) => {
 };
 
 export const mutationCloneOrder = async (data = {}) => {
-  console.log({ data });
+  // console.log({ data });
   const sendingData = _.map(data, (x) => ({
     food: x.food,
     quantity: x.quantity,
@@ -21,6 +21,6 @@ export const mutationCloneOrder = async (data = {}) => {
     price: x.price,
     destination: x.destination,
   }));
-  console.log({ sendingData });
+  // console.log({ sendingData });
   return await handleCreateOrder(sendingData);
 };

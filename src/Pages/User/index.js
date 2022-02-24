@@ -35,6 +35,7 @@ const User = (props) => {
   useEffect(() => {
     if (!auth.isSuccess()) {
       history.push("/acestore");
+      console.log("logout");
     }
   }, [props.login]);
 

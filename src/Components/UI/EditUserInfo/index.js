@@ -54,7 +54,7 @@ const EditUserInfo = (props) => {
   const onClickConfirm = async () => {
     setState({ loading: true });
     const res = await mutationUpdateUser(state);
-    console.log({ res });
+    // console.log({ res });
     if (res.isSuccess) {
       auth.setDatalogin(res.user);
       alert("Successfully update user information!");

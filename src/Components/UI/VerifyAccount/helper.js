@@ -8,7 +8,7 @@ export const mutationVerifiedEmail = async (verificationCode) => {
   } catch (error) {
     console.log("Failed to verify code: ", error);
   }
-  console.log({ res });
+  // console.log({ res });
   if (res.isSuccess) {
     alert("Verify code successfully!");
     return res;
@@ -25,7 +25,7 @@ export const mutationSendCode = async () => {
   } catch (error) {
     console.log("Failed to send verify code: ", error);
   }
-  console.log({ res });
+  // console.log({ res });
   if (res.isSuccess) {
     alert("Send verify code successfully!");
     return res;
