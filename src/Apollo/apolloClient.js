@@ -16,13 +16,12 @@ import auth from "../Helpers/auth";
 import emitter from "../Utils/eventEmitter";
 
 const httpLink = new HttpLink({
-  uri: `http://${CONFIG.APOLLO_HOST_URL}`,
+  uri: `https://${CONFIG.APOLLO_HOST_URL}`,
   credentials: "same-origin",
 });
 
 const wsLink = new WebSocketLink({
   uri: `wss://${CONFIG.APOLLO_HOST_URL}`,
-  // uri: CONFIG.APOLLO_HOST_URL,
   options: {
     reconnect: true,
   },

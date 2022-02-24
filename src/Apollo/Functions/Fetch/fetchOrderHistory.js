@@ -1,5 +1,3 @@
-// import axios from "axios";
-// import { CONFIG } from "../../../Constants";
 import gql from "graphql-tag";
 import createClient from "../../apolloClient";
 import FOOD from "../../Fragments/food";
@@ -24,12 +22,6 @@ const ORDER_HISTORY = gql`
 
 const fetchOrderHistory = async (variables = {}) => {
   try {
-    // const res = await axios({
-    //   method: "POST",
-    //   url: `${CONFIG.APOLLO_HOST_URL}/api/foodorder/adminhistory`,
-    //   data: variables,
-    // });
-    // return res.data;
     const client = await createClient();
     const res = await client.query({
       query: ORDER_HISTORY,

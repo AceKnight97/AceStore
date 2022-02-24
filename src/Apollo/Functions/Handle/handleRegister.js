@@ -1,5 +1,3 @@
-// import axios from "axios";
-// import { CONFIG } from "../../../Constants";
 import gql from "graphql-tag";
 import { client } from "../../apolloClient";
 
@@ -14,11 +12,6 @@ const SIGN_UP = gql`
 
 const handleRegister = async (variables) => {
   try {
-    // const res = await axios.post(
-    //   `${CONFIG.APOLLO_HOST_URL}/api/user/createuser`,
-    //   variables
-    // );
-    // return res.data;
     const result = await client.mutate({
       mutation: SIGN_UP,
       variables,
