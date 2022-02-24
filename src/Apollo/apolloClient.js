@@ -15,13 +15,17 @@ import APP_FLOW_ACTIONS, { CONFIG } from "../Constants";
 import auth from "../Helpers/auth";
 import emitter from "../Utils/eventEmitter";
 
+const { APOLLO_HOST_URL } = CONFIG;
+
+const isLocal = APOLLO_HOST_URL.includes("localhost") ? "" : "s";
+
 const httpLink = new HttpLink({
-  uri: `https://${CONFIG.APOLLO_HOST_URL}`,
+  uri: `http${isLocal}://${APOLLO_HOST_URL}`,
   credentials: "same-origin",
 });
 
 const wsLink = new WebSocketLink({
-  uri: `wss://${CONFIG.APOLLO_HOST_URL}`,
+  uri: `ws${isLocal}://${APOLLO_HOST_URL}`,
   options: {
     reconnect: true,
   },
