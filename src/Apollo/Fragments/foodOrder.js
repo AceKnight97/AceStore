@@ -8,7 +8,6 @@ const FOOD_ORDER = gql`
     food
     quantity
     createdAt
-    email
     notes
     status
     price

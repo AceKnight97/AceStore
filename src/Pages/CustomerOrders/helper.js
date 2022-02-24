@@ -37,10 +37,10 @@ export const getOrderHistory = (res = [], addMore = 0) => {
 };
 
 export const mutationGetFoodOrders = async (filterObj = {}) => {
-  const { currentDate, email } = filterObj;
+  const { currentDate, isAll } = filterObj;
   const sendingData = {
     date: moment(currentDate).format("DD/MM/YYYY"),
-    email,
+    isAll,
   };
   // console.log({ sendingData });
   try {

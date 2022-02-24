@@ -1,7 +1,6 @@
 import handleCreateAnyCustomerOrder from "../../Apollo/Functions/Handle/handleCreateAnyCustomerOrder";
 import handleCreateOrder from "../../Apollo/Functions/Handle/handleCreateOrder";
-
-export const temp = "";
+import { formatPhone } from "../../Helpers";
 
 export const getFoodData = (foodData = []) => {
   const arr = [];
@@ -21,14 +20,12 @@ export const getFoodData = (foodData = []) => {
 
 export const mutationCreateOrder = async (
   foodData = [],
-  email = "",
   notes = "",
   destination = ""
 ) => {
   const sendingData = foodData.map((x) => ({
     food: x.id,
     quantity: parseFloat(x.quantity.slice(0, 3)),
-    email,
     notes,
     status: "Pending",
     price: x.price,
@@ -48,18 +45,16 @@ export const createOrderForAnyCustomer = async (
   foodData = [],
   anyCustomerData = {}
 ) => {
-  const { email, username, address, phone, notes, destination } =
-    anyCustomerData;
+  const { phone, address, notes } = anyCustomerData;
   const orders = foodData.map((x) => ({
     food: x.id,
     quantity: parseFloat(x.quantity.slice(0, 3)),
-    email,
     notes,
     status: "Pending",
     price: x.price,
-    destination,
+    destination: address,
   }));
-  const customer = { email, username, address, phone, password: phone };
+  const customer = { phone: formatPhone(phone), address, password: phone };
   const sendingData = { orders, customer };
   // console.log({ foodData, anyCustomerData, sendingData });
   try {

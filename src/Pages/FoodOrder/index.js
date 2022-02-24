@@ -90,12 +90,12 @@ const FoodOrder = (props) => {
   };
 
   const onClickConfirm = async () => {
-    if (!address || !phone || !email) {
+    if (!address || !phone) {
       setState({ anyCustomerVisible: true });
       return;
     }
     setState({ loading: true });
-    const res = await mutationCreateOrder(foodData, email, notes, destination);
+    const res = await mutationCreateOrder(foodData, notes, destination);
     if (res.isSuccess) {
       alert("Successfully creating order!");
       auth.setFoodData(undefined);
