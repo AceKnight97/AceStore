@@ -1,20 +1,18 @@
-import React, { useRef } from "react";
-import PropTypes from "prop-types";
 import classnames from "classnames";
 import _ from "lodash";
-
+import PropTypes from "prop-types";
+import React, { useRef } from "react";
+import { MIN_MAX_PRICE } from "../../../../Constants/home";
+import auth from "../../../../Helpers/auth";
 import {
   useMergeState,
   useUpdateEffect,
 } from "../../../../Helpers/customHooks";
-import "./_filter-block.scss";
 import InputCT from "../../../Inputs/InputCT";
-import starIc from "../../../../Images/Pages/Home/star.svg";
-import starInactiveIc from "../../../../Images/Pages/Home/star-inactive.svg";
 import SelectCT from "../../../Inputs/SelectCT";
-import { MIN_MAX_PRICE } from "../../../../Constants/home";
-import auth from "../../../../Helpers/auth";
 import DisplayRating from "../../../UI/DisplayRating";
+import HomeTotal from "../HomeTotal";
+import "./_filter-block.scss";
 
 const FilterBlock = (props) => {
   const filterRef = useRef(undefined);
@@ -50,74 +48,68 @@ const FilterBlock = (props) => {
 
   return (
     <div className={classnames("filter-block", className)}>
-      <div className="flex">
-        <div className="filter-block-title">Search:</div>
-        <InputCT
-          name="searchName"
-          value={searchName}
-          onChange={onChange}
-          className="filter-block-search"
-        />
-        <div className="filter-block-star">Stars:</div>
-
-        <DisplayRating
-          rating={rating}
-          isButton
-          onClick={onChangeStar}
-          className="filter-block-star-dis"
-        ></DisplayRating>
-        {/*
-        <Button
-          type="link"
-          // onClick={onClickUsername}
-          className="home-header-username-btn"
-        >
-          {username}
-        </Button>
-        */}
-      </div>
-      <div className="filter-block-row">
-        <SelectCT
-          name="kind"
-          value={kind}
-          onChange={onChange}
-          className="w-160"
-          title="Kind of food:"
-          data={auth.getKindOfFood() || []}
-        />
-        <SelectCT
-          name="minPrice"
-          value={minPrice}
-          onChange={onChange}
-          title="Min price:"
-          className="ml-48 w-160"
-          type="NUMBER"
-          data={_.filter(MIN_MAX_PRICE, (x) =>
-            maxPrice ? x < maxPrice : true
-          )}
-        />
-        <SelectCT
-          name="maxPrice"
-          value={maxPrice}
-          onChange={onChange}
-          title="Max price:"
-          className="ml-48 w-160"
-          type="NUMBER"
-          data={_.filter(MIN_MAX_PRICE, (x) =>
-            minPrice ? x > minPrice : true
-          )}
-        />
-      </div>
+      <InputCT
+        title="Search:"
+        name="searchName"
+        value={searchName}
+        onChange={onChange}
+        className="filter-block-search"
+      />
+      <SelectCT
+        className="filter-block-select"
+        name="kind"
+        value={kind}
+        onChange={onChange}
+        title="Kind of food:"
+        data={auth.getKindOfFood() || []}
+      />
+      <SelectCT
+        className="filter-block-select"
+        name="minPrice"
+        value={minPrice}
+        onChange={onChange}
+        title="Min price:"
+        type="NUMBER"
+        data={_.filter(MIN_MAX_PRICE, (x) => (maxPrice ? x < maxPrice : true))}
+      />
+      <SelectCT
+        className="filter-block-select"
+        name="maxPrice"
+        value={maxPrice}
+        onChange={onChange}
+        title="Max price:"
+        type="NUMBER"
+        data={_.filter(MIN_MAX_PRICE, (x) => (minPrice ? x > minPrice : true))}
+      />
+      <DisplayRating
+        title="Stars:"
+        rating={rating}
+        isButton
+        onClick={onChangeStar}
+        className="filter-block-star-dis"
+      ></DisplayRating>
+      <HomeTotal
+        className="filter-block-total"
+        total={props.total}
+        onClickReset={props.onClickReset}
+        onClickBuy={props.onClickBuy}
+      />
     </div>
   );
 };
 FilterBlock.defaultProps = {
   className: "",
   onFilterFood: () => {},
+  total: 0,
+  onClickBuy: () => {},
+  onClickReset: () => {},
 };
 FilterBlock.propTypes = {
   className: PropTypes.string,
   onFilterFood: PropTypes.func,
+  total: PropTypes.number,
+  onClickBuy: PropTypes.func,
+  onClickReset: PropTypes.func,
 };
 
 export default FilterBlock;

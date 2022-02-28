@@ -58,7 +58,7 @@ const DisplayUserInfo = (props) => {
       </div>
 
       <div className="handle-user-ui-btns">
-        {!isVerified && (
+        {!isVerified && email && (
           <Button
             className="mr-32"
             type="dashed"

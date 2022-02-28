@@ -1,34 +1,38 @@
 @import "../../../../Styles/style.scss";
 .filter-block {
-  // width: 32%;
-  // min-width: 368px;
-  padding: 1rem;
-  // border: 1px solid $gray-5;
-  // border-radius: 0.25rem;
   width: 100%;
-  margin-right: 2rem;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
   &-title {
-    // font-weight: bold;
     font-size: 1.125rem;
-    margin-right: 1rem;
   }
   &-star {
-    // font-weight: bold;
     font-size: 1.125rem;
-    margin: 0 1rem 0 3rem;
+    margin: 0 1rem 0 0;
   }
   &-star-dis {
+    margin-top: 1rem;
     img {
       width: 1.5rem !important;
       height: 1.5rem !important;
     }
   }
-  &-row {
-    margin-top: 1rem;
-    display: flex;
-    align-items: center;
-  }
   &-search {
-    width: 200px !important;
+    margin-top: 1rem;
+    width: 160px !important;
+    input {
+      width: 160px !important;
+    }
+  }
+  &-select {
+    margin-top: 1rem;
+    width: 160px;
+    .ant-select {
+      width: 160px;
+    }
+  }
+  &-total {
+    margin-top: 1rem;
   }
 }

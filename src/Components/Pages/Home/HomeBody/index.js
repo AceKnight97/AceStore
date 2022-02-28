@@ -81,22 +81,15 @@ const HomeBody = (props) => {
     }, 400);
   };
 
-  const renderToper = () => (
-    <div className="home-body-toper">
-      <FilterBlock onFilterFood={onFilterFood}></FilterBlock>
-      <HomeTotal
-        className="home-body-toper-block-3"
-        total={total}
-        onClickReset={onClickReset}
-        onClickBuy={onClickBuy}
-      />
-    </div>
-  );
-
   return (
     <div>
       <div className={classnames("home-body", className)}>
-        {renderToper()}
+        <FilterBlock
+          onFilterFood={onFilterFood}
+          total={total}
+          onClickReset={onClickReset}
+          onClickBuy={onClickBuy}
+        ></FilterBlock>
 
         <div className="home-body-main">
           {cartTags.length !== 0 && (

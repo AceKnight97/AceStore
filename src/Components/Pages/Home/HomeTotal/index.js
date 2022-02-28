@@ -3,13 +3,9 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import _ from "lodash";
 import { Button } from "antd";
-// import { useMergeState } from '../../../../Helpers/customHooks';
 import { getPrice } from "../../../../Helpers";
 
 const HomeTotal = (props) => {
-  // const [state, setState] = useMergeState({
-  //   data: [],
-  // });
   const { className, total, onClickBuy, onClickReset } = props;
   return (
     <div className={classnames("home-total", className)}>

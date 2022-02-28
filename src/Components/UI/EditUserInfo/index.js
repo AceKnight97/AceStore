@@ -75,7 +75,7 @@ const EditUserInfo = (props) => {
             value={email}
             onChange={onChange}
             placeholder="Enter your email"
-            errMes={isValidEmail(email) ? "" : "Invalid email!"}
+            errMes={email && isValidEmail(email) ? "" : "Invalid email!"}
           />
           <InputCT
             title="Username"

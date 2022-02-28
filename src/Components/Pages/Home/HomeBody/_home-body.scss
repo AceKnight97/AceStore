@@ -4,10 +4,10 @@
   flex-direction: column;
   background-color: white;
   border-radius: 0.125rem;
-  min-width: 850px;
+  // min-width: 850px;
   &-toper {
-    display: flex;
-    justify-content: space-between;
+    // display: flex;
+    // justify-content: space-between;
   }
   &-main {
   }
@@ -19,6 +19,15 @@
       margin-right: 0.5rem;
     }
     &-item {
+    }
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .home-body {
+    &-toper {
+      display: flex;
+      flex-direction: column;
     }
   }
 }
