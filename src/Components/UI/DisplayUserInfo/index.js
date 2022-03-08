@@ -59,19 +59,15 @@ const DisplayUserInfo = (props) => {
 
       <div className="handle-user-ui-btns">
         {!isVerified && email && (
-          <Button
-            className="mr-32"
-            type="dashed"
-            onClick={onClickVerifyAccount}
-          >
+          <Button type="dashed" onClick={onClickVerifyAccount}>
             Verify account
           </Button>
         )}
-        <Button className="mr-32" onClick={onClickChangePass}>
+        <Button className="ml-32" onClick={onClickChangePass}>
           Change password
         </Button>
 
-        <Button type="primary" onClick={onClickChangeInfo}>
+        <Button type="primary" className="ml-32" onClick={onClickChangeInfo}>
           Change info
         </Button>
       </div>

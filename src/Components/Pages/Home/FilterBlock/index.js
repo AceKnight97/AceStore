@@ -19,7 +19,7 @@ const FilterBlock = (props) => {
   const [state, setState] = useMergeState({
     searchName: "",
     rating: 0,
-    kind: undefined,
+    kind: "All",
     minPrice: undefined,
     maxPrice: undefined,
   });
@@ -61,7 +61,7 @@ const FilterBlock = (props) => {
         value={kind}
         onChange={onChange}
         title="Kind of food:"
-        data={auth.getKindOfFood() || []}
+        data={["All", ...auth.getKindOfFood()]}
       />
       <SelectCT
         className="filter-block-select"

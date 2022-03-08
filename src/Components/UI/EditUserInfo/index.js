@@ -140,11 +140,12 @@ const EditUserInfo = (props) => {
         </div>
       </div>
       <div className="handle-user-ui-btns">
-        <Button className="mr-32" onClick={onClickCancel} disabled={loading}>
+        <Button onClick={onClickCancel} disabled={loading}>
           Cancel
         </Button>
 
         <Button
+          className="ml-32"
           type="primary"
           onClick={onClickConfirm}
           loading={loading}

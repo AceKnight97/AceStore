@@ -174,7 +174,7 @@ const AddFood = (props) => {
               >
                 <FileImageTwoTone />
                 <div className="food-card-img-text">
-                  <span>Upload image</span>
+                  <span>Upload image (*Require)</span>
                 </div>
               </div>
             )}

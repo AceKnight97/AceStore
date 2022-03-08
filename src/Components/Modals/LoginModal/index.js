@@ -80,7 +80,7 @@ const LoginModal = (props) => {
             name="password"
             value={password}
             onChange={onChange}
-            placeholder="Enter your phone"
+            placeholder="Enter your password"
             type="PASSWORD"
             className="mt-16"
             errMes={passwordErr}

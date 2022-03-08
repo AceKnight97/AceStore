@@ -77,14 +77,13 @@ const VerifyAccount = (props) => {
             autoFocus={false}
             values={verifycationCode.split()}
             type="number"
-            className={invalidCode ? "invalid-code" : ""}
+            className={`mt-16 ${invalidCode ? "invalid-code" : ""}`}
             fieldWidth={32}
             fieldHeight={40}
             fields={6}
             placeholder={["_", "_", "_", "_", "_", "_"]}
             onChange={(x) => onChange("verifycationCode", x)}
             title="Verify account"
-            className="mt-16"
           />
 
           {invalidCode ? (
@@ -107,7 +106,7 @@ const VerifyAccount = (props) => {
       </div>
 
       <div className="handle-user-ui-btns">
-        <Button className="mr-32" onClick={onClickCancel} disabled={loading}>
+        <Button onClick={onClickCancel} disabled={loading}>
           Cancel
         </Button>
 
@@ -116,6 +115,7 @@ const VerifyAccount = (props) => {
           onClick={onClickVerify}
           loading={loading}
           disabled={verifycationCode.length !== 6}
+          className="ml-32"
         >
           Verify
         </Button>

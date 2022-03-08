@@ -55,10 +55,6 @@ const RegisterModal = (props) => {
     }
   }, [visible]);
 
-  const onClickBack = () => {
-    setState({ isStep1: true });
-  };
-
   const onChange = (key, value) => {
     const obj = { [key]: value };
     if (isStep1) {
@@ -157,7 +153,7 @@ const RegisterModal = (props) => {
           disabled={disabledRegister(state)}
           leftTitle={"Cancel"}
           rightTitle={"Register"}
-          onClickLeftBtn={onClickBack}
+          onClickLeftBtn={onClickCancel}
           onClickRightBtn={onClickRightBtn}
           loading={loading}
         />

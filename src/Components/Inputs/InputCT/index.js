@@ -117,6 +117,7 @@ const InputCT = (props) => {
           onChange={onChange}
           prefix={prefix}
           suffix={suffix}
+          allowClear
         />
       ) : null}
 

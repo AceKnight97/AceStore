@@ -39,7 +39,6 @@ const FoodOrderDrawer = (props) => {
     <Drawer
       title="Food order"
       placement="right"
-      width={400}
       closeIcon={<CloseOutlined className="color-gray-9" />}
       onClose={onClose}
       visible={visible}

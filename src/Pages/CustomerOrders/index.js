@@ -46,7 +46,7 @@ const CustomerOrders = (props) => {
 
   return (
     <div className={classnames("customer-orders", className)}>
-      <div className="flex">
+      <div className="customer-orders-top">
         <DatepickerCT
           className="customer-orders-cur-date"
           placeholder="Choose date"

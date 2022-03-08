@@ -10,7 +10,7 @@
     flex-direction: column;
     background-color: white;
     border-radius: 0.125rem;
-    min-width: 850px;
+    // min-width: 850px;
     overflow: auto;
     .ant-tabs {
       overflow: unset;
@@ -20,6 +20,17 @@
       font-size: 1.2rem;
     }
     &-profile {
+    }
+  }
+}
+
+@media only screen and (max-width: 1528px) {
+  .user {
+    .ant-tabs-nav-list {
+      flex-direction: column;
+      .ant-tabs-tab {
+        margin-left: 0;
+      }
     }
   }
 }

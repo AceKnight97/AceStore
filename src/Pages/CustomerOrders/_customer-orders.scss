@@ -8,4 +8,29 @@
     font-size: 1.5rem;
     margin-left: 1.5rem;
   }
+  &-top {
+    display: flex;
+  }
+}
+
+@media only screen and (max-width: 1528px) {
+  .customer-orders {
+    &-cur-date {
+      max-width: 400px;
+    }
+    &-top {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    &-date {
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }

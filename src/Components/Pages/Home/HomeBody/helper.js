@@ -80,7 +80,7 @@ export const handleFilterFood = (filterObject = {}, foodData = []) => {
   _.forEach(newFoodata, (x) => {
     x.data = _.filter(x.data, (y) => {
       let condition = true;
-      if (kind) {
+      if (kind && kind !== "All") {
         // console.log("kind");
         condition = y.title === kind;
       }
