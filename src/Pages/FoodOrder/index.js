@@ -3,9 +3,9 @@ import classnames from "classnames";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
-import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import InputCT from "../../Components/Inputs/InputCT";
+import SelectCT from "../../Components/Inputs/SelectCT";
 import AnyCustomerModal from "../../Components/Modals/AnyCustomerModal";
 import { calcCartTotal } from "../../Components/Pages/Home/HomeBody/helper";
 import HomeHeader from "../../Components/Pages/Home/HomeHeader";
@@ -16,6 +16,7 @@ import auth from "../../Helpers/auth";
 import { useMergeState } from "../../Helpers/customHooks";
 import {
   createOrderForAnyCustomer,
+  generateColumns,
   getFoodData,
   mutationCreateOrder,
 } from "./helper";
@@ -30,38 +31,24 @@ const FoodOrder = (props) => {
     notes: "",
     destination: "",
     loading: false,
+    tableNumber: undefined,
   });
   const { className } = props;
 
-  const { foodData, anyCustomerVisible, notes, destination, loading } = state;
+  const {
+    foodData,
+    anyCustomerVisible,
+    notes,
+    destination,
+    loading,
+    tableNumber,
+  } = state;
   const { total } = calcCartTotal(location.state);
   const { address, phone, email } = auth.getDataLogin();
+  const isOrderHere = auth.getIsOrderHere();
 
   const onChange = (key, value) => {
     setState({ [key]: value });
-  };
-
-  const generateColumns = () => {
-    const columns = [
-      {
-        title: "No.",
-        dataIndex: "index",
-      },
-      {
-        title: "Name",
-        dataIndex: "name",
-      },
-      {
-        title: "Price",
-        dataIndex: "price",
-        render: (cell) => getPrice(cell, undefined, ""),
-      },
-      {
-        title: "Quantity",
-        dataIndex: "quantity",
-      },
-    ];
-    return columns;
   };
 
   const orderAnyCustomer = async (anyCustomerData = {}) => {
@@ -110,27 +97,61 @@ const FoodOrder = (props) => {
     <div className={classnames("food-order", className)}>
       <HomeHeader></HomeHeader>
       <div className="food-order-body">
-        <div className="food-order-body-toper">
-          <div className="flex">
-            <span className="b">Payment Options:</span>
-            <span className="ml-4">Cash - When receiving</span>
-          </div>
-          <div className="flex">
-            <span className="b">Total:</span>
-            <span className="ml-4">{getPrice(total, undefined, "")}</span>
-          </div>
-        </div>
-        <div className="food-order-body-toper">
-          <div className="flex">
-            <span className="b">Delivery:</span>
-            <span className="ml-4">{address}</span>
-          </div>
-          <div className="flex">
-            <span className="b">Contact at:</span>
-            <span className="ml-4">{phone}</span>
-          </div>
-        </div>
-        {email && (
+        {isOrderHere ? (
+          <>
+            <div className="food-order-body-toper">
+              <div className="flex">
+                <span className="b">Order method:</span>
+                <span className="ml-4">at the restaurant</span>
+              </div>
+              <div className="flex">
+                <span className="b">Total:</span>
+                <span className="ml-4">{getPrice(total, undefined, "")}</span>
+              </div>
+            </div>
+            <div className="food-order-body-toper">
+              <SelectCT
+                titleClassName="b"
+                title="Table number"
+                name="tableNumber"
+                value={tableNumber}
+                onChange={onChange}
+                placeholder="Select table number"
+                data={[]}
+              />
+              <div className="flex">
+                <span className="b">Total:</span>
+                <span className="ml-4">{getPrice(total, undefined, "")}</span>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="food-order-body-toper">
+              <div className="flex">
+                <span className="b">Payment Options:</span>
+                <span className="ml-4">Cash - When receiving</span>
+              </div>
+              <div className="flex">
+                <span className="b">Total:</span>
+                <span className="ml-4">{getPrice(total, undefined, "")}</span>
+              </div>
+            </div>
+            {phone && (
+              <div className="food-order-body-toper">
+                <div className="flex">
+                  <span className="b">Delivery:</span>
+                  <span className="ml-4">{address}</span>
+                </div>
+                <div className="flex">
+                  <span className="b">Contact at:</span>
+                  <span className="ml-4">{phone}</span>
+                </div>
+              </div>
+            )}
+          </>
+        )}
+        {phone && (
           <>
             <InputCT
               titleClassName="b"
@@ -183,10 +204,4 @@ FoodOrder.propTypes = {
   className: PropTypes.string,
 };
 
-const mapStateToProps = (state) => ({
-  login: state.login,
-});
-
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FoodOrder);
+export default FoodOrder;

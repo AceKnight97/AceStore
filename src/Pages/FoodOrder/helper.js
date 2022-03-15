@@ -1,6 +1,6 @@
 import handleCreateAnyCustomerOrder from "../../Apollo/Functions/Handle/handleCreateAnyCustomerOrder";
 import handleCreateOrder from "../../Apollo/Functions/Handle/handleCreateOrder";
-import { formatPhone } from "../../Helpers";
+import { formatPhone, getPrice } from "../../Helpers";
 
 export const getFoodData = (foodData = []) => {
   const arr = [];
@@ -62,4 +62,27 @@ export const createOrderForAnyCustomer = async (
   } catch (error) {
     return { isSuccess: false, message: error };
   }
+};
+
+export const generateColumns = () => {
+  const columns = [
+    {
+      title: "No.",
+      dataIndex: "index",
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+    },
+    {
+      title: "Price",
+      dataIndex: "price",
+      render: (cell) => getPrice(cell, undefined, ""),
+    },
+    {
+      title: "Quantity",
+      dataIndex: "quantity",
+    },
+  ];
+  return columns;
 };

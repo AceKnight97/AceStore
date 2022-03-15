@@ -26,6 +26,7 @@ const SelectCT = (props) => {
     name,
     disabled,
     isObject,
+    titleClassName,
   } = props;
 
   const onChange = (value) => {
@@ -42,7 +43,7 @@ const SelectCT = (props) => {
       className={classnames("select-ct-wrapper", className)}
       key={`select-ct-wrapper-${props.name}`}
     >
-      <InputTitle title={title} />
+      <InputTitle title={title} className={titleClassName} />
 
       <Select
         getPopupContainer={(trigger) => trigger.parentElement}
@@ -113,6 +114,7 @@ SelectCT.defaultProps = {
   name: "",
   disabled: false,
   isObject: false,
+  titleClassName: "",
 };
 
 SelectCT.propTypes = {
@@ -144,6 +146,7 @@ SelectCT.propTypes = {
   name: PropTypes.string,
   disabled: PropTypes.bool,
   isObject: PropTypes.bool,
+  titleClassName: PropTypes.string,
 };
 
 export default SelectCT;

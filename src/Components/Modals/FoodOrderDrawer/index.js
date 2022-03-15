@@ -17,7 +17,7 @@ const FoodOrderDrawer = (props) => {
     loading: false,
   });
   const { visible, className, data, onClose, onUpdateFoodOrder } = props;
-  const { date, status, foodOrderId, notes, destination } = data;
+  const { date, status, foodOrderId, notes, address } = data;
   const { loading } = state;
   const onChangeStatus = async (key, value) => {
     if (!foodOrderId || !value) {
@@ -78,10 +78,10 @@ const FoodOrderDrawer = (props) => {
             )} - Quantity: ${x.quantity}`}
           </div>
         ))}
-        <div className="mt-16">
-          <span className="b">Destination: </span>
+        {/* <div className="mt-16">
+          <span className="b">Address: </span>
         </div>
-        <div className="food-order-drawer-notes">{destination || ""}</div>
+        <div className="food-order-drawer-notes">{address || ""}</div> */}
         <div className="mt-16">
           <span className="b">Notes: </span>
         </div>

@@ -34,6 +34,7 @@ const auth = {
       ? JSON.parse(localStorage.kindOfFood)
       : [];
   },
+
   getToken() {
     return localStorage.token;
   },
@@ -59,7 +60,6 @@ const auth = {
   },
 
   setDatalogin(data) {
-    // data = user
     localStorage.login = JSON.stringify(data);
   },
 
@@ -69,20 +69,18 @@ const auth = {
       : {};
   },
 
+  setIsOrderHere(val = false) {
+    localStorage.isOrderHere = JSON.stringify(val);
+  },
+
+  getIsOrderHere() {
+    return localStorage.isOrderHere && localStorage.isOrderHere !== "undefined"
+      ? JSON.parse(localStorage.isOrderHere)
+      : false;
+  },
+
   isSuccess() {
     return localStorage.isSuccess;
-  },
-
-  userId() {
-    return localStorage.userId;
-  },
-
-  username() {
-    return localStorage.userName;
-  },
-
-  role() {
-    return localStorage.role; // || 'MD'; // || 'NURSE';
   },
 
   logout() {

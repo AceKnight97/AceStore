@@ -23,7 +23,10 @@ export const getOrderHistory = (res = [], addMore = 0) => {
       date: x,
       data,
       notes: grouped[x]?.[0]?.foodOrder?.notes || "",
-      destination: grouped[x]?.[0]?.foodOrder?.destination || "",
+      destination:
+        grouped[x]?.[0]?.foodOrder?.destination ||
+        grouped[x]?.[0]?.user?.address ||
+        "",
       status: grouped[x]?.[0]?.foodOrder?.status || "",
       username: grouped[x]?.[0]?.user?.username || "",
       total: getOrderTotal(data),

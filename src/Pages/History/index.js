@@ -14,7 +14,7 @@ const History = (props) => {
 
   useEffect(() => {
     if (!auth.isSuccess()) {
-      history?.push("/acestore");
+      history.push("/acestore");
       console.log("logout");
     }
   }, [props.login]);

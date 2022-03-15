@@ -7,19 +7,36 @@ import { getPrice } from "../../../../Helpers";
 
 const HomeTotal = (props) => {
   const { className, total, onClickBuy, onClickReset } = props;
+
+  const orderHere = () => {
+    onClickBuy(true);
+  };
+
+  const onClickBuyNow = () => {
+    onClickBuy(false);
+  };
+
   return (
     <div className={classnames("home-total", className)}>
       <div className="fr-sb">
-        <div className="home-total-title">Total:</div>
+        {/* <div className="home-total-title">Total:</div> */}
+        <Button
+          type="primary"
+          onClick={orderHere}
+          disabled={!total}
+          className="mr-16"
+        >
+          Order here
+        </Button>
 
         <Button type="primary" danger onClick={onClickReset} disabled={!total}>
-          Reset cart
+          Reset
         </Button>
       </div>
 
       <div className="home-total-price">{getPrice(total, undefined, "")}</div>
 
-      <Button block type="primary" onClick={onClickBuy} disabled={!total}>
+      <Button block type="primary" onClick={onClickBuyNow} disabled={!total}>
         Buy now
       </Button>
     </div>

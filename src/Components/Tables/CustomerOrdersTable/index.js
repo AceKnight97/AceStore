@@ -38,8 +38,8 @@ const CustomerOrdersTable = (props) => {
         dataIndex: "total",
       },
       {
-        title: "Address",
-        dataIndex: "address",
+        title: "Destination",
+        dataIndex: "destination",
       },
       {
         title: "Phone number",
@@ -55,7 +55,7 @@ const CustomerOrdersTable = (props) => {
   };
 
   const onRowClick = (rowIndex, record) => {
-    console.log({ record });
+    // console.log({ record });
     setState({ foodOrderData: record });
   };
 

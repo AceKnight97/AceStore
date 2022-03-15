@@ -1,7 +1,7 @@
 import classnames from "classnames";
 import _ from "lodash";
 import PropTypes from "prop-types";
-import React, { useRef } from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 import { MIN_MAX_PRICE } from "../../../../Constants/home";
 import auth from "../../../../Helpers/auth";
 import {
@@ -46,6 +46,14 @@ const FilterBlock = (props) => {
     }, 200);
   }, [searchName, rating, kind, minPrice, maxPrice]);
 
+  const minPriceData = useMemo(() => {
+    return _.filter(MIN_MAX_PRICE, (x) => (maxPrice ? x <= maxPrice : true));
+  }, [maxPrice]);
+
+  const maxPriceData = useMemo(() => {
+    return _.filter(MIN_MAX_PRICE, (x) => (minPrice ? x >= minPrice : true));
+  }, [minPrice]);
+
   return (
     <div className={classnames("filter-block", className)}>
       <InputCT
@@ -70,7 +78,7 @@ const FilterBlock = (props) => {
         onChange={onChange}
         title="Min price:"
         type="NUMBER"
-        data={_.filter(MIN_MAX_PRICE, (x) => (maxPrice ? x < maxPrice : true))}
+        data={minPriceData}
       />
       <SelectCT
         className="filter-block-select"
@@ -79,7 +87,7 @@ const FilterBlock = (props) => {
         onChange={onChange}
         title="Max price:"
         type="NUMBER"
-        data={_.filter(MIN_MAX_PRICE, (x) => (minPrice ? x > minPrice : true))}
+        data={maxPriceData}
       />
       <DisplayRating
         title="Stars:"

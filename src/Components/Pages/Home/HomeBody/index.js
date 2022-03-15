@@ -31,6 +31,7 @@ const HomeBody = (props) => {
   };
 
   useEffect(() => {
+    auth.setIsOrderHere(false);
     if (auth.getFoodData().length !== 0) {
       setState({ loading: false });
       return;
@@ -54,11 +55,12 @@ const HomeBody = (props) => {
     setState({ foodData: newFoodData });
   };
 
-  const onClickBuy = () => {
+  const onClickBuy = (isOrderHere = false) => {
     history.push({
       pathname: "/food-order",
       state: foodData,
     });
+    auth.setIsOrderHere(isOrderHere);
     auth.setFoodData(foodData);
   };
 
