@@ -87,7 +87,7 @@ const FoodCard = (props) => {
                 disabled={!isBuy}
                 name="quantity"
                 showSearch={false}
-                className="mt-4"
+                className="food-card-quantity"
                 value={quantity}
                 onChange={onChange}
                 data={

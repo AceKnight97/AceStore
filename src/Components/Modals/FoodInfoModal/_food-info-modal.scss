@@ -1,9 +1,15 @@
 .food-info-modal {
-  width: unset !important;
+  // width: unset !important;
   // min-width: 520px;
+  &-img-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   &-main {
     padding: 1.5rem;
     img {
+      max-height: 58vh;
       max-width: 100%;
     }
   }

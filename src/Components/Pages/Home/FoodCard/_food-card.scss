@@ -6,13 +6,17 @@
   padding: 0.5rem;
   // width: 280px;
   // max-width: 280px;
+  &-quantity {
+    margin-top: 0.25rem;
+    width: 84px;
+  }
   &-img {
     height: 150px;
-    width: 210px;
+    width: 196px;
     background-color: #e8c0c0;
     &-dis {
       max-height: 150px;
-      width: 210px;
+      width: 196px;
     }
     &-child {
       display: none;

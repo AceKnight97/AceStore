@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import _ from "lodash";
@@ -6,7 +6,14 @@ import { Button } from "antd";
 import { getPrice } from "../../../../Helpers";
 
 const HomeTotal = (props) => {
-  const { className, total, onClickBuy, onClickReset } = props;
+  const {
+    className,
+    total,
+    onClickBuy,
+    onClickReset,
+    isDisabledResetFilter,
+    onClickResetFilter,
+  } = props;
 
   const orderHere = () => {
     onClickBuy(true);
@@ -16,29 +23,43 @@ const HomeTotal = (props) => {
     onClickBuy(false);
   };
 
+  const formatedTotal = useMemo(() => {
+    return getPrice(total, undefined, "");
+  }, [total]);
+
   return (
     <div className={classnames("home-total", className)}>
       <div className="fr-sb">
-        {/* <div className="home-total-title">Total:</div> */}
+        <Button
+          type="primary"
+          className="mr-16"
+          danger
+          disabled={isDisabledResetFilter}
+          onClick={onClickResetFilter}
+        >
+          Reset filter
+        </Button>
+
+        <Button type="primary" danger onClick={onClickReset} disabled={!total}>
+          Reset Cart
+        </Button>
+      </div>
+
+      <div className="home-total-price">{formatedTotal}</div>
+
+      <div className="fr-sb">
+        <Button block type="primary" onClick={onClickBuyNow} disabled={!total}>
+          Take away
+        </Button>
         <Button
           type="primary"
           onClick={orderHere}
           disabled={!total}
-          className="mr-16"
+          className="ml-16"
         >
           Order here
         </Button>
-
-        <Button type="primary" danger onClick={onClickReset} disabled={!total}>
-          Reset
-        </Button>
       </div>
-
-      <div className="home-total-price">{getPrice(total, undefined, "")}</div>
-
-      <Button block type="primary" onClick={onClickBuyNow} disabled={!total}>
-        Buy now
-      </Button>
     </div>
   );
 };
@@ -47,12 +68,16 @@ HomeTotal.defaultProps = {
   total: 0,
   onClickBuy: () => {},
   onClickReset: () => {},
+  onClickResetFilter: () => {},
+  isDisabledResetFilter: false,
 };
 HomeTotal.propTypes = {
   className: PropTypes.string,
   total: PropTypes.number,
   onClickBuy: PropTypes.func,
   onClickReset: PropTypes.func,
+  onClickResetFilter: PropTypes.func,
+  isDisabledResetFilter: PropTypes.bool,
 };
 
 export default HomeTotal;

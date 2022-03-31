@@ -24,11 +24,13 @@ const FoodInfoModal = (props) => {
         <ModalHeader title={name} onClick={toggleClick} />
 
         <div className="food-info-modal-main">
-          {image ? (
-            <img src={image} alt="Food card img"></img>
-          ) : (
-            <div className="food-info-modal-img" />
-          )}
+          <div className="food-info-modal-img-wrap">
+            {image ? (
+              <img src={image} alt="Food card img"></img>
+            ) : (
+              <div className="food-info-modal-img" />
+            )}
+          </div>
           <div className="fr-sb mt-16">
             <div className="flex">
               <span className="b">Rating:</span>

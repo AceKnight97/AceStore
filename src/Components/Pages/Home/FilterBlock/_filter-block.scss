@@ -33,6 +33,12 @@
     }
   }
   &-total {
-    margin-top: 1rem;
+    // margin-top: 1rem;
+
+    position: fixed;
+    background: white;
+    z-index: 9;
+    right: 24px;
+    bottom: 24px;
   }
 }

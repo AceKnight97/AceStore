@@ -14,14 +14,18 @@ import DisplayRating from "../../../UI/DisplayRating";
 import HomeTotal from "../HomeTotal";
 import "./_filter-block.scss";
 
+const DEFAULT_STATE = {
+  searchName: "",
+  rating: 0,
+  kind: "All",
+  minPrice: undefined,
+  maxPrice: undefined,
+};
+
 const FilterBlock = (props) => {
   const filterRef = useRef(undefined);
   const [state, setState] = useMergeState({
-    searchName: "",
-    rating: 0,
-    kind: "All",
-    minPrice: undefined,
-    maxPrice: undefined,
+    ...DEFAULT_STATE,
   });
   const { className, onFilterFood } = props;
   const onChange = (key, value) => {
@@ -36,6 +40,10 @@ const FilterBlock = (props) => {
     setState({ rating });
   };
   const { searchName, rating, kind, minPrice, maxPrice } = state;
+
+  const onClickResetFilter = () => {
+    setState({ ...DEFAULT_STATE });
+  };
 
   useUpdateEffect(() => {
     if (filterRef.current) {
@@ -99,8 +107,10 @@ const FilterBlock = (props) => {
       <HomeTotal
         className="filter-block-total"
         total={props.total}
+        isDisabledResetFilter={_.isEqual(DEFAULT_STATE, state)}
         onClickReset={props.onClickReset}
         onClickBuy={props.onClickBuy}
+        onClickResetFilter={onClickResetFilter}
       />
     </div>
   );
