@@ -1,6 +1,5 @@
 import { Button } from "antd";
 import classnames from "classnames";
-import _ from "lodash";
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import ReactCodeInput from "react-verification-code-input";
@@ -44,7 +43,7 @@ const VerifyAccount = (props) => {
     const res = await mutationSendCode();
     const obj = { loading: false, visibleSendCode: false };
     if (res.isSuccess) {
-      _.assign(obj, { countingTime: 60 });
+      Object.assign(obj, { countingTime: 60 });
     }
     setState(obj);
   };

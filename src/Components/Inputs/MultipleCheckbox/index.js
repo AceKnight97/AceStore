@@ -21,7 +21,7 @@ const MultipleCheckbox = (props) => {
 
       <InputTitle title={title} className={classnames('checkbox-ct-title', titleClassName)} />
 
-      {_.map(data, (x, i) => (
+      {data.map((x, i) => (
         <div key={i} className={classnames('multiple-checkbox-main', rowClassName)}>
           <div className="multiple-checkbox-value">
             <Checkbox

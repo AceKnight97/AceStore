@@ -1,11 +1,10 @@
 import { Button } from "antd";
 import classnames from "classnames";
-import _ from "lodash";
 import PropTypes from "prop-types";
 import React, { useRef } from "react";
 import auth from "../../../Helpers/auth";
 import { useMergeState } from "../../../Helpers/customHooks";
-import { isValidEmail } from "../../../Utils";
+import { isEqual, isValidEmail } from "../../../Utils";
 import InputCT from "../../Inputs/InputCT";
 import RadioCT from "../../Inputs/RadioCT";
 import { mutationUpdateUser } from "./helper";
@@ -149,7 +148,7 @@ const EditUserInfo = (props) => {
           type="primary"
           onClick={onClickConfirm}
           loading={loading}
-          disabled={_.isEqual(originalData.current, {
+          disabled={isEqual(originalData.current, {
             email,
             username,
             address,

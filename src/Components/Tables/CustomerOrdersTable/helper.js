@@ -12,7 +12,7 @@ export const getOrderTotal = (data = []) => {
 
 export const mutationCloneOrder = async (data = {}) => {
   // console.log({ data });
-  const sendingData = _.map(data, (x) => ({
+  const sendingData = data.map((x) => ({
     food: x.food,
     quantity: x.quantity,
     email: x.email,

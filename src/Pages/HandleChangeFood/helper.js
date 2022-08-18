@@ -1,4 +1,3 @@
-import _ from "lodash";
 import handleAddFood from "../../Apollo/Functions/Handle/handleAddFood";
 import handleDeleteFood from "../../Apollo/Functions/Handle/handleDeleteFood";
 import handleUpdateFood from "../../Apollo/Functions/Handle/handleUpdateFood";
@@ -18,7 +17,7 @@ const formatFood = (x = {}, id = null) => {
     image: x.image,
   };
   if (id) {
-    _.assign(obj, { id });
+    Object.assign(obj, { id });
   }
   return obj;
 };
@@ -31,12 +30,12 @@ export const handleMutationAddFood = async (food = [], type = "ADD") => {
   switch (type) {
     case "ADD":
     case "EDIT":
-      _.assign(sendingData, {
-        input: _.map(food, (x) => formatFood(x, isAdd ? null : x.id)),
+      Object.assign(sendingData, {
+        input: food.map((x) => formatFood(x, isAdd ? null : x.id)),
       });
       break;
     default:
-      _.assign(sendingData, { input: _.map(food, (x) => x.id) });
+      Object.assign(sendingData, { input: food.map((x) => x.id) });
       break;
   }
   // console.log({ sendingData });
@@ -57,8 +56,7 @@ export const checkDisabledFoodList = (foodList = [], isDelete = false) => {
   if (!foodList || foodList?.length === 0 || !foodList[0]) {
     return true;
   }
-  const res = _.find(
-    foodList,
+  const res = foodList.find(
     (x) =>
       !x ||
       !x.name ||

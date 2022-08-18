@@ -1,9 +1,9 @@
 import classnames from "classnames";
-import _ from "lodash";
 import moment from "moment";
 import PropTypes from "prop-types";
 import React from "react";
 import { useMergeState } from "../../../Helpers/customHooks";
+import { isEmpty } from "../../../Utils";
 import FoodOrderDrawer from "../../Modals/FoodOrderDrawer";
 import DisplayStatus from "../../UI/DisplayStatus";
 import AntdTable from "../AntdTable";
@@ -77,7 +77,7 @@ const CustomerOrdersTable = (props) => {
         ></AntdTable>
       )}
       <FoodOrderDrawer
-        visible={!_.isEmpty(foodOrderData)}
+        visible={!isEmpty(foodOrderData)}
         data={foodOrderData}
         onClose={onCloseFoodOrderDrawer}
         onUpdateFoodOrder={onUpdateFoodOrder}

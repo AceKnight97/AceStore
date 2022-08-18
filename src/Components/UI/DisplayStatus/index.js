@@ -1,7 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
 import classnames from "classnames";
-import _ from "lodash";
+import PropTypes from "prop-types";
+import React from "react";
 import { STATUS_ENUM } from "../../../Constants/home";
 import "./_display-status.scss";
 

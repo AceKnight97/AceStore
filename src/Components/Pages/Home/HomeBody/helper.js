@@ -1,7 +1,7 @@
 import { QUANTITY_TYPES } from "../../../../Constants/home";
-import _ from "lodash";
 import fetchMenu from "../../../../Apollo/Functions/Fetch/fetchMenu";
 import auth from "../../../../Helpers/auth";
+import { isNil, sumBy } from "../../../../Utils";
 // import testimg1 from "../../../../Images/Foods/1.webp";
 // import testimg10 from "../../../../Images/Foods/10.jpg";
 // import testimg11 from "../../../../Images/Foods/11.png";
@@ -16,13 +16,20 @@ import auth from "../../../../Helpers/auth";
 // import testimg8 from "../../../../Images/Foods/8.jpg";
 // import testimg9 from "../../../../Images/Foods/9.webp";
 
+const groupBy = (xs, key) => {
+  return xs.reduce((rv, x) => {
+    (rv[x[key]] = rv[x[key]] || []).push(x);
+    return rv;
+  }, {});
+};
+
 export const getFoodMasterData = async () => {
   try {
     const res = await fetchMenu();
     auth.setMenu(res);
     const titles = [];
     const foodData = [];
-    const grouped = _.groupBy(res, (x) => x.title);
+    const grouped = groupBy(res, "title");
     Object.keys(grouped).forEach((x) => {
       titles.push(x);
       foodData.push({
@@ -60,8 +67,8 @@ const calPackage = (z = {}, cartTags) => {
 export const calcCartTotal = (foodData = []) => {
   let total = 0;
   const cartTags = [];
-  _.forEach(foodData, (x) => {
-    total += _.sumBy(x.data, (z) => {
+  foodData.forEach((x) => {
+    total += sumBy(x.data, (z) => {
       if (z.isBuy) {
         return calPackage(z, cartTags) || calWeight(z, cartTags);
       }
@@ -76,15 +83,15 @@ export const handleFilterFood = (filterObject = {}, foodData = []) => {
   // console.log({ filterObject, foodData });
   const { searchName, rating, kind, minPrice, maxPrice } = filterObject;
   console.log({ searchName, rating, kind, minPrice, maxPrice });
-  let newFoodata = _.cloneDeep(foodData);
-  _.forEach(newFoodata, (x) => {
-    x.data = _.filter(x.data, (y) => {
+  let newFoodata = [...foodData];
+  newFoodata.forEach((x) => {
+    x.data = x.data.filter((y) => {
       let condition = true;
       if (kind && kind !== "All") {
         // console.log("kind");
         condition = y.title === kind;
       }
-      if (!_.isNil(rating) && !_.isNil(y.rating)) {
+      if (!isNil(rating) && !isNil(y.rating)) {
         // console.log("rating");
         condition = condition && y.rating >= rating;
       }
@@ -93,11 +100,11 @@ export const handleFilterFood = (filterObject = {}, foodData = []) => {
         condition =
           condition && y.name?.toLowerCase().includes(searchName.toLowerCase());
       }
-      if (!_.isNil(minPrice)) {
+      if (!isNil(minPrice)) {
         // console.log("minPrice");
         condition = condition && y.price >= minPrice;
       }
-      if (!_.isNil(maxPrice)) {
+      if (!isNil(maxPrice)) {
         // console.log("maxPrice");
         condition = condition && y.price <= maxPrice;
       }
@@ -106,7 +113,7 @@ export const handleFilterFood = (filterObject = {}, foodData = []) => {
   });
   // console.log({ newFoodata, foodData });
 
-  return _.filter(newFoodata, (x) => x.data?.length !== 0);
+  return newFoodata.filter((x) => x.data?.length !== 0);
 };
 
 // const arr = [

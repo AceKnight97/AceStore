@@ -1,5 +1,4 @@
 import classnames from "classnames";
-import _ from "lodash";
 import PropTypes from "prop-types";
 import React, { useCallback, useMemo, useRef } from "react";
 import { MIN_MAX_PRICE } from "../../../../Constants/home";
@@ -55,11 +54,11 @@ const FilterBlock = (props) => {
   }, [searchName, rating, kind, minPrice, maxPrice]);
 
   const minPriceData = useMemo(() => {
-    return _.filter(MIN_MAX_PRICE, (x) => (maxPrice ? x <= maxPrice : true));
+    return MIN_MAX_PRICE.filter((x) => (maxPrice ? x <= maxPrice : true));
   }, [maxPrice]);
 
   const maxPriceData = useMemo(() => {
-    return _.filter(MIN_MAX_PRICE, (x) => (minPrice ? x >= minPrice : true));
+    return MIN_MAX_PRICE.filter((x) => (minPrice ? x >= minPrice : true));
   }, [minPrice]);
 
   return (
@@ -107,7 +106,7 @@ const FilterBlock = (props) => {
       <HomeTotal
         className="filter-block-total"
         total={props.total}
-        isDisabledResetFilter={_.isEqual(DEFAULT_STATE, state)}
+        isDisabledResetFilter={JSON.stringify(DEFAULT_STATE) === JSON.stringify(state)}
         onClickReset={props.onClickReset}
         onClickBuy={props.onClickBuy}
         onClickResetFilter={onClickResetFilter}

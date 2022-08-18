@@ -1,6 +1,5 @@
 import { Button } from "antd";
 import classnames from "classnames";
-import _ from "lodash";
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
@@ -8,6 +7,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import auth from "../../../../Helpers/auth";
 import { useMergeState } from "../../../../Helpers/customHooks";
 import { loginRequest, logoutRequest } from "../../../../Redux/Actions/login";
+import { isEmpty } from "../../../../Utils";
 import LoginModal from "../../../Modals/LoginModal";
 import RegisterModal from "../../../Modals/RegisterModal";
 
@@ -47,7 +47,7 @@ const HomeHeader = (props) => {
   const { isVerify = true, phone } = auth.getDataLogin();
 
   useEffect(() => {
-    if (_.isEmpty(props.login) && _.isEmpty(auth.getDataLogin())) {
+    if (isEmpty(props.login) && isEmpty(auth.getDataLogin())) {
       console.log("No current user");
       setState({});
     }

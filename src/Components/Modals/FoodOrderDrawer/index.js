@@ -1,7 +1,6 @@
 import { CloseOutlined } from "@ant-design/icons";
 import { Drawer } from "antd";
 import classnames from "classnames";
-import _ from "lodash";
 import moment from "moment";
 import PropTypes from "prop-types";
 import React from "react";
@@ -27,7 +26,7 @@ const FoodOrderDrawer = (props) => {
     try {
       const res = await mutationChangeStatus(foodOrderId, value);
       if (res.isSuccess) {
-        onUpdateFoodOrder(_.assign(props.data, { status: value }));
+        onUpdateFoodOrder(Object.assign(props.data, { status: value }));
       }
       setState({ loading: false });
     } catch (error) {

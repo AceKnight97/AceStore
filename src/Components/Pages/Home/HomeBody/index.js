@@ -1,6 +1,5 @@
 import { Tag } from "antd";
 import classnames from "classnames";
-import _ from "lodash";
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
@@ -9,16 +8,15 @@ import { useMergeState } from "../../../../Helpers/customHooks";
 import Loading from "../../../UI/Loading";
 import FilterBlock from "../FilterBlock";
 import FoodTable from "../FoodTable";
-import HomeTotal from "../HomeTotal";
 import { calcCartTotal, getFoodMasterData, handleFilterFood } from "./helper";
 
 const HomeBody = (props) => {
   const history = useHistory();
   const [state, setState] = useMergeState({
-    foodData: auth.getFoodData().length !== 0 ? auth.getFoodData() : [], //_.cloneDeep([MOCKING_FOOD_TABLE])
+    foodData: auth.getFoodData().length !== 0 ? auth.getFoodData() : [],
     arrImages: [],
     loading: true,
-    rawFoodData: auth.getFoodData().length !== 0 ? auth.getFoodData() : [], //_.cloneDeep([MOCKING_FOOD_TABLE])
+    rawFoodData: auth.getFoodData().length !== 0 ? auth.getFoodData() : [],
   });
 
   const fetchMenuData = async () => {
@@ -45,10 +43,10 @@ const HomeBody = (props) => {
   const { cartTags, total } = calcCartTotal(foodData);
 
   const onClickReset = () => {
-    const newFoodData = _.cloneDeep(foodData);
-    _.forEach(newFoodData, (x) => {
-      _.forEach(x.data || [], (y) => {
-        _.assign(y, { isBuy: false });
+    const newFoodData = [...foodData];
+    newFoodData.forEach((x) => {
+      (x.data || []).forEach((y) => {
+        Object.assign(y, { isBuy: false });
       });
     });
     auth.setFoodData(undefined);
@@ -66,9 +64,9 @@ const HomeBody = (props) => {
 
   const onChangeCart = (item = {}, title = "") => {
     // console.log({ item });
-    const { data } = _.find(foodData, (x) => x.title === title);
-    const cardTemp = _.find(data, (x) => x.name === item.name);
-    _.assign(cardTemp, { ...item });
+    const { data } = foodData.find((x) => x.title === title);
+    const cardTemp = data.find((x) => x.name === item.name);
+    Object.assign(cardTemp, { ...item });
     // console.log({ foodData });
     auth.setFoodData(foodData);
     setState({ foodData });
@@ -79,7 +77,7 @@ const HomeBody = (props) => {
     setTimeout(() => {
       const newFoodata = handleFilterFood(filterObject, state.rawFoodData);
       // console.log({ newFoodata });
-      setState({ foodData: _.cloneDeep(newFoodata), loading: false });
+      setState({ foodData: [...newFoodata], loading: false });
     }, 400);
   };
 
@@ -100,7 +98,7 @@ const HomeBody = (props) => {
                 <span>Your cart:</span>
               </div>
 
-              {_.map(cartTags, (x, i) => (
+              {cartTags.map((x, i) => (
                 <Tag key={i} className="home-body-cart-tag-item" color="orange">
                   {x}
                 </Tag>
@@ -108,8 +106,7 @@ const HomeBody = (props) => {
             </div>
           )}
 
-          {_.map(
-            foodData,
+          {foodData.map(
             (x, i) =>
               x.data.length !== 0 &&
               x.title && (

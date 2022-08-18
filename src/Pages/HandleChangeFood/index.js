@@ -1,6 +1,5 @@
 import { Button } from "antd";
 import classnames from "classnames";
-import _ from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
 import { getFoodMasterData } from "../../Components/Pages/Home/HomeBody/helper";
@@ -51,7 +50,7 @@ const HandleChangeFood = (props) => {
           : "Successfully deleting food!"
       );
       await getFoodMasterData();
-      _.assign(obj, { foodList: [undefined] });
+      Object.assign(obj, { foodList: [undefined] });
       setState({ foodList: [] });
     } else {
       alert(
@@ -73,7 +72,7 @@ const HandleChangeFood = (props) => {
   return (
     <div className={classnames("handle-change-food", className)}>
       <div className="handle-change-food-add-food">
-        {_.map(foodList, (x, i) => (
+        {foodList.map((x, i) => (
           <AddFood
             key={i}
             index={i}

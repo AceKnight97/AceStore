@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import _ from "lodash";
 import $ from "jquery";
 import { Button } from "antd";
 import FoodCard from "../FoodCard";
@@ -45,7 +44,7 @@ const FoodTable = (props) => {
       </div>
       <div ref={toggleRef}>
         <div className="food-table-wrap">
-          {_.map(data, (x, i) => (
+          {data.map((x, i) => (
             <FoodCard
               key={i}
               {...x}

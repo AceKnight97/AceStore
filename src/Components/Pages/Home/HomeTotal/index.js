@@ -1,8 +1,7 @@
-import React, { useMemo } from "react";
-import PropTypes from "prop-types";
-import classnames from "classnames";
-import _ from "lodash";
 import { Button } from "antd";
+import classnames from "classnames";
+import PropTypes from "prop-types";
+import React, { useMemo } from "react";
 import { getPrice } from "../../../../Helpers";
 
 const HomeTotal = (props) => {

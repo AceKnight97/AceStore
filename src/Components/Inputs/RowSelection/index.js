@@ -22,7 +22,7 @@ const RowSelection = (props) => {
       </div>
 
       {disabled
-        ? _.map(data, (x, i) => (
+        ? data.map((x, i) => (
           <div
             key={i}
             className={classnames('row-selection-item', value === x ? 'selected-item' : '')}
@@ -30,7 +30,7 @@ const RowSelection = (props) => {
             <span>{`${i + 1}. ${x}`}</span>
           </div>
         ))
-        : _.map(data, (x, i) => (
+        : data.map((x, i) => (
           <button
             key={i}
             onClick={() => onChange(x)}

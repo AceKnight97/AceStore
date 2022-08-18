@@ -1,8 +1,6 @@
-import { put, call, take, fork } from "redux-saga/effects";
-
-import _ from "lodash";
-import auth from "../../Helpers/auth";
+import { fork, put, take } from "redux-saga/effects";
 import AppFlowActions from "../../Constants";
+import auth from "../../Helpers/auth";
 
 // import login from '../reducers/login';
 
@@ -13,7 +11,7 @@ export function* loginRequest() {
     const { data } = request;
     const result = {
       isSuccess: true,
-      user: _.cloneDeep(data.user),
+      user: {...data.user},
       token: data.token,
     };
     // console.log({ result });

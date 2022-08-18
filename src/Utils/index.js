@@ -102,3 +102,45 @@ export const mutateDateTime = (dateTime = undefined) => {
     ? moment(dateTime).toISOString()
     : undefined;
 };
+
+export const isNil = (x) => {
+  return x === null || x === undefined;
+};
+
+export const sumBy = (arr = [], func) =>
+  arr.reduce((acc, item) => acc + func(item), 0);
+
+export const isEmpty = (data) => {
+  return (
+    data === null ||
+    data === undefined ||
+    JSON.stringify(data) === "{}" ||
+    JSON.stringify(data) === "[]"
+  );
+};
+
+export const range = (start, end, increment) => {
+  const isEndDef = typeof end !== "undefined";
+  end = isEndDef ? end : start;
+  start = isEndDef ? start : 0;
+
+  if (typeof increment === "undefined") {
+    increment = Math.sign(end - start);
+  }
+
+  const length = Math.abs((end - start) / (increment || 1));
+
+  const { result } = Array.from({ length }).reduce(
+    ({ result, current }) => ({
+      result: [...result, current],
+      current: current + increment,
+    }),
+    { current: start, result: [] }
+  );
+
+  return result;
+};
+
+export const isEqual = (data1, data2) => {
+  return JSON.stringify(data1) === JSON.stringify(data2);
+};

@@ -1,6 +1,5 @@
 import { Button } from "antd";
 import classnames from "classnames";
-import _ from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
@@ -18,7 +17,7 @@ import {
   createOrderForAnyCustomer,
   generateColumns,
   getFoodData,
-  mutationCreateOrder,
+  mutationCreateOrder
 } from "./helper";
 import "./_food-order.scss";
 
@@ -58,7 +57,7 @@ const FoodOrder = (props) => {
     if (res.isSuccess) {
       alert("Successfully creating order!");
       auth.setFoodData(undefined);
-      _.assign(obj, { anyCustomerVisible: false });
+      Object.assign(obj, { anyCustomerVisible: false });
       setTimeout(() => {
         history.push("/acestore");
       }, 300);

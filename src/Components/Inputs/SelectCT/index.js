@@ -1,6 +1,5 @@
 import { Select } from "antd";
 import classnames from "classnames";
-import _ from "lodash";
 import PropTypes from "prop-types";
 import React, { useRef } from "react";
 // import Blue1BgRow from '../UI/blue1BgRow';
@@ -64,17 +63,17 @@ const SelectCT = (props) => {
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
       >
-        {isObject
-          ? _.map(data, (x, i) => (
-              <Option key={i} value={x.label}>
-                {x.label}
-              </Option>
-            ))
-          : _.map(data, (x, i) => (
-              <Option key={i} value={x}>
-                {x}
-              </Option>
-            ))}
+        {data.map((x, i) =>
+          isObject ? (
+            <Option key={x} value={x.label}>
+              {x.label}
+            </Option>
+          ) : (
+            <Option key={x} value={x}>
+              {x}
+            </Option>
+          )
+        )}
       </Select>
 
       {/* {

@@ -1,6 +1,5 @@
 import { Modal } from "antd";
 import classnames from "classnames";
-import _ from "lodash";
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { useMergeState } from "../../../Helpers/customHooks";
@@ -58,10 +57,10 @@ const RegisterModal = (props) => {
   const onChange = (key, value) => {
     const obj = { [key]: value };
     if (isStep1) {
-      _.assign(obj, { emailErr: "", passwordErr: "", confirmPasswordErr: "" });
+      Object.assign(obj, { emailErr: "", passwordErr: "", confirmPasswordErr: "" });
       setState(obj);
     } else {
-      _.assign(obj, {
+      Object.assign(obj, {
         usernameErr: "",
         phoneErr: "",
         addressErr: "",

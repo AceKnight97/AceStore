@@ -1,10 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Radio, Spin } from "antd";
 import classnames from "classnames";
-import _ from "lodash";
+import PropTypes from "prop-types";
+import React from "react";
 import InputTitle from "../InputTitle";
-import { Radio, Drawer, Modal, Spin } from "antd";
-import { CloseOutlined, LoadingOutlined } from "@ant-design/icons";
 
 const RadioCT = (props) => {
   const {
@@ -60,35 +59,35 @@ const RadioCT = (props) => {
           value={value}
           disabled={disabled}
         >
-          {isObj
-            ? _.map(data, (x, i) => (
-                <div
-                  key={i}
-                  className={classnames("radio-item", radioItemClassName)}
+          {data.map((x, i) =>
+            isObj ? (
+              <div
+                key={x}
+                className={classnames("radio-item", radioItemClassName)}
+              >
+                <Radio
+                  value={x}
+                  className={classnames(
+                    itemMagrinTop,
+                    itemClassName,
+                    textClass,
+                    x.content ? "fw-600" : ""
+                  )}
                 >
-                  <Radio
-                    value={x}
-                    className={classnames(
-                      itemMagrinTop,
-                      itemClassName,
-                      textClass,
-                      x.content ? "fw-600" : ""
-                    )}
-                  >
-                    {x.title}
-                  </Radio>
-                  {x.content ? (
-                    <div className="radio-content">
-                      <span>{x.content}</span>
-                    </div>
-                  ) : null}
-                </div>
-              ))
-            : _.map(data, (x, i) => (
-                <Radio key={x} value={x}>
-                  {x}
+                  {x.title}
                 </Radio>
-              ))}
+                {x.content ? (
+                  <div className="radio-content">
+                    <span>{x.content}</span>
+                  </div>
+                ) : null}
+              </div>
+            ) : (
+              <Radio key={x} value={x}>
+                {x}
+              </Radio>
+            )
+          )}
         </Radio.Group>
       )}
     </div>

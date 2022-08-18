@@ -1,9 +1,9 @@
 import classnames from "classnames";
-import _ from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
 import starInactiveIc from "../../../Images/Pages/Home/star-inactive.svg";
 import starIc from "../../../Images/Pages/Home/star.svg";
+import { range } from "../../../Utils";
 import InputTitle from "../../Inputs/InputTitle";
 import "./_display-rating.scss";
 
@@ -17,7 +17,7 @@ const DisplayRating = (props) => {
       <div className="flex">
         {isButton ? (
           <>
-            {_.map(_.range(rating), (x, i) => (
+            {range(rating).map((x, i) => (
               <button
                 className={`bas-btn ${curNotAllowed}`}
                 key={x}
@@ -27,7 +27,7 @@ const DisplayRating = (props) => {
                 <img src={starIc} alt="Star ic" />
               </button>
             ))}
-            {_.map(_.range(5 - rating), (x, i) => (
+            {range(5 - rating).map((x, i) => (
               <button
                 className={`bas-btn ${curNotAllowed}`}
                 key={x}
@@ -40,10 +40,10 @@ const DisplayRating = (props) => {
           </>
         ) : (
           <>
-            {_.map(_.range(rating), (x) => (
+            {range(rating).map((x, i) => (
               <img src={starIc} alt="Star ic" key={x} className="mr-2" />
             ))}
-            {_.map(_.range(5 - rating), (x, i) => (
+            {range(5 - rating).map((x, i) => (
               <img
                 src={starInactiveIc}
                 alt="Star ic"
