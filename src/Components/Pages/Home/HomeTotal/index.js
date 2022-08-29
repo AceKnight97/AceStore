@@ -3,8 +3,14 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 import React, { useMemo } from "react";
 import { getPrice } from "../../../../Helpers";
+import { useMergeState } from "../../../../Helpers/customHooks";
+import expandIc from "../../../../Images/Icons/expand.png";
+import "./_home-total.scss";
 
 const HomeTotal = (props) => {
+  const [state, setState] = useMergeState({
+    isExpanded: true,
+  });
   const {
     className,
     total,
@@ -14,6 +20,8 @@ const HomeTotal = (props) => {
     onClickResetFilter,
   } = props;
 
+  const { isExpanded } = state;
+
   const orderHere = () => {
     onClickBuy(true);
   };
@@ -22,12 +30,22 @@ const HomeTotal = (props) => {
     onClickBuy(false);
   };
 
+  const onToggleExpand = () => {
+    setState({ isExpanded: !isExpanded });
+  };
+
   const formatedTotal = useMemo(() => {
     return getPrice(total, undefined, "");
   }, [total]);
 
   return (
-    <div className={classnames("home-total", className)}>
+    <div
+      className={classnames(
+        "home-total",
+        !isExpanded && "animation-un-expanded",
+        className
+      )}
+    >
       <div className="fr-sb">
         <Button
           type="primary"
@@ -59,6 +77,10 @@ const HomeTotal = (props) => {
           Order here
         </Button>
       </div>
+
+      <button className="home-total-expand-btn" onClick={onToggleExpand}>
+        <img src={expandIc} alt="Expand ic" />
+      </button>
     </div>
   );
 };

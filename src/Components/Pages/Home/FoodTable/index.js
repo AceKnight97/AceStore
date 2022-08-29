@@ -6,6 +6,7 @@ import { Button } from "antd";
 import FoodCard from "../FoodCard";
 import { useMergeState } from "../../../../Helpers/customHooks";
 import { findDOMNode } from "react-dom";
+import './_food-table.scss';
 
 const FoodTable = (props) => {
   const toggleRef = useRef(undefined);

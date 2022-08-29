@@ -1,25 +1,52 @@
+@import "../../../../Styles/variables";
+
 .home-total {
-  // width: 32%;
-  // min-width: 368px;
   width: max-content;
   height: 140px;
   padding: 1rem;
   border: 1px solid $gray-5;
-  // border-radius: 0.25rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  // position: relative;
+
   &-title {
     font-weight: bold;
     font-size: 1.125rem;
     margin-right: 1rem;
   }
+
   &-price {
     font-weight: bold;
     font-size: 1.25rem;
     display: flex;
     justify-content: center;
   }
+
+  &-expand-btn {
+    position: absolute;
+    top: -16px;
+    left: 226px;
+    padding: 0;
+    margin: 0;
+    background: dimgray;
+    border: none;
+    display: flex;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+.home-total-not-expanded{
+
 }
 
 @media screen and (max-width: 980px) {

@@ -1,6 +1,7 @@
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
+import './_home-footer.scss';
 
 const HomeFooter = (props) => {
   const { className } = props;

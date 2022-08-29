@@ -1,9 +1,9 @@
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
-
 import { useMergeState } from "../../../../Helpers/customHooks";
 import InputCT from "../../../Inputs/InputCT";
+import './_info-block.scss';
 
 const InforBlock = (props) => {
   const [state, setState] = useMergeState({});

@@ -9,6 +9,8 @@ import Loading from "../../../UI/Loading";
 import FilterBlock from "../FilterBlock";
 import FoodTable from "../FoodTable";
 import { calcCartTotal, getFoodMasterData, handleFilterFood } from "./helper";
+import './_home-body.scss';
+
 
 const HomeBody = (props) => {
   const history = useHistory();
@@ -26,7 +28,7 @@ const HomeBody = (props) => {
     } catch (error) {
       setState({ loading: false });
     }
-  };
+  };  
 
   useEffect(() => {
     auth.setIsOrderHere(false);
@@ -35,6 +37,8 @@ const HomeBody = (props) => {
       return;
     }
     fetchMenuData();
+
+    getFormatedData();
   }, []);
 
   const { className } = props;
@@ -63,11 +67,9 @@ const HomeBody = (props) => {
   };
 
   const onChangeCart = (item = {}, title = "") => {
-    // console.log({ item });
     const { data } = foodData.find((x) => x.title === title);
     const cardTemp = data.find((x) => x.name === item.name);
     Object.assign(cardTemp, { ...item });
-    // console.log({ foodData });
     auth.setFoodData(foodData);
     setState({ foodData });
   };
@@ -76,13 +78,12 @@ const HomeBody = (props) => {
     setState({ foodData: [], loading: true });
     setTimeout(() => {
       const newFoodata = handleFilterFood(filterObject, state.rawFoodData);
-      // console.log({ newFoodata });
       setState({ foodData: [...newFoodata], loading: false });
     }, 400);
   };
 
   return (
-    <div>
+    <>
       <div className={classnames("home-body", className)}>
         <FilterBlock
           onFilterFood={onFilterFood}
@@ -123,7 +124,7 @@ const HomeBody = (props) => {
         </div>
       </div>
       {loading && <Loading></Loading>}
-    </div>
+    </>
   );
 };
 HomeBody.defaultProps = {

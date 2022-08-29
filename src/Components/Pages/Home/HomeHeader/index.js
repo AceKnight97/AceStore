@@ -10,6 +10,7 @@ import { loginRequest, logoutRequest } from "../../../../Redux/Actions/login";
 import { isEmpty } from "../../../../Utils";
 import LoginModal from "../../../Modals/LoginModal";
 import RegisterModal from "../../../Modals/RegisterModal";
+import './_home-header.scss';
 
 const HomeHeader = (props) => {
   const history = useHistory();

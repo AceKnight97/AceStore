@@ -1,3 +1,6 @@
+@import "../../../../Styles/variables";
+@import "../../../../Styles/Vendors/spacing";
+
 .food-table {
   position: relative;
   margin-top: 1.5rem;
@@ -10,16 +13,10 @@
     display: grid;
     grid-template-columns: $pc-20 $pc-20 $pc-20 $pc-20;
     place-items: center;
-    // grid-template-rows: 100px 200px;
-    // display: flex;
-    // align-items: center;
-    // justify-content: space-between;
   }
   &-wrap {
     flex-wrap: wrap;
     display: flex;
-    // white-space: pre-wrap;
-    // overflow-wrap: break-word;
   }
   &-show-btn {
     position: absolute;
