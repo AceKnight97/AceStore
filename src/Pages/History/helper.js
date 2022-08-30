@@ -1,5 +1,6 @@
 import moment from "moment";
 import fetchHistory from "../../Apollo/Functions/Fetch/fetchHistory";
+import { groupBy } from "../../Utils";
 
 export const a = "a";
 
@@ -17,12 +18,10 @@ export const queryHistory = async () => {
     const res = await fetchHistory();
     // console.log({ res, foodOrder: res.foodOrder });
     const orderHistory = [];
-    const grouped = _.groupBy(res, (order) => order?.foodOrder?.createdAt);
+    const grouped = groupBy(res, (order) => order?.foodOrder?.createdAt);
     // console.log({ grouped });
     Object.keys(grouped).forEach((x) => {
-      const data = _.map(grouped[x], (y, index) =>
-        formatOrderHisData(y, index)
-      );
+      const data = grouped[x].map((y, index) => formatOrderHisData(y, index));
       orderHistory.push({
         date: x,
         data,

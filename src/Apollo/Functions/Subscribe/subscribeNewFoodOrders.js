@@ -7,6 +7,7 @@ import { Button } from "antd";
 import gql from "graphql-tag";
 import PropTypes from "prop-types";
 import React, { useRef } from "react";
+import { isEqual } from "../../../Utils";
 import { showSuccessMsg } from "../../../Utils/showNotification";
 import FOOD from "../../Fragments/food";
 import FOOD_ORDER from "../../Fragments/foodOrder";
@@ -39,7 +40,7 @@ const SubscribeNewFoodOrders = (props) => {
   if (
     data?.newFoodOrders &&
     data?.newFoodOrders?.length !== 0 &&
-    !_.isEqual(data, oldData.current)
+    !isEqual(data, oldData.current)
   ) {
     showSuccessMsg(
       "New food order(s) arrived!",

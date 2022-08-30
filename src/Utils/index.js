@@ -141,6 +141,25 @@ export const range = (start, end, increment) => {
   return result;
 };
 
+const ordered = (unordered) =>
+  Object.keys(unordered)
+    .sort()
+    .reduce((obj, key) => {
+      obj[key] = unordered[key];
+      return obj;
+    }, {});
+
 export const isEqual = (data1, data2) => {
-  return JSON.stringify(data1) === JSON.stringify(data2);
+  return (
+    JSON.stringify(ordered({ ...data1 })) ===
+    JSON.stringify(ordered({ ...data2 }))
+  );
+};
+
+
+export const groupBy = (xs, key) => {
+  return xs.reduce((rv, x) => {
+    (rv[x[key]] = rv[x[key]] || []).push(x);
+    return rv;
+  }, {});
 };

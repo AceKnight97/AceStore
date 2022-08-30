@@ -1,5 +1,6 @@
 module.exports = {
-  rules: { 
+  rules: {
     "no-unused-vars": "off",
   },
-}
+  parser: "babel-eslint",
+};

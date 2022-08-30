@@ -80,7 +80,7 @@ const SelectCT = (props) => {
         isValueOutside && (
           <div className="select-ct-outside-res">
             {
-              _.map(value, (x, i) => (
+              value.map((x, i) => (
                 <Blue1BgRow
                   key={i}
                   value={x}

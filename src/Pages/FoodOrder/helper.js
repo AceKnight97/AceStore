@@ -5,8 +5,8 @@ import { formatPhone, getPrice } from "../../Helpers";
 export const getFoodData = (foodData = []) => {
   const arr = [];
   let index = 1;
-  _.forEach(foodData, (x) => {
-    _.forEach(x.data || [], (y) => {
+  foodData.forEach((x) => {
+    (x.data || []).forEach((y) => {
       if (y.isBuy) {
         // console.log({ y });
         arr.push({ ...y, index });

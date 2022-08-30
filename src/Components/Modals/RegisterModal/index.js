@@ -3,6 +3,7 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { useMergeState } from "../../../Helpers/customHooks";
+import { isEmpty } from "../../../Utils";
 import InputCT from "../../Inputs/InputCT";
 import ModalFooter from "../ModalFooter";
 import ModalHeader from "../ModalHeader";
@@ -71,7 +72,7 @@ const RegisterModal = (props) => {
 
   const onClickRightBtn = async () => {
     const errObj = handleRightBtnClick(state);
-    if (_.isEmpty(errObj)) {
+    if (isEmpty(errObj)) {
       const obj = { loading: false };
       setState({ loading: true });
       const res = await mutationCreateUser(state);

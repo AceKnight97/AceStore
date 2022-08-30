@@ -1,7 +1,7 @@
 import { QUANTITY_TYPES } from "../../../../Constants/home";
 import fetchMenu from "../../../../Apollo/Functions/Fetch/fetchMenu";
 import auth from "../../../../Helpers/auth";
-import { isNil, sumBy } from "../../../../Utils";
+import { groupBy, isNil, sumBy } from "../../../../Utils";
 // import testimg1 from "../../../../Images/Foods/1.webp";
 // import testimg10 from "../../../../Images/Foods/10.jpg";
 // import testimg11 from "../../../../Images/Foods/11.png";
@@ -15,13 +15,6 @@ import { isNil, sumBy } from "../../../../Utils";
 // import testimg7 from "../../../../Images/Foods/7.webp";
 // import testimg8 from "../../../../Images/Foods/8.jpg";
 // import testimg9 from "../../../../Images/Foods/9.webp";
-
-const groupBy = (xs, key) => {
-  return xs.reduce((rv, x) => {
-    (rv[x[key]] = rv[x[key]] || []).push(x);
-    return rv;
-  }, {});
-};
 
 export const getFoodMasterData = async () => {
   try {

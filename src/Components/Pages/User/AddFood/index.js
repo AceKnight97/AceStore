@@ -9,6 +9,7 @@ import {
 } from "../../../../Constants/home";
 import auth from "../../../../Helpers/auth";
 import { useMergeState } from "../../../../Helpers/customHooks";
+import { isEmpty } from "../../../../Utils";
 import InputCT from "../../../Inputs/InputCT";
 import InputTitle from "../../../Inputs/InputTitle";
 import SelectCT from "../../../Inputs/SelectCT";
@@ -77,12 +78,11 @@ const AddFood = (props) => {
   };
 
   const setIem = () => {
-    const item = _.find(
-      menuRef.current,
+    const item = menuRef.current.find(
       (x) => x.title + "." + x.name === displayingName
     );
     // console.log({ item });
-    if (!_.isEmpty(item)) {
+    if (!isEmpty(item)) {
       setState({
         ...item,
         quantityType:
@@ -153,7 +153,7 @@ const AddFood = (props) => {
           value={displayingName}
           onChange={onChange}
           placeholder="Select food name"
-          data={_.map(auth.getMenu(), (x) => x.title + "." + x.name)}
+          data={auth.getMenu().map((x) => x.title + "." + x.name)}
           className="mb-16"
         />
       )}

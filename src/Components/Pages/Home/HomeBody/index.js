@@ -5,20 +5,20 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import auth from "../../../../Helpers/auth";
 import { useMergeState } from "../../../../Helpers/customHooks";
+import { getFormatedData } from "../../../../temp";
 import Loading from "../../../UI/Loading";
 import FilterBlock from "../FilterBlock";
 import FoodTable from "../FoodTable";
 import { calcCartTotal, getFoodMasterData, handleFilterFood } from "./helper";
-import './_home-body.scss';
-
+import "./_home-body.scss";
 
 const HomeBody = (props) => {
   const history = useHistory();
   const [state, setState] = useMergeState({
-    foodData: auth.getFoodData().length !== 0 ? auth.getFoodData() : [],
+    foodData: [],
     arrImages: [],
+    rawFoodData: [],
     loading: true,
-    rawFoodData: auth.getFoodData().length !== 0 ? auth.getFoodData() : [],
   });
 
   const fetchMenuData = async () => {
@@ -28,12 +28,13 @@ const HomeBody = (props) => {
     } catch (error) {
       setState({ loading: false });
     }
-  };  
+  };
 
   useEffect(() => {
     auth.setIsOrderHere(false);
     if (auth.getFoodData().length !== 0) {
-      setState({ loading: false });
+      const foodData = auth.getFoodData();
+      setState({ loading: false, foodData, rawFoodData: [...foodData] });
       return;
     }
     fetchMenuData();

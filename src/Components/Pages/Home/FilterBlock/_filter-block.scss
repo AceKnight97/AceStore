@@ -4,23 +4,29 @@
   flex-wrap: wrap;
   display: flex;
   justify-content: space-between;
+
   &-title {
     font-size: 1.125rem;
   }
+
   &-star {
     font-size: 1.125rem;
     margin: 0 1rem 0 0;
   }
+
   &-star-dis {
     margin-top: 1rem;
+
     img {
       width: 1.5rem !important;
       height: 1.5rem !important;
     }
   }
+
   &-search {
     margin-top: 1rem;
     width: 160px !important;
+
     input {
       width: 160px !important;
     }
@@ -28,17 +34,9 @@
   &-select {
     margin-top: 1rem;
     width: 160px;
+
     .ant-select {
       width: 160px;
     }
-  }
-  &-total {
-    // margin-top: 1rem;
-
-    position: fixed;
-    background: white;
-    z-index: 9;
-    right: 24px;
-    bottom: 24px;
   }
 }

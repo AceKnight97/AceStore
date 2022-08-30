@@ -4,7 +4,7 @@ import handleCreateOrder from "../../../Apollo/Functions/Handle/handleCreateOrde
 export const getOrderTotal = (data = []) => {
   // console.log({ data });
   let total = 0;
-  _.forEach(data, (x) => {
+  data.forEach((x) => {
     total += x.price * x.quantity;
   });
   return getPrice(total, undefined, "");

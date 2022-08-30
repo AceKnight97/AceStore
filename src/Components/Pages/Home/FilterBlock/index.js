@@ -7,6 +7,7 @@ import {
   useMergeState,
   useUpdateEffect,
 } from "../../../../Helpers/customHooks";
+import { isEqual } from "../../../../Utils";
 import InputCT from "../../../Inputs/InputCT";
 import SelectCT from "../../../Inputs/SelectCT";
 import DisplayRating from "../../../UI/DisplayRating";
@@ -70,6 +71,7 @@ const FilterBlock = (props) => {
         onChange={onChange}
         className="filter-block-search"
       />
+      
       <SelectCT
         className="filter-block-select"
         name="kind"
@@ -78,6 +80,7 @@ const FilterBlock = (props) => {
         title="Kind of food:"
         data={["All", ...auth.getKindOfFood()]}
       />
+
       <SelectCT
         className="filter-block-select"
         name="minPrice"
@@ -87,6 +90,7 @@ const FilterBlock = (props) => {
         type="NUMBER"
         data={minPriceData}
       />
+
       <SelectCT
         className="filter-block-select"
         name="maxPrice"
@@ -96,6 +100,7 @@ const FilterBlock = (props) => {
         type="NUMBER"
         data={maxPriceData}
       />
+
       <DisplayRating
         title="Stars:"
         rating={rating}
@@ -103,10 +108,10 @@ const FilterBlock = (props) => {
         onClick={onChangeStar}
         className="filter-block-star-dis"
       ></DisplayRating>
+
       <HomeTotal
-        className="filter-block-total"
         total={props.total}
-        isDisabledResetFilter={JSON.stringify(DEFAULT_STATE) === JSON.stringify(state)}
+        isDisabledResetFilter={isEqual(DEFAULT_STATE, state)}
         onClickReset={props.onClickReset}
         onClickBuy={props.onClickBuy}
         onClickResetFilter={onClickResetFilter}

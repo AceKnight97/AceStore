@@ -68,7 +68,7 @@ const FoodOrderDrawer = (props) => {
         <div className="mt-16">
           <span className="b">Food list: </span>
         </div>
-        {_.map(data.data || [], (x, i) => (
+        {(data.data || []).map((x, i) => (
           <div key={i} className="food-order-drawer-row">
             {`${i + 1}: ${x.name} - Price: ${getPrice(
               x.price,

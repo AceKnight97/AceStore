@@ -16,6 +16,16 @@
   }
 }
 
+@keyframes expanded {
+  from {
+    opacity: 0;
+    height: 0px;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes un-expanded {
   from {
     opacity: 1;
@@ -30,7 +40,7 @@
   &-fadein-1s {
     animation: fadein 1s;
   }
-  
+
   &-fadein-2s {
     animation: fadein 2s;
   }
@@ -43,10 +53,11 @@
     animation: fadeout 2s;
   }
 
-  
+  &-expanded {
+    animation: expanded 1s;
+  }
+
   &-un-expanded {
     animation: un-expanded 1s;
   }
 }
-
-
