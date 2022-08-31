@@ -76,6 +76,7 @@ const CustomerOrdersTable = (props) => {
           onRowClick={onRowClick}
         ></AntdTable>
       )}
+
       <FoodOrderDrawer
         visible={!isEmpty(foodOrderData)}
         data={foodOrderData}

@@ -1,9 +1,16 @@
 import moment from "moment";
 import fetchOrderHistory from "../../Apollo/Functions/Fetch/fetchOrderHistory";
 import { getOrderTotal } from "../../Helpers";
-import { groupBy, sortBy } from "../../Utils";
+import { sortBy } from "../../Utils";
 
 export const e = "";
+
+const groupOrderHis = (xs) => {
+  return xs.reduce((rv, x) => {
+    (rv[x.foodOrder?.createdAt] = rv[x.foodOrder?.createdAt] || []).push(x);
+    return rv;
+  }, {});
+};
 
 const formatOrderHisData = (y, index) => ({
   // index: index + 1,
@@ -15,7 +22,7 @@ const formatOrderHisData = (y, index) => ({
 
 export const getOrderHistory = (res = [], addMore = 0) => {
   const orderHistory = [];
-  const grouped = groupBy(res, (order) => order?.foodOrder?.createdAt);
+  const grouped = groupOrderHis(res);
   // console.log({ grouped });
   Object.keys(grouped).forEach((x, i) => {
     const data = grouped[x].map((y, index) => formatOrderHisData(y, index));
@@ -37,7 +44,10 @@ export const getOrderHistory = (res = [], addMore = 0) => {
       foodOrderId: grouped[x]?.[0]?.foodOrder?.id || "",
     });
   });
-  return sortBy(orderHistory, (x, y) => moment(x.date).valueOf() - moment(y.date).valueOf());
+  return sortBy(
+    orderHistory,
+    (x, y) => moment(y.date).valueOf() - moment(x.date).valueOf()
+  );
 };
 
 export const mutationGetFoodOrders = async (filterObj = {}) => {

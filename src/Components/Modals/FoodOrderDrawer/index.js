@@ -42,7 +42,6 @@ const FoodOrderDrawer = (props) => {
       onClose={onClose}
       visible={visible}
       className="food-order-drawer"
-      maskClosable={false}
     >
       <div className={classnames("food-order-drawer-wrapper", className)}>
         <div className="food-order-drawer-created-at">

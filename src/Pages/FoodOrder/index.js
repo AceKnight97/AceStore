@@ -24,11 +24,12 @@ import "./_food-order.scss";
 const FoodOrder = (props) => {
   const location = useLocation();
   const history = useHistory();
+  const { address, phone } = auth.getDataLogin();
   const [state, setState] = useMergeState({
     foodData: getFoodData(location.state),
     anyCustomerVisible: false,
     notes: "",
-    destination: "",
+    destination: address,
     loading: false,
     tableNumber: undefined,
   });
@@ -43,7 +44,6 @@ const FoodOrder = (props) => {
     tableNumber,
   } = state;
   const { total } = calcCartTotal(location.state);
-  const { address, phone, email } = auth.getDataLogin();
   const isOrderHere = auth.getIsOrderHere();
 
   const onChange = (key, value) => {
@@ -95,6 +95,7 @@ const FoodOrder = (props) => {
   return (
     <div className={classnames("food-order", className)}>
       <HomeHeader></HomeHeader>
+
       <div className="food-order-body">
         {isOrderHere ? (
           <>
@@ -103,6 +104,7 @@ const FoodOrder = (props) => {
                 <span className="b">Order method:</span>
                 <span className="ml-4">at the restaurant</span>
               </div>
+
               <div className="flex">
                 <span className="b">Total:</span>
                 <span className="ml-4">{getPrice(total, undefined, "")}</span>
@@ -118,6 +120,7 @@ const FoodOrder = (props) => {
                 placeholder="Select table number"
                 data={[]}
               />
+
               <div className="flex">
                 <span className="b">Total:</span>
                 <span className="ml-4">{getPrice(total, undefined, "")}</span>
@@ -131,17 +134,20 @@ const FoodOrder = (props) => {
                 <span className="b">Payment Options:</span>
                 <span className="ml-4">Cash - When receiving</span>
               </div>
+
               <div className="flex">
                 <span className="b">Total:</span>
                 <span className="ml-4">{getPrice(total, undefined, "")}</span>
               </div>
             </div>
+
             {phone && (
               <div className="food-order-body-toper">
                 <div className="flex">
-                  <span className="b">Delivery:</span>
+                  <span className="b">Address:</span>
                   <span className="ml-4">{address}</span>
                 </div>
+
                 <div className="flex">
                   <span className="b">Contact at:</span>
                   <span className="ml-4">{phone}</span>
@@ -161,6 +167,7 @@ const FoodOrder = (props) => {
               placeholder="Enter your notes"
               className="mt-16"
             />
+
             <InputCT
               titleClassName="b"
               title="Notes"
@@ -173,12 +180,14 @@ const FoodOrder = (props) => {
             />
           </>
         )}
+
         <div className="food-order-body-btns">
           <Button onClick={onClickBack}>Back</Button>
           <Button type="primary" onClick={onClickConfirm}>
             Confirm
           </Button>
         </div>
+
         <AntdTable
           className="mt-48"
           rowKey="id"

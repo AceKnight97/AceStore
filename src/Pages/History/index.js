@@ -22,6 +22,7 @@ const History = (props) => {
   return (
     <div className={classnames("history", className)}>
       <HomeHeader></HomeHeader>
+      
       <div className="history-body">
         <CustomerOrders isAll={false}></CustomerOrders>
       </div>

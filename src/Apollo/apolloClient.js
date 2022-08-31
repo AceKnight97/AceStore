@@ -79,6 +79,7 @@ const createClient = async (
                   if (
                     message.includes("403") ||
                     message.includes("400") ||
+                    message.includes("404") ||
                     extensions.code === "UNAUTHENTICATED"
                   ) {
                     emitter.emit(APP_FLOW_ACTIONS.LOGOUT_REQUEST);
