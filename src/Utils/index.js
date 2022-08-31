@@ -156,10 +156,13 @@ export const isEqual = (data1, data2) => {
   );
 };
 
-
 export const groupBy = (xs, key) => {
   return xs.reduce((rv, x) => {
     (rv[x[key]] = rv[x[key]] || []).push(x);
     return rv;
   }, {});
 };
+
+export const sortBy = (arr = [], func = () => { }) => {
+  return arr.sort(func);
+}

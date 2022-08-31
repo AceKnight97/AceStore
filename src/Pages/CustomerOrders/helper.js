@@ -1,7 +1,7 @@
 import moment from "moment";
 import fetchOrderHistory from "../../Apollo/Functions/Fetch/fetchOrderHistory";
 import { getOrderTotal } from "../../Helpers";
-import { groupBy } from "../../Utils";
+import { groupBy, sortBy } from "../../Utils";
 
 export const e = "";
 
@@ -37,7 +37,7 @@ export const getOrderHistory = (res = [], addMore = 0) => {
       foodOrderId: grouped[x]?.[0]?.foodOrder?.id || "",
     });
   });
-  return _.orderBy(orderHistory, [(x) => moment(x.date).valueOf()], ["desc"]);
+  return sortBy(orderHistory, (x, y) => moment(x.date).valueOf() - moment(y.date).valueOf());
 };
 
 export const mutationGetFoodOrders = async (filterObj = {}) => {

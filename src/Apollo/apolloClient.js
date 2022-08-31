@@ -74,11 +74,11 @@ const createClient = async (
           onError(
             ({ graphQLErrors, networkError, response, operation, forward }) => {
               if (graphQLErrors) {
-                _.map(graphQLErrors, ({ message, extensions }) => {
+                graphQLErrors.map(({ message, extensions }) => {
                   console.log({ errMes: message });
                   if (
-                    _.includes(message, "403") ||
-                    _.includes(message, "400") ||
+                    message.includes("403") ||
+                    message.includes("400") ||
                     extensions.code === "UNAUTHENTICATED"
                   ) {
                     emitter.emit(APP_FLOW_ACTIONS.LOGOUT_REQUEST);

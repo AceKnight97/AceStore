@@ -19,9 +19,9 @@ const SortableFields = [
 export function getTableColumns(
   dataHeader = [],
   dataKey = [],
-  onChange = () => {},
-  onClickPatientName = () => {},
-  onRowClick = () => {}
+  onChange = () => { },
+  onClickPatientName = () => { },
+  onRowClick = () => { }
 ) {
   const arr = [];
   if (dataHeader.length === 0) {
@@ -39,9 +39,15 @@ export function getTableColumns(
         // console.log('row: ', row);
         let type = "";
         let className = "";
-        if (key.toLocaleLowerCase().includes("date")) type = "DATE";
-        if (key.toLocaleLowerCase().includes("time")) type = "TIME";
-        if (key.toLocaleLowerCase().includes("done")) type = "CHECKBOX";
+        if (key.toLocaleLowerCase().includes("date")) {
+          type = "DATE";
+        }
+        if (key.toLocaleLowerCase().includes("time")) {
+          type = "TIME";
+        }
+        if (key.toLocaleLowerCase().includes("done")) {
+          type = "CHECKBOX";
+        }
         if (key === "patientName") {
           className = "text-color-blue-7 patient-name-pointer";
           type = "BUTTON";
@@ -85,7 +91,7 @@ export function ultiItemRender(
   originalElement = null,
   currentPage = 0,
   isEnd = true,
-  onNextClick = () => {}
+  onNextClick = () => { }
 ) {
   if (type === "prev") {
     if (currentPage === 1) return null;

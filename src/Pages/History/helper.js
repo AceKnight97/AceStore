@@ -1,6 +1,6 @@
 import moment from "moment";
 import fetchHistory from "../../Apollo/Functions/Fetch/fetchHistory";
-import { groupBy } from "../../Utils";
+import { groupBy, sortBy } from "../../Utils";
 
 export const a = "a";
 
@@ -30,7 +30,7 @@ export const queryHistory = async () => {
       });
     });
     // console.log({ grouped, orderHistory });
-    return _.orderBy(orderHistory, [(x) => moment(x.date).valueOf()], ["desc"]);
+    return sortBy(orderHistory, (x, y) => moment(x.date).valueOf() - moment(y.date).valueOf());
   } catch (error) {
     throw error;
   }
