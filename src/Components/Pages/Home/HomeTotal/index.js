@@ -108,7 +108,7 @@ const HomeTotal = (props) => {
         </div>
       </div>
 
-      <button
+      {/* <button
         className={classnames(
           "home-total-expand-btn",
           isDisNone && "new-possition"
@@ -116,7 +116,7 @@ const HomeTotal = (props) => {
         onClick={onToggleExpand}
       >
         <img src={expandIc} alt="Expand ic" />
-      </button>
+      </button> */}
     </div>
   );
 };

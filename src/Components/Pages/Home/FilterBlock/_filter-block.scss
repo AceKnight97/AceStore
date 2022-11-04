@@ -39,4 +39,22 @@
       width: 160px;
     }
   }
+  &-toggle-exp {
+    position: fixed;
+    background: white;
+    z-index: 9;
+    right: 24px;
+    bottom: 24px;
+    .ant-collapse-header {
+      justify-content: center;
+      font-weight: bold;
+      font-size: 16px;
+      padding: 4px 12px !important;
+    }
+    .ant-collapse-content {
+      & > .ant-collapse-content-box {
+        padding: 0;
+      }
+    }
+  }
 }

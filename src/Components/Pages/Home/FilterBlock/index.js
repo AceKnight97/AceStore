@@ -1,11 +1,12 @@
+import { Collapse } from "antd";
 import classnames from "classnames";
 import PropTypes from "prop-types";
-import React, { useCallback, useMemo, useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import { MIN_MAX_PRICE } from "../../../../Constants/home";
 import auth from "../../../../Helpers/auth";
 import {
   useMergeState,
-  useUpdateEffect,
+  useUpdateEffect
 } from "../../../../Helpers/customHooks";
 import { isEqual } from "../../../../Utils";
 import InputCT from "../../../Inputs/InputCT";
@@ -13,6 +14,8 @@ import SelectCT from "../../../Inputs/SelectCT";
 import DisplayRating from "../../../UI/DisplayRating";
 import HomeTotal from "../HomeTotal";
 import "./_filter-block.scss";
+
+const { Panel } = Collapse;
 
 const DEFAULT_STATE = {
   searchName: "",
@@ -27,7 +30,7 @@ const FilterBlock = (props) => {
   const [state, setState] = useMergeState({
     ...DEFAULT_STATE,
   });
-  const { className, onFilterFood } = props;
+  const { className, onFilterFood, } = props;
   const onChange = (key, value) => {
     setState({ [key]: value });
   };
@@ -71,7 +74,7 @@ const FilterBlock = (props) => {
         onChange={onChange}
         className="filter-block-search"
       />
-      
+
       <SelectCT
         className="filter-block-select"
         name="kind"
@@ -109,22 +112,26 @@ const FilterBlock = (props) => {
         className="filter-block-star-dis"
       ></DisplayRating>
 
-      <HomeTotal
-        total={props.total}
-        isDisabledResetFilter={isEqual(DEFAULT_STATE, state)}
-        onClickReset={props.onClickReset}
-        onClickBuy={props.onClickBuy}
-        onClickResetFilter={onClickResetFilter}
-      />
+      <Collapse defaultActiveKey={['1']} onChange={onChange} className="filter-block-toggle-exp" >
+        <Panel header="Shopbox" key="1" showArrow={false} className="filter-block-toggle-exp-header" >
+          <HomeTotal
+            total={props.total}
+            isDisabledResetFilter={isEqual(DEFAULT_STATE, state)}
+            onClickReset={props.onClickReset}
+            onClickBuy={props.onClickBuy}
+            onClickResetFilter={onClickResetFilter}
+          />
+        </Panel>
+      </Collapse>
     </div>
   );
 };
 FilterBlock.defaultProps = {
   className: "",
-  onFilterFood: () => {},
+  onFilterFood: () => { },
   total: 0,
-  onClickBuy: () => {},
-  onClickReset: () => {},
+  onClickBuy: () => { },
+  onClickReset: () => { },
 };
 FilterBlock.propTypes = {
   className: PropTypes.string,

@@ -1,4 +1,3 @@
-// import boschLogo from "../../../Images/bosch-logo-new-flat.png";
 import { RightOutlined } from "@ant-design/icons";
 import classnames from "classnames";
 import PropTypes from "prop-types";
@@ -13,7 +12,6 @@ const Supergraphic = (props) => {
   const { pathname } = location;
   const [state, setState] = useMergeState({});
   const { className } = props;
-  // useEffect(() => {}, []);
   const isAtHome = pathname.includes("/acestore");
 
   const onClickHome = () => {
@@ -40,7 +38,7 @@ const Supergraphic = (props) => {
         break;
     }
     return (
-      <div className="bosch-header-title">
+      <div className="line-color-header-title">
         <NavLink
           to="/acestore"
           onClick={onClickHome}
@@ -61,19 +59,11 @@ const Supergraphic = (props) => {
   return (
     <div>
       <div className={classnames("supergraphic", className)}></div>
-      <div className="bosch-header">
+      <div className="line-color-header">
         <div className="flex">
-          {/* <img
-            src={boschLogo}
-            alt="Bosch ic"
-            className="bosch-header-logo"
-          ></img> */}
-          {/* <div className="supergraphic-title">
-            Acestore
-          </div> */}
           {renderLocationTitle()}
         </div>
-        <div className="bosch-header-group">Acestore</div>
+        <div className="line-color-header-group">Acestore</div>
       </div>
       {!isAtHome && (
         <NavLink to="/acestore" className="not-home-back-btn">
